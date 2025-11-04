@@ -77,7 +77,7 @@ PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch contr
 
 
 - Army of Ages
-  <img width="705" height="496" alt="image" src="https://github.com/user-attachments/assets/18b0ac67-ee36-4519-94af-49c2a425a576" />
+<img width="705" height="496" alt="image" src="https://github.com/user-attachments/assets/18b0ac67-ee36-4519-94af-49c2a425a576" />
 
 - Civilization series – [link](https://civilization.com/)  
 
