@@ -3,15 +3,16 @@
 
 ## Concept
 
-The Promised Hills is a historical strategy and defense game where the player commands a settlement through Israel’s history, from ancient kingdoms to the modern State of Israel. Players build defenses, recruit units, research technologies, and fight battles that mirror real historical events. Progression is tied to both skill and historical understanding.
+The Promised Hills is a historical strategy and defense game where the player commands a settlement through Israel’s history, from ancient kingdoms to the modern State of Israel. Players build defenses, and fight battles that mirror real historical events. Progression is tied to both skill and historical understanding.
 
 ## Platform
 
-PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch controls.
+PC / Laptop (Mouse & Keyboard), potential mobile adaptation.
 
 ## Screenshot
 
-![Screenshot placeholder](placeholder-promised-hills.png)
+<img width="1532" height="800" alt="image" src="https://github.com/user-attachments/assets/d23c2cb1-55c3-46de-999c-68defe021dfc" />
+
 
 ## Formal Elements
 
@@ -28,9 +29,9 @@ PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch contr
 
 ### 3. Processes
 
-- **Game start (first 30 sec):** Cinematic overview of the settlement, player builds first wall/unit with tutorial guidance.  
-- **Core gameplay:** Build defenses, recruit units, research technologies, and command battles.  
-- **Endgame:** Survive all waves, achieve era objectives, unlock cutscenes and score/ranking.
+- **Game start (first 30 sec):** Cinematic overview of the hills, players base is shown, with tutorial on sending units.
+- **Core gameplay:** Build defenses, recruit units, and command battles.  
+- **Endgame:** Survive all waves, achieve era objectives, unlock score/ranking.
 
 **Learning integration:** Historical context is absorbed through gameplay — unit types, technologies, and events are accurate to each era.
 
@@ -42,8 +43,8 @@ PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch contr
 
 ### 5. Resources
 
-- **Resources:** Gold, food, manpower, technology points.  
-- **Utility:** Build units, fortifications, and research technologies.  
+- **Resources:** Gold, food, manpower, exp.  
+- **Utility:** Build units and fortifications.  
 - **Acquisition:** Harvesting, conquest, completing objectives.  
 - **Scarcity:** Wave-based distribution, increasing cost.  
 - **Display:** Resource bars and numeric HUD.
@@ -56,19 +57,18 @@ PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch contr
 
 ### 7. Boundaries
 
-- Semi-open maps progressing through eras.  
-- Fog of war and map edges indicate limits.  
-- **Design principles:** Meaning, navigation, engagement, and guidance.
+- Single world map from home base to enemy base, changing as the story progresses. 
+- **Design principles:** Simplicity, layed out.
 
 ### 8. Outcomes
 
-- Victory, defeat, or partial success per era objectives.  
+- Victory or defeat.  
 - Mostly skill-based with minimal randomness.  
 - Non-zero-sum: players progress independently, with optional leaderboard comparison.
 
 ## Existing Games Review
 
-**Search terms:** "historical strategy game Israel", "age of empires Israel mod", "total war Israel".  
+**Search terms:** "Israel video game", "historical strategy game", "strategic tower defense".  
 
 ## **Similar games:**  
 
