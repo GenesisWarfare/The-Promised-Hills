@@ -66,6 +66,12 @@ PC / Laptop (Mouse & Keyboard), potential mobile adaptation.
 - Mostly skill-based with minimal randomness.  
 - Non-zero-sum: players progress independently, with optional leaderboard comparison.
 
+### Examples for battles:
+- Kingdom of Israel vs Philistines
+- Kingdom of Judah vs Moab
+- Hasmonean Kingdom vs Edomites
+- State of Israel vs Egypt, Syria, Jordan
+
 ## Existing Games Review
 
 **Search terms:** "Israel video game", "historical strategy game", "strategic tower defense".  
