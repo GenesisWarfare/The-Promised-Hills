@@ -70,15 +70,19 @@ PC / Laptop (Mouse & Keyboard), with potential adaptation for tablet touch contr
 
 **Search terms:** "historical strategy game Israel", "age of empires Israel mod", "total war Israel".  
 
-**Similar games:**  
+## **Similar games:**  
 
-- Age of War
+- Age of War - https://ageofwargame.io/
 <img width="837" height="590" alt="image" src="https://github.com/user-attachments/assets/f294db02-7f26-4031-a492-15b12d08f3a2" />
 
 
-- Army of Ages
+
+- Army of Ages - https://armorgames.com/play/11789/army-of-ages?tag-referral=army
 <img width="705" height="496" alt="image" src="https://github.com/user-attachments/assets/18b0ac67-ee36-4519-94af-49c2a425a576" />
 
-- Civilization series – [link](https://civilization.com/)  
+
+- Civilization series – https://civilization.com
+<img width="1410" height="704" alt="image" src="https://github.com/user-attachments/assets/552c7a1b-0628-484f-831b-f6557fe75f33" />
+
 
 **Difference:** Focused on Israel’s historical eras, with authentic battles and cultural context, embedding learning directly in gameplay.
