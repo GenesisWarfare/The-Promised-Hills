@@ -82,7 +82,7 @@ In addition, rewarded ads in the metagame (which will be described in detail lat
 
 | Feature | Description |
 |----------|--------------|
-| *eekly Challenges | Randomized wave modifiers for replayability |
+| Weekly Challenges | Randomized wave modifiers for replayability |
 | Educational Missions | Bonus trivia-based short levels |
 | Community Scoreboards | Leaderboards for asynchronous competition |
 
