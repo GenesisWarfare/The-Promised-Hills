@@ -19,7 +19,7 @@ The game contains 4 eras, each representing a historical period:
 
 1. Kingdom of Israel
 2. Kingdom of Judah
-3. Hasmonean Revolt
+3. Hasmonean Kingdom
 4. Modern State of Israel
 
 Each era contains several battles shown as red markers on a map of Israel.  
@@ -147,7 +147,7 @@ Focus on:
 - First real strategic choices  
 
 
-# 5. Era 3 – Hasmonean Revolution  
+# 5. Era 3 – Hasmonean Kingdom  
 ### “The Maccabees rise against the Seleucid Empire”
 
 ## 5.1 Level Goals
@@ -162,7 +162,7 @@ This era introduces:
 
 | Category | Unit                        | Description               |
 |----------|-----------------------------|---------------------------|
-| Basic    | Maccabee Rebel              | Fast melee                |
+| Basic    | Maccabee Fighter            | Fast melee                |
 | Ranged   | Hasmonean Javelin Thrower   | High burst damage         |
 | Elite    | Cohen Warrior / Temple Guard| Very high armor           |
 | Defense  | Reinforced Stone Tower      | Strongest pre-modern tower |
