@@ -119,14 +119,12 @@ This era increases complexity:
 | Elite    | Royal Cavalry    | Fast + high damage             |
 | Defense  | Stone Tower      | Better range + HP              |
 
----
 
 ## 4.3 Enemy Types
 - Moabite Infantry  
 - Edomite Archers  
 - Aramean Chariot (sometimes)
 
----
 
 ## 4.4 Battles
 
@@ -159,7 +157,6 @@ This era introduces:
 - Faster combat  
 - Tougher enemy AI  
 
----
 
 ## 5.2 Unit Types (Player)
 
@@ -170,14 +167,12 @@ This era introduces:
 | Elite    | Cohen Warrior / Temple Guard| Very high armor           |
 | Defense  | Reinforced Stone Tower      | Strongest pre-modern tower |
 
----
 
 ## 5.3 Enemy Types
 - Seleucid Spearmen  
 - Seleucid Archer Corps  
 - War Elephants (elite)  
 
----
 
 ## 5.4 Battles
 
@@ -202,7 +197,6 @@ Players must:
 - Use elite units wisely  
 - Maintain strong defense lines  
 
----
 
 # 6. Era 4 – Modern State of Israel  
 ### “Tanks, jets, and desert warfare”
@@ -217,7 +211,6 @@ Final era = full complexity:
 - Combined enemy formations  
 - High firepower everywhere  
 
----
 
 ## 6.2 Unit Types (Player)
 
