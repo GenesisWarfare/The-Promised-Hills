@@ -9,7 +9,8 @@ The Promised Hills is a historical strategy and defense game where you guide a s
 - Raphael Coeffic
 
 ## 📜 Project Files
-[Formal Elements Document](formal-elements.md)
-[Market Research Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Market_Research.md)
-[Levels Design Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Levels-Design.md)
+-[Formal Elements Document](formal-elements.md)
+-[Market Research Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Market_Research.md)
+-[Levels Design Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Levels-Design.md)
+
 
