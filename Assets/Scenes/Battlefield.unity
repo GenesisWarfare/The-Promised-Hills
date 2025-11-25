@@ -555,6 +555,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1779971637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8441084400912118169, guid: 8d0e7ce26df9d5e4d8c98ee43e3e6b6d, type: 3}
+  m_PrefabInstance: {fileID: 118992619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1924147370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -680,7 +685,7 @@ PrefabInstance:
     - target: {fileID: 1827345121139675978, guid: 6648d574bf9150544bb4541ac6ed2a2f, type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1779971637}
     - target: {fileID: 4566503784952081649, guid: 6648d574bf9150544bb4541ac6ed2a2f, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
