@@ -17,7 +17,46 @@ Lead your settlement through the ages of Israel — one battle at a time.
 -[Market Research Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Market_Research.md)
 -[Levels Design Document](https://github.com/GenesisWarfare/The-Promised-Hills/blob/main/Levels-Design.md)
 
-
+---
+Assets
+├── Prefabs
+│   ├── EnemySpawner.prefab
+│   ├── EnemySpawnPoint.prefab
+│   ├── Enemy_Base.prefab
+│   ├── My_Base.prefab
+│   ├── PlayerSpawnPoint.prefab
+│   ├── Soldier.prefab
+│   └── Terrorist.prefab
+│
+├── Scenes
+│   └── Battlefield.unity
+│
+├── Scripts
+│   ├── Base
+│   │   ├── GameBase.cs
+│   │   ├── Soldier.cs
+│   │   └── Terrorist.cs
+│   │
+│   ├── Button
+│   │   └── LaunchPlayer.cs
+│   │
+│   ├── Spawners
+│   │   └── EnemySpawner.cs
+│   │
+│   └── Units
+│       └── Unit.cs
+│
+├── Settings
+│   └── (URP + Scene templates)
+│
+└── Sprites
+    ├── 1_terrorist_1_Run_002.png
+    ├── 2_soldier_2_Run_003.png
+    ├── building.png
+    ├── Desert.png
+    ├── launch_player.png
+    ├── launch_player_2.png
+    └── military_base.png
 
 ---
 
