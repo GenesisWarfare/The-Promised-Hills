@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject initialExplanation;
     [SerializeField] private GameObject LaunchSoldierExplanation;
     [SerializeField] private GameObject goalExplanation;
-    
+
     private int currentStep = 0;
     private const int TOTAL_STEPS = 3;
 
@@ -20,8 +20,8 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         // Advance to next step on any input
-        if (Keyboard.current.anyKey.wasPressedThisFrame || 
-            Mouse.current.leftButton.wasPressedThisFrame)
+        if (Keyboard.current.anyKey.wasPressedThisFrame
+            || Mouse.current.leftButton.wasPressedThisFrame)
         {
             AdvanceStep();
         }
@@ -30,7 +30,7 @@ public class TutorialManager : MonoBehaviour
     void AdvanceStep()
     {
         currentStep++;
-        
+
         if (currentStep >= TOTAL_STEPS)
         {
             LoadNextScene();

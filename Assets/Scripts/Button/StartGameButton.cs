@@ -7,7 +7,7 @@ public class StartGameButton : MonoBehaviour
     [SerializeField] private string tutorialSceneName = "Tutorial";
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
-    
+
     private SpriteRenderer spriteRenderer;
 
     void Start()

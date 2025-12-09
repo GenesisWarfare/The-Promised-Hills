@@ -34,8 +34,6 @@ Lead your settlement through the ages of Israel — one battle at a time.
   - Scripts/
     - Base/
       - GameBase.cs
-      - Soldier.cs
-      - Terrorist.cs
     - Button/
       - LaunchPlayer.cs
     - Spawners/
@@ -45,13 +43,7 @@ Lead your settlement through the ages of Israel — one battle at a time.
   - Settings/
     - (URP + Scene templates)
   - Sprites/
-    - 1_terrorist_1_Run_002.png
-    - 2_soldier_2_Run_003.png
-    - building.png
-    - Desert.png
-    - launch_player.png
-    - launch_player_2.png
-    - military_base.png
+
 ---
 
 # 2D Battle Lane Prototype

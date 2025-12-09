@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             CleanupDeadUnits();
-            
+
             if (activeUnits.Count < maxActiveUnits)
             {
                 GameObject spawnedUnit = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
