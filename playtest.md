@@ -80,25 +80,11 @@ The number of spawners and their unit limits determine the strategic complexity 
 
 **Current Setup:** 3 explanation steps (configurable, skippable)
 
-**Considerations:**
-- **Information density:** How much information can players absorb at once? Too many explanations overwhelm new players, while too few leave them confused.
-- **Player retention:** Tutorials that are too long cause players to drop off before reaching gameplay. Tutorials that are too short fail to teach essential mechanics.
-- **Skip functionality:** Should tutorials be mandatory or optional? Allowing skips helps experienced players but might let new players miss critical information.
-- **Progressive disclosure:** Should all mechanics be explained upfront, or should some be discovered through gameplay? Finding the right balance between hand-holding and exploration.
-- **Visual vs. text:** What's the most effective way to communicate mechanics? Text explanations, visual demonstrations, or interactive tutorials each have different strengths.
-
 ---
 
 ## 7. How should difficulty scale between levels to create a satisfying progression curve?
 
 **Current Setup:** Configurable per level
-
-**Considerations:**
-- **Difficulty ramping:** Should each level be incrementally harder, or should difficulty spike at certain points? Gradual increases feel fair but can be predictable. Sudden spikes create memorable challenges but risk frustration.
-- **Parameter adjustments:** Which parameters should change between levels? Spawn rates, unit stats, number of spawners, base health, or combinations of these?
-- **Player skill development:** As players improve, they need increasing challenges to stay engaged. However, players learn at different rates—some need more time to master mechanics.
-- **Replayability:** Should later levels be significantly harder, or should difficulty plateau at a certain point? Too much difficulty increase can make later levels feel impossible.
-- **Checkpoint system:** Should players be able to retry levels easily, or should failure have consequences? Easy retries reduce frustration but might reduce tension.
 
 ---
 
