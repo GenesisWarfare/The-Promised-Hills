@@ -77,3 +77,23 @@ This is the early combat prototype of the game. Units walk toward each other, en
 3. When they meet an enemy, they stop and fight.
 4. Destroy the enemy base before yours falls.
 
+---
+
+## Playtest Questions
+
+1. **What is the optimal spawn interval for enemy spawners to maintain challenging gameplay without overwhelming the player?**
+   - Current default: 2 seconds
+   - Consider: player unit spawn rate, unit combat duration, base health, and difficulty curve
+
+2. **How many enemy spawners should be active per level, and what should be the maximum active units per spawner?**
+   - Current limit: 5 active units per spawner
+   - Consider: level difficulty progression, screen space, performance, and player strategy options
+
+3. **What are the optimal unit stats (health, damage, speed, attack interval) for balanced combat between player and enemy units?**
+   - Current defaults vary by unit type
+   - Consider: time-to-kill, strategic depth, and player agency
+
+4. **What is the optimal base health value to create engaging gameplay that allows for comebacks while maintaining tension?**
+   - Current default: 200 health
+   - Consider: unit damage values, spawn rates, and match duration
+
