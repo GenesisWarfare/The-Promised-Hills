@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6319956503994550392}
   - component: {fileID: 4739219428430448365}
-  - component: {fileID: 38567847179832609}
   - component: {fileID: 5151014847455002586}
   - component: {fileID: -1174443538497679699}
+  - component: {fileID: 8673855277353332646}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: PlayerUnit
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1606922375519663846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.460004, y: -5.68, z: -1}
-  m_LocalScale: {x: 0.4065617, y: 0.36960682, z: 1}
+  m_LocalPosition: {x: -11.2033, y: -7.0542, z: -5}
+  m_LocalScale: {x: 0.18601257, y: 0.15302627, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,23 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &38567847179832609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606922375519663846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af907f85aa264314c823277e3064c648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Soldier
-  speed: 2
-  maxHealth: 25
-  attackDamage: 5
-  attackInterval: 0.5
-  direction: {x: 1, y: 0}
 --- !u!50 &5151014847455002586
 Rigidbody2D:
   serializedVersion: 5
@@ -183,3 +166,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.74, y: 12.69}
   m_EdgeRadius: 0
+--- !u!114 &8673855277353332646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606922375519663846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54556682101cc3849b321fde61751eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  speed: 2
+  maxHealth: 20
+  attackDamage: 5
+  attackInterval: 0.5
+  direction: {x: 1, y: 0}

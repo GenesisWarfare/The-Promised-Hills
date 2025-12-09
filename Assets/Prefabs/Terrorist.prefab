@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 968696637387265302}
   - component: {fileID: 6416750638737745912}
-  - component: {fileID: 7190614605537473896}
   - component: {fileID: 7060711195414827532}
   - component: {fileID: -8683505369754926208}
+  - component: {fileID: 5253508480068157788}
   m_Layer: 0
   m_Name: Terrorist
   m_TagString: EnemyUnit
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1791009337995031278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.020028, y: -5.77, z: -1}
-  m_LocalScale: {x: 0.4152015, y: 0.3635484, z: 1}
+  m_LocalPosition: {x: 10.8045, y: -7.0544, z: -1}
+  m_LocalScale: {x: 0.18586417, y: 0.15917635, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,23 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7190614605537473896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791009337995031278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea92c9fd6a6d8c441a83769513ecd71a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Terrorist
-  speed: 1.5
-  maxHealth: 15
-  attackDamage: 10
-  attackInterval: 0.7
-  direction: {x: -1, y: 0}
 --- !u!50 &7060711195414827532
 Rigidbody2D:
   serializedVersion: 5
@@ -183,3 +166,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.84, y: 12.57}
   m_EdgeRadius: 0
+--- !u!114 &5253508480068157788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791009337995031278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54556682101cc3849b321fde61751eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  speed: 1
+  maxHealth: 20
+  attackDamage: 5
+  attackInterval: 0.5
+  direction: {x: -1, y: 0}
