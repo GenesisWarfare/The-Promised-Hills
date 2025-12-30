@@ -48,11 +48,11 @@ public class LevelSelectionButton : MonoBehaviour
             }
         }
     }
-    
+
     void SelectLevel()
     {
         Debug.Log($"LevelSelectionButton clicked - levelNumber: {levelNumber}, levelManager: {(levelManager != null ? "found" : "NULL")}");
-        
+
         if (levelManager != null)
         {
             levelManager.SelectLevel(levelNumber);
@@ -68,7 +68,7 @@ public class LevelSelectionButton : MonoBehaviour
             }
         }
     }
-    
+
     public void SetSelected(bool selected)
     {
         // No visual feedback for selection - just normal/hover colors

@@ -60,7 +60,7 @@ public class BattlefieldButton : MonoBehaviour
             SceneManager.LoadScene(sceneName);
         }
     }
-    
+
     public int GetLevelNumber()
     {
         return levelNumber;

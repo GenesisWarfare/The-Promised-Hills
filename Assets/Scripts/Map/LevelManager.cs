@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
                 button.gameObject.SetActive(false);
             }
         }
-        
+
         // Initialize with level 1 selected (this will show the correct buttons)
         SelectLevel(1);
     }
@@ -52,10 +52,10 @@ public class LevelManager : MonoBehaviour
     public void SelectLevel(int levelNumber)
     {
         currentSelectedLevel = levelNumber;
-        
+
         Debug.Log($"SelectLevel called with levelNumber: {levelNumber}");
         Debug.Log($"Total battlefield buttons found: {allBattlefieldButtons.Count}");
-        
+
         // Show/hide battlefield buttons based on level
         foreach (BattlefieldButton button in allBattlefieldButtons)
         {

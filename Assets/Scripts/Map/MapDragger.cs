@@ -83,7 +83,7 @@ public class MapDragger : MonoBehaviour
         {
             return mapCollider.OverlapPoint(worldPoint);
         }
-        
+
         return false;
     }
 }
