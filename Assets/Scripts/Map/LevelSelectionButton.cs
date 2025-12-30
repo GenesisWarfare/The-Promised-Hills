@@ -6,10 +6,10 @@ public class LevelSelectionButton : MonoBehaviour
     [SerializeField] private int levelNumber = 1;
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
-    
+
     private SpriteRenderer spriteRenderer;
     private LevelManager levelManager;
-    
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -17,10 +17,10 @@ public class LevelSelectionButton : MonoBehaviour
         {
             spriteRenderer.color = normalColor;
         }
-        
+
         levelManager = FindFirstObjectByType<LevelManager>();
     }
-    
+
     void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -32,7 +32,7 @@ public class LevelSelectionButton : MonoBehaviour
                 SelectLevel();
             }
         }
-        
+
         // Visual feedback on hover
         if (spriteRenderer != null)
         {
@@ -74,7 +74,7 @@ public class LevelSelectionButton : MonoBehaviour
         // No visual feedback for selection - just normal/hover colors
         // This method exists for compatibility but does nothing visual
     }
-    
+
     public int GetLevelNumber()
     {
         return levelNumber;

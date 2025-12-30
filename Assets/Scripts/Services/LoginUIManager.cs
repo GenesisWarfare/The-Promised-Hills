@@ -13,13 +13,13 @@ public class LoginUIManager : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TextMeshProUGUI statusText; // Optional - can be null
-    
+
     [Header("Scene Settings")]
     [SerializeField] private string menuSceneName = "Menu";
-    
+
     [Header("Authentication")]
     [SerializeField] private AuthenticationManagerWithPassword authManager;
-    
+
     void Start()
     {
         // Check if already signed in
@@ -34,7 +34,7 @@ public class LoginUIManager : MonoBehaviour
             AuthenticationService.Instance.SignedIn += OnSignedIn;
         }
     }
-    
+
     void OnDestroy()
     {
         // Unsubscribe from events
@@ -43,13 +43,13 @@ public class LoginUIManager : MonoBehaviour
             AuthenticationService.Instance.SignedIn -= OnSignedIn;
         }
     }
-    
+
     void OnSignedIn()
     {
         Debug.Log("User signed in successfully!");
         GoToMenu();
     }
-    
+
     public async void OnLoginButtonClicked()
     {
         if (usernameInputField == null || passwordInputField == null)
@@ -57,18 +57,18 @@ public class LoginUIManager : MonoBehaviour
             Debug.LogError("Username or Password input fields not assigned!");
             return;
         }
-        
+
         string username = usernameInputField.text;
         string password = passwordInputField.text;
-        
+
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             SetStatus("Please enter username and password", Color.red);
             return;
         }
-        
+
         SetStatus("Logging in...", Color.yellow);
-        
+
         if (authManager == null)
         {
             authManager = FindFirstObjectByType<AuthenticationManagerWithPassword>();
@@ -78,16 +78,16 @@ public class LoginUIManager : MonoBehaviour
                 return;
             }
         }
-        
+
         string message = await authManager.LoginWithUsernameAndPassword(username, password);
         SetStatus(message, message.Contains("success") ? Color.green : Color.red);
-        
+
         if (message.Contains("success"))
         {
             // OnSignedIn will be called automatically via event
         }
     }
-    
+
     public async void OnRegisterButtonClicked()
     {
         if (usernameInputField == null || passwordInputField == null)
@@ -95,32 +95,32 @@ public class LoginUIManager : MonoBehaviour
             Debug.LogError("Username or Password input fields not assigned!");
             return;
         }
-        
+
         string username = usernameInputField.text;
         string password = passwordInputField.text;
-        
+
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             SetStatus("Please enter username and password", Color.red);
             return;
         }
-        
+
         // Validate username: 3-20 characters, letters A-Z, numbers, and symbols ., -, @, _
         if (!IsValidUsername(username))
         {
             SetStatus("Username: 3-20 chars, letters, numbers, and . - @ _ only", Color.red);
             return;
         }
-        
+
         // Validate password: 8-30 chars, at least 1 lowercase, 1 uppercase, 1 number, 1 symbol
         if (!IsValidPassword(password))
         {
             SetStatus("Password: 8-30 chars, needs lowercase, uppercase, number, and symbol", Color.red);
             return;
         }
-        
+
         SetStatus("Registering...", Color.yellow);
-        
+
         if (authManager == null)
         {
             authManager = FindFirstObjectByType<AuthenticationManagerWithPassword>();
@@ -130,16 +130,16 @@ public class LoginUIManager : MonoBehaviour
                 return;
             }
         }
-        
+
         string message = await authManager.RegisterWithUsernameAndPassword(username, password);
         SetStatus(message, message.Contains("success") ? Color.green : Color.red);
-        
+
         if (message.Contains("success"))
         {
             // OnSignedIn will be called automatically via event
         }
     }
-    
+
     void SetStatus(string message, Color color)
     {
         if (statusText != null)
@@ -149,7 +149,7 @@ public class LoginUIManager : MonoBehaviour
         }
         Debug.Log($"Status: {message}");
     }
-    
+
     void GoToMenu()
     {
         if (!string.IsNullOrEmpty(menuSceneName))
@@ -161,16 +161,16 @@ public class LoginUIManager : MonoBehaviour
             Debug.LogError("Menu scene name not set!");
         }
     }
-    
+
     bool IsValidUsername(string username)
     {
         // Username: 3-20 characters, only letters A-Z, numbers, and symbols ., -, @, _
         if (username.Length < 3 || username.Length > 20)
             return false;
-        
+
         foreach (char c in username)
         {
-            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || 
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
                   (c >= '0' && c <= '9') || c == '.' || c == '-' || c == '@' || c == '_'))
             {
                 return false;
@@ -178,18 +178,18 @@ public class LoginUIManager : MonoBehaviour
         }
         return true;
     }
-    
+
     bool IsValidPassword(string password)
     {
         // Password: 8-30 characters, at least 1 lowercase, 1 uppercase, 1 number, 1 symbol
         if (password.Length < 8 || password.Length > 30)
             return false;
-        
+
         bool hasLower = false;
         bool hasUpper = false;
         bool hasNumber = false;
         bool hasSymbol = false;
-        
+
         foreach (char c in password)
         {
             if (c >= 'a' && c <= 'z') hasLower = true;
@@ -197,7 +197,7 @@ public class LoginUIManager : MonoBehaviour
             else if (c >= '0' && c <= '9') hasNumber = true;
             else hasSymbol = true; // Any other character is considered a symbol
         }
-        
+
         return hasLower && hasUpper && hasNumber && hasSymbol;
     }
 }

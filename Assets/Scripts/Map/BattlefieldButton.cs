@@ -8,10 +8,10 @@ public class BattlefieldButton : MonoBehaviour
     [SerializeField] private string sceneName = "";
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
-    
+
     private SpriteRenderer spriteRenderer;
     private LevelManager levelManager;
-    
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -19,12 +19,12 @@ public class BattlefieldButton : MonoBehaviour
         {
             spriteRenderer.color = normalColor;
         }
-        
+
         levelManager = FindFirstObjectByType<LevelManager>();
-        
+
         // Don't hide here - LevelManager will handle visibility in Awake/Start
     }
-    
+
     void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -36,7 +36,7 @@ public class BattlefieldButton : MonoBehaviour
                 LoadBattlefield();
             }
         }
-        
+
         // Visual feedback on hover
         if (spriteRenderer != null)
         {
@@ -52,7 +52,7 @@ public class BattlefieldButton : MonoBehaviour
             }
         }
     }
-    
+
     void LoadBattlefield()
     {
         if (!string.IsNullOrEmpty(sceneName))

@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
     private int currentSelectedLevel = 1;
     private List<BattlefieldButton> allBattlefieldButtons = new List<BattlefieldButton>();
     private List<LevelSelectionButton> levelSelectionButtons = new List<LevelSelectionButton>();
-    
+
     void Awake()
     {
         // Find all battlefield buttons - make sure they're all active when we find them
@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
                 Debug.Log($"Added BattlefieldButton with level: {button.GetLevelNumber()}");
             }
         }
-        
+
         // Find all level selection buttons
         LevelSelectionButton[] allLevelButtons = FindObjectsByType<LevelSelectionButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         Debug.Log($"Found {allLevelButtons.Length} LevelSelectionButtons in Awake");
@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    
+
     void Start()
     {
         // Hide all battlefield buttons first
@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         // Initialize with level 1 selected (this will show the correct buttons)
         SelectLevel(1);
     }
-    
+
     public void SelectLevel(int levelNumber)
     {
         currentSelectedLevel = levelNumber;
@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    
+
     public void RegisterLevelSelectionButton(LevelSelectionButton button)
     {
         if (!levelSelectionButtons.Contains(button))
@@ -76,7 +76,7 @@ public class LevelManager : MonoBehaviour
             levelSelectionButtons.Add(button);
         }
     }
-    
+
     public int GetCurrentLevel()
     {
         return currentSelectedLevel;
