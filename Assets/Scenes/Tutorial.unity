@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00b6b658fa95974ca19c3d063233502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  nextSceneName: Battlefield
+  nextSceneName: Map
   initialExplanation: {fileID: 1717811203}
   LaunchSoldierExplanation: {fileID: 755382236}
   goalExplanation: {fileID: 299121345}

@@ -30,11 +30,11 @@ public class Unit : MonoBehaviour
     {
         if (currentEnemyUnit != null || targetBase != null)
         {
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        rb.velocity = direction * speed;
+        rb.linearVelocity = direction * speed;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
