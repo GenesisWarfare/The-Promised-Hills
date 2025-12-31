@@ -4,7 +4,7 @@ using System.IO;
 
 /**
  * Creates a soldier prefab with all required components
- * 
+ *
  * Usage:
  * Tools -> Create Soldier Prefab
  */
@@ -28,7 +28,7 @@ public class CreateSoldierPrefab : EditorWindow
 
         prefabName = EditorGUILayout.TextField("Prefab Name:", prefabName);
         useAnimatedUnit = EditorGUILayout.Toggle("Use Animated Unit:", useAnimatedUnit);
-        
+
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Unit Tag:");
         unitTag = EditorGUILayout.TextField(unitTag);
@@ -77,7 +77,7 @@ public class CreateSoldierPrefab : EditorWindow
         if (useAnimatedUnit)
         {
             soldier.AddComponent<AnimatedUnit>();
-            
+
             // Add Animator
             Animator animator = soldier.AddComponent<Animator>();
             // Note: User will need to assign Animator Controller manually
@@ -99,7 +99,7 @@ public class CreateSoldierPrefab : EditorWindow
 
         // Create prefab
         string prefabPath = $"Assets/Prefabs/{prefabName}.prefab";
-        
+
         // Make sure Prefabs folder exists
         if (!AssetDatabase.IsValidFolder("Assets/Prefabs"))
         {
@@ -166,4 +166,3 @@ public class CreateSoldierPrefab : EditorWindow
         }
     }
 }
-

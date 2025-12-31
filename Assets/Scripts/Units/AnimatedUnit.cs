@@ -37,7 +37,7 @@ public class AnimatedUnit : Unit
     protected override void Update()
     {
         base.Update();
-        
+
         if (!isDead)
             UpdateAnimations();
     }
@@ -78,7 +78,7 @@ public class AnimatedUnit : Unit
     protected override IEnumerator AttackUnitRoutine(Unit enemy)
     {
         isAttacking = true;
-        
+
         while (enemy != null && enemy.IsAlive && IsAlive)
         {
             // Trigger attack animation
@@ -86,18 +86,18 @@ public class AnimatedUnit : Unit
             {
                 animator.SetTrigger(ANIM_ATTACK);
             }
-            
+
             // Deal damage
             enemy.TakeDamage(attackDamage);
-            
+
             // Wait for next attack
             yield return new WaitForSeconds(attackInterval);
         }
-        
+
         // Enemy died - immediately stop attacking and reset animation
         isAttacking = false;
         currentEnemyUnit = null;
-        
+
         // Force animation back to run/idle immediately
         if (animator != null && animator.isInitialized)
         {
@@ -110,7 +110,7 @@ public class AnimatedUnit : Unit
     protected override IEnumerator AttackBaseRoutine(GameBase baseObj)
     {
         isAttacking = true;
-        
+
         while (baseObj != null && baseObj.IsAlive() && IsAlive)
         {
             // Trigger attack animation
@@ -118,18 +118,18 @@ public class AnimatedUnit : Unit
             {
                 animator.SetTrigger(ANIM_ATTACK);
             }
-            
+
             // Deal damage
             baseObj.TakeDamage(attackDamage);
-            
+
             // Wait for next attack
             yield return new WaitForSeconds(attackInterval);
         }
-        
+
         // Base destroyed - immediately stop attacking and reset animation
         isAttacking = false;
         targetBase = null;
-        
+
         // Force animation back to run/idle immediately
         if (animator != null && animator.isInitialized)
         {
@@ -154,7 +154,7 @@ public class AnimatedUnit : Unit
                 animator.SetTrigger(ANIM_DEATH);
                 animator.SetBool(ANIM_RUN, false);
                 animator.SetBool(ANIM_IDLE, false);
-                
+
                 // Destroy after death animation
                 StartCoroutine(DestroyAfterDeath());
             }

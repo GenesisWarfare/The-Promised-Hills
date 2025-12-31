@@ -64,7 +64,7 @@ public class CreateAnimatorController : EditorWindow
         }
 
         string controllerPath = Path.Combine(folderPath, $"{controllerName}.controller");
-        
+
         // Delete existing if it exists
         if (File.Exists(controllerPath))
         {

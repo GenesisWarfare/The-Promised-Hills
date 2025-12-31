@@ -114,11 +114,11 @@ public class FixMedievalKingAnimations : EditorWindow
         {
             // Horizontal strip - calculate frames more carefully
             int frameHeight = height;
-            
+
             // Try different frame counts
             int[] possibleFrames = { 4, 6, 8, 10, 12, 16 };
             int bestFit = 8; // Default
-            
+
             foreach (int frames in possibleFrames)
             {
                 int frameWidth = width / frames;
@@ -129,7 +129,7 @@ public class FixMedievalKingAnimations : EditorWindow
                     break;
                 }
             }
-            
+
             gridSize = new Vector2Int(bestFit, 1);
         }
         else if (height > width)
@@ -138,7 +138,7 @@ public class FixMedievalKingAnimations : EditorWindow
             int frameWidth = width;
             int[] possibleFrames = { 4, 6, 8, 10, 12, 16 };
             int bestFit = 8;
-            
+
             foreach (int frames in possibleFrames)
             {
                 int frameHeight = height / frames;
@@ -148,7 +148,7 @@ public class FixMedievalKingAnimations : EditorWindow
                     break;
                 }
             }
-            
+
             gridSize = new Vector2Int(1, bestFit);
         }
         else

@@ -89,7 +89,7 @@ public class SetupSpriteSheetAnimation : EditorWindow
                 int frameHeight = height;
                 int[] possibleFrames = { 4, 6, 8, 10, 12, 16, 20 };
                 int bestFit = width / frameHeight; // Initial estimate
-                
+
                 foreach (int frames in possibleFrames)
                 {
                     int frameWidth = width / frames;
@@ -100,7 +100,7 @@ public class SetupSpriteSheetAnimation : EditorWindow
                         break;
                     }
                 }
-                
+
                 currentGridSize = new Vector2Int(bestFit, 1);
             }
             else if (height > width * 2)
@@ -109,7 +109,7 @@ public class SetupSpriteSheetAnimation : EditorWindow
                 int frameWidth = width;
                 int[] possibleFrames = { 4, 6, 8, 10, 12, 16, 20 };
                 int bestFit = height / frameWidth;
-                
+
                 foreach (int frames in possibleFrames)
                 {
                     int frameHeight = height / frames;
@@ -119,7 +119,7 @@ public class SetupSpriteSheetAnimation : EditorWindow
                         break;
                     }
                 }
-                
+
                 currentGridSize = new Vector2Int(1, bestFit);
             }
             else
