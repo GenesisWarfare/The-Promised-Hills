@@ -79,12 +79,21 @@ public class LoginUIManager : MonoBehaviour
             }
         }
 
-        string message = await authManager.LoginWithUsernameAndPassword(username, password);
-        SetStatus(message, message.Contains("success") ? Color.green : Color.red);
-
-        if (message.Contains("success"))
+        try
         {
-            // OnSignedIn will be called automatically via event
+            string message = await authManager.LoginWithUsernameAndPassword(username, password);
+            bool isSuccess = message.ToLower().Contains("success");
+            SetStatus(message, isSuccess ? Color.green : Color.red);
+
+            if (isSuccess)
+            {
+                // OnSignedIn will be called automatically via event
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error during login: {ex}");
+            SetStatus("Login failed: An unexpected error occurred. Please try again.", Color.red);
         }
     }
 
@@ -131,12 +140,21 @@ public class LoginUIManager : MonoBehaviour
             }
         }
 
-        string message = await authManager.RegisterWithUsernameAndPassword(username, password);
-        SetStatus(message, message.Contains("success") ? Color.green : Color.red);
-
-        if (message.Contains("success"))
+        try
         {
-            // OnSignedIn will be called automatically via event
+            string message = await authManager.RegisterWithUsernameAndPassword(username, password);
+            bool isSuccess = message.ToLower().Contains("success");
+            SetStatus(message, isSuccess ? Color.green : Color.red);
+
+            if (isSuccess)
+            {
+                // OnSignedIn will be called automatically via event
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error during registration: {ex}");
+            SetStatus("Registration failed: An unexpected error occurred. Please try again.", Color.red);
         }
     }
 
