@@ -30,10 +30,10 @@ public class GameBase : MonoBehaviour
     {
         health -= dmg;
         if (health < 0) health = 0;
-        
+
         // Notify health bar of health change
         OnHealthChanged?.Invoke(health, maxHealth);
-        
+
         if (health <= 0) Die();
     }
 

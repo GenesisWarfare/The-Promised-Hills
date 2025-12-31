@@ -139,7 +139,7 @@ public class Unit : MonoBehaviour
 
         // Check if we're at the edge of the screen
         float edgeThreshold = 0.3f;
-        
+
         // Player units move right, enemy units move left
         if (this.CompareTag("PlayerUnit"))
         {

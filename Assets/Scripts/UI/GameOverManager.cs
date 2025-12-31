@@ -136,7 +136,7 @@ public class GameOverManager : MonoBehaviour
     void ShowWinScreen()
     {
         Debug.Log("You Win!");
-        
+
         // Stop time or pause game
         Time.timeScale = 0f;
 
@@ -154,7 +154,7 @@ public class GameOverManager : MonoBehaviour
     void ShowLoseScreen()
     {
         Debug.Log("You Lose!");
-        
+
         // Stop time or pause game
         Time.timeScale = 0f;
 
