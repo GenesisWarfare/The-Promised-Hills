@@ -107,6 +107,12 @@ public class Unit : MonoBehaviour
             }
         }
 
+        // Also check if we've reached the screen edge (for invisible bases)
+        if (foundBase == null)
+        {
+            foundBase = CheckScreenEdgeForBase();
+        }
+
         // Handle enemy unit collision
         if (foundEnemy != null && currentEnemyUnit == null)
         {
@@ -120,6 +126,57 @@ public class Unit : MonoBehaviour
             targetBase = foundBase;
             StartCoroutine(AttackBaseRoutine(foundBase));
         }
+    }
+
+    private GameBase CheckScreenEdgeForBase()
+    {
+        // Get screen bounds
+        Camera cam = Camera.main;
+        if (cam == null) return null;
+
+        float screenLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        float screenRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+
+        // Check if we're at the edge of the screen
+        float edgeThreshold = 0.3f;
+        
+        // Player units move right, enemy units move left
+        if (this.CompareTag("PlayerUnit"))
+        {
+            // Player unit moving right - check if reached right edge (enemy base)
+            if (transform.position.x >= screenRight - edgeThreshold)
+            {
+                // Find enemy base
+                BaseManager baseManager = FindFirstObjectByType<BaseManager>();
+                if (baseManager != null)
+                {
+                    GameBase enemyBase = baseManager.GetEnemyBase();
+                    if (enemyBase != null && enemyBase.IsAlive())
+                    {
+                        return enemyBase;
+                    }
+                }
+            }
+        }
+        else if (this.CompareTag("EnemyUnit"))
+        {
+            // Enemy unit moving left - check if reached left edge (player base)
+            if (transform.position.x <= screenLeft + edgeThreshold)
+            {
+                // Find player base
+                BaseManager baseManager = FindFirstObjectByType<BaseManager>();
+                if (baseManager != null)
+                {
+                    GameBase playerBase = baseManager.GetPlayerBase();
+                    if (playerBase != null && playerBase.IsAlive())
+                    {
+                        return playerBase;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     protected virtual bool IsEnemy(Unit other)
