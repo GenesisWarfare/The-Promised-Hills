@@ -12,13 +12,28 @@ public class LevelSelectionButton : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"[LevelSelectionButton] Start() - GameObject: '{gameObject.name}', levelNumber: {levelNumber}");
+        
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             spriteRenderer.color = normalColor;
+            Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - SpriteRenderer found and color set");
+        }
+        else
+        {
+            Debug.LogWarning($"[LevelSelectionButton] '{gameObject.name}' - No SpriteRenderer found!");
         }
 
         levelManager = FindFirstObjectByType<LevelManager>();
+        if (levelManager != null)
+        {
+            Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - LevelManager found");
+        }
+        else
+        {
+            Debug.LogError($"[LevelSelectionButton] '{gameObject.name}' - LevelManager NOT FOUND!");
+        }
     }
 
     void Update()
@@ -29,6 +44,7 @@ public class LevelSelectionButton : MonoBehaviour
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {
+                Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - Mouse click detected on button!");
                 SelectLevel();
             }
         }
@@ -51,20 +67,27 @@ public class LevelSelectionButton : MonoBehaviour
 
     void SelectLevel()
     {
-        Debug.Log($"LevelSelectionButton clicked - levelNumber: {levelNumber}, levelManager: {(levelManager != null ? "found" : "NULL")}");
+        Debug.Log($"=== LevelSelectionButton.SelectLevel() - '{gameObject.name}' clicked ===");
+        Debug.Log($"[LevelSelectionButton] levelNumber: {levelNumber}, levelManager: {(levelManager != null ? "found" : "NULL")}");
 
         if (levelManager != null)
         {
+            Debug.Log($"[LevelSelectionButton] Calling levelManager.SelectLevel({levelNumber})");
             levelManager.SelectLevel(levelNumber);
         }
         else
         {
-            Debug.LogError("LevelManager is NULL! Cannot select level.");
+            Debug.LogError($"[LevelSelectionButton] '{gameObject.name}' - LevelManager is NULL! Cannot select level. Trying to find it again...");
             // Try to find it again
             levelManager = FindFirstObjectByType<LevelManager>();
             if (levelManager != null)
             {
+                Debug.Log($"[LevelSelectionButton] Found LevelManager on retry, calling SelectLevel({levelNumber})");
                 levelManager.SelectLevel(levelNumber);
+            }
+            else
+            {
+                Debug.LogError($"[LevelSelectionButton] '{gameObject.name}' - LevelManager still not found after retry!");
             }
         }
     }
