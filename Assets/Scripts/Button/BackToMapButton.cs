@@ -13,7 +13,7 @@ public class BackToMapButton : MonoBehaviour
 {
     [Header("Scene Settings")]
     [SerializeField] private string mapSceneName = "Map";
-    
+
     [Header("Visual Settings")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
