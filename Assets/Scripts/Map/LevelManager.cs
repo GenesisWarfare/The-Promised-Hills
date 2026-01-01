@@ -144,7 +144,6 @@ public class LevelManager : MonoBehaviour
         // Re-find all buttons to catch any that might have been created dynamically
         BattlefieldButton[] allButtons = FindObjectsByType<BattlefieldButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         Debug.Log($"[LevelManager] Found {allButtons.Length} BattlefieldButtons during refresh");
-        
         allBattlefieldButtons.Clear();
         foreach (BattlefieldButton button in allButtons)
         {
