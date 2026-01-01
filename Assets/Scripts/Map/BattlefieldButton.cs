@@ -15,7 +15,7 @@ public class BattlefieldButton : MonoBehaviour
     void Start()
     {
         Debug.Log($"[BattlefieldButton] Start() - GameObject: '{gameObject.name}', levelNumber: {levelNumber}, sceneName: '{sceneName}'");
-        
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {

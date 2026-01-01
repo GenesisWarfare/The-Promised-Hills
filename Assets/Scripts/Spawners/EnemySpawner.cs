@@ -56,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
             }
 
             // Use random interval if enabled
-            float waitTime = useRandomInterval 
-                ? Random.Range(minSpawnInterval, maxSpawnInterval) 
+            float waitTime = useRandomInterval
+                ? Random.Range(minSpawnInterval, maxSpawnInterval)
                 : spawnInterval;
 
             yield return new WaitForSeconds(waitTime);

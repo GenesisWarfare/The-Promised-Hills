@@ -13,7 +13,7 @@ public class LevelSelectionButton : MonoBehaviour
     void Start()
     {
         Debug.Log($"[LevelSelectionButton] Start() - GameObject: '{gameObject.name}', levelNumber: {levelNumber}");
-        
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {

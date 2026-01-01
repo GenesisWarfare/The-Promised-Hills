@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         Debug.Log("=== LevelManager.Awake() START ===");
-        
+
         // Find all battlefield buttons - make sure they're all active when we find them
         BattlefieldButton[] allButtons = FindObjectsByType<BattlefieldButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         Debug.Log($"[LevelManager] Found {allButtons.Length} BattlefieldButtons in Awake");
@@ -42,14 +42,14 @@ public class LevelManager : MonoBehaviour
                 Debug.LogWarning("[LevelManager] Found null LevelSelectionButton in Awake");
             }
         }
-        
+
         Debug.Log($"=== LevelManager.Awake() END - Total BattlefieldButtons: {allBattlefieldButtons.Count}, Total LevelSelectionButtons: {levelSelectionButtons.Count} ===");
     }
 
     void Start()
     {
         Debug.Log("=== LevelManager.Start() START ===");
-        
+
         // Refresh button lists to ensure we have all buttons
         RefreshButtonLists();
 
@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
         // Initialize with level 1 selected (this will show the correct buttons)
         Debug.Log("[LevelManager] Initializing with level 1 selected...");
         SelectLevel(1);
-        
+
         Debug.Log("=== LevelManager.Start() END ===");
     }
 
@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log($"[LevelManager] SelectLevel called with levelNumber: {levelNumber}");
         Debug.Log($"[LevelManager] Previous level was: {currentSelectedLevel}");
-        
+
         // Refresh button list in case buttons were added dynamically
         Debug.Log("[LevelManager] Refreshing button lists...");
         RefreshButtonLists();
@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
 
         int buttonsShown = 0;
         int buttonsHidden = 0;
-        
+
         // Show/hide battlefield buttons based on level
         foreach (BattlefieldButton button in allBattlefieldButtons)
         {
@@ -101,7 +101,7 @@ public class LevelManager : MonoBehaviour
                 bool shouldShow = buttonLevel == levelNumber;
                 bool currentlyActive = button.gameObject.activeSelf;
                 Debug.Log($"[LevelManager] BattlefieldButton '{button.gameObject.name}' - level: {buttonLevel}, shouldShow: {shouldShow}, currentlyActive: {currentlyActive}");
-                
+
                 if (shouldShow != currentlyActive)
                 {
                     button.gameObject.SetActive(shouldShow);
@@ -130,7 +130,7 @@ public class LevelManager : MonoBehaviour
                 Debug.LogWarning($"[LevelManager] BattlefieldButton has null gameObject");
             }
         }
-        
+
         Debug.Log($"[LevelManager] Summary: Shown {buttonsShown} buttons, Hidden {buttonsHidden} buttons for level {levelNumber}");
         Debug.Log($"=== LevelManager.SelectLevel({levelNumber}) END ===");
     }
@@ -138,9 +138,9 @@ public class LevelManager : MonoBehaviour
     private void RefreshButtonLists()
     {
         Debug.Log("[LevelManager] RefreshButtonLists() - Re-finding all buttons...");
-        
+
         int beforeCount = allBattlefieldButtons.Count;
-        
+
         // Re-find all buttons to catch any that might have been created dynamically
         BattlefieldButton[] allButtons = FindObjectsByType<BattlefieldButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         Debug.Log($"[LevelManager] Found {allButtons.Length} BattlefieldButtons during refresh");
@@ -154,7 +154,7 @@ public class LevelManager : MonoBehaviour
                 Debug.Log($"[LevelManager] Refresh: Added BattlefieldButton '{button.gameObject.name}' (level {button.GetLevelNumber()})");
             }
         }
-        
+
         int afterCount = allBattlefieldButtons.Count;
         if (afterCount != beforeCount)
         {
