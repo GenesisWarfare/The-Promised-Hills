@@ -2677,11 +2677,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
   winPanel: {fileID: 1600565712}
   losePanel: {fileID: 1742570101}
-  backToMapButton: {fileID: 2079048012}
+  winBackToMapButton: {fileID: 0}
   winText: {fileID: 1385605036}
+  loseBackToMapButton: {fileID: 0}
   loseText: {fileID: 897819132}
   mapSceneName: Map
-  delayBeforeShowingScreen: 0
 --- !u!4 &1677205816
 Transform:
   m_ObjectHideFlags: 0

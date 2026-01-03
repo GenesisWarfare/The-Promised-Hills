@@ -12,15 +12,15 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private GameObject losePanel;
 
     [Header("Win Screen")]
-    [SerializeField] private UnityEngine.UI.Button backToMapButton;
+    [SerializeField] private UnityEngine.UI.Button winBackToMapButton;
     [SerializeField] private TextMeshProUGUI winText;
 
     [Header("Lose Screen")]
+    [SerializeField] private UnityEngine.UI.Button loseBackToMapButton;
     [SerializeField] private TextMeshProUGUI loseText;
 
     [Header("Settings")]
     [SerializeField] private string mapSceneName = "Map";
-    [SerializeField] private float delayBeforeShowingScreen = 1f;
 
     private BaseManager baseManager;
     private bool gameOver = false;
@@ -33,10 +33,15 @@ public class GameOverManager : MonoBehaviour
         if (losePanel != null)
             losePanel.SetActive(false);
 
-        // Setup button
-        if (backToMapButton != null)
+        // Setup buttons
+        if (winBackToMapButton != null)
         {
-            backToMapButton.onClick.AddListener(GoToMap);
+            winBackToMapButton.onClick.AddListener(GoToMap);
+        }
+
+        if (loseBackToMapButton != null)
+        {
+            loseBackToMapButton.onClick.AddListener(GoToMap);
         }
 
         // Wait a frame for BaseManager to create bases

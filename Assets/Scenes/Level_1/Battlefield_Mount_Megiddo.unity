@@ -181,7 +181,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1051,11 +1051,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
   winPanel: {fileID: 174604409}
   losePanel: {fileID: 977864511}
-  backToMapButton: {fileID: 1872356116}
+  winBackToMapButton: {fileID: 0}
   winText: {fileID: 1164207628}
+  loseBackToMapButton: {fileID: 0}
   loseText: {fileID: 1823941983}
   mapSceneName: Map
-  delayBeforeShowingScreen: 0
 --- !u!4 &601402494
 Transform:
   m_ObjectHideFlags: 0

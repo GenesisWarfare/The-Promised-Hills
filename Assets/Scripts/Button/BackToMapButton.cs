@@ -14,18 +14,26 @@ public class BackToMapButton : MonoBehaviour
     [Header("Scene Settings")]
     [SerializeField] private string mapSceneName = "Map";
 
-    [Header("Visual Settings")]
-    [SerializeField] private Color normalColor = Color.white;
-    [SerializeField] private Color hoverColor = Color.yellow;
+    [Header("Sprite Settings")]
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite hoverSprite;
 
     private SpriteRenderer spriteRenderer;
+    private Sprite originalSprite;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = normalColor;
+            // Store the original sprite if not set in inspector
+            originalSprite = spriteRenderer.sprite;
+
+            // Use normal sprite if assigned, otherwise keep the original
+            if (normalSprite != null)
+            {
+                spriteRenderer.sprite = normalSprite;
+            }
         }
     }
 
@@ -59,7 +67,7 @@ public class BackToMapButton : MonoBehaviour
             }
         }
 
-        // Visual feedback on hover
+        // Visual feedback on hover - swap sprites
         if (spriteRenderer != null)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(
@@ -72,11 +80,20 @@ public class BackToMapButton : MonoBehaviour
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {
-                spriteRenderer.color = hoverColor;
+                // Use hover sprite if assigned, otherwise keep current
+                if (hoverSprite != null)
+                {
+                    spriteRenderer.sprite = hoverSprite;
+                }
             }
             else
             {
-                spriteRenderer.color = normalColor;
+                // Use normal sprite if assigned, otherwise use original
+                Sprite spriteToUse = normalSprite != null ? normalSprite : originalSprite;
+                if (spriteToUse != null)
+                {
+                    spriteRenderer.sprite = spriteToUse;
+                }
             }
         }
     }
