@@ -192,7 +192,8 @@ public class GameOverManager : MonoBehaviour
         }
 
         // Set to opaque black (or you can change this color)
-        panelImage.color = new Color(0f, 1f, 1f, 1f); 
+        panelImage.color = new Color(0f, 1f, 1f, 1f);
+
 
         // Ensure the panel's Canvas has high sorting order to render on top
         Canvas canvas = panel.GetComponentInParent<Canvas>();
