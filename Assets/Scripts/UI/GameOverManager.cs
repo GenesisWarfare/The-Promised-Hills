@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -147,6 +148,7 @@ public class GameOverManager : MonoBehaviour
 
         if (winPanel != null)
         {
+            EnsurePanelSetup(winPanel);
             winPanel.SetActive(true);
         }
 
@@ -165,12 +167,39 @@ public class GameOverManager : MonoBehaviour
 
         if (losePanel != null)
         {
+            EnsurePanelSetup(losePanel);
             losePanel.SetActive(true);
         }
 
         if (loseText != null)
         {
             loseText.text = "You Lose!";
+        }
+    }
+
+    /**
+     * Ensure panel is properly set up: has opaque background and renders on top
+     */
+    void EnsurePanelSetup(GameObject panel)
+    {
+        if (panel == null) return;
+
+        // Find or add Image component for opaque background
+        Image panelImage = panel.GetComponent<Image>();
+        if (panelImage == null)
+        {
+            panelImage = panel.AddComponent<Image>();
+        }
+
+        // Set to opaque black (or you can change this color)
+        panelImage.color = new Color(0f, 1f, 1f, 1f); 
+
+        // Ensure the panel's Canvas has high sorting order to render on top
+        Canvas canvas = panel.GetComponentInParent<Canvas>();
+        if (canvas != null)
+        {
+            // Set very high sorting order so it renders above everything
+            canvas.sortingOrder = 1000;
         }
     }
 

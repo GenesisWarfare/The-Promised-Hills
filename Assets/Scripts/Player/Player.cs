@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
@@ -74,6 +76,62 @@ public class Player : MonoBehaviour
         await WaitForUnityServices();
         await LoadMoneyFromCloud();
         UpdateMoneyUI();
+
+        // Subscribe to scene loaded event to update money UI when entering any scene
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Start coroutine to continuously update money UI
+        StartCoroutine(ContinuousMoneyUIUpdate());
+    }
+
+    /**
+     * Coroutine that continuously tries to find and update money UI
+     * This ensures the money text is always found and updated, even if UI loads late
+     */
+    IEnumerator ContinuousMoneyUIUpdate()
+    {
+        while (true)
+        {
+            // Reset reference if invalid
+            if (moneyText == null || moneyText.gameObject == null)
+            {
+                moneyText = null;
+            }
+
+            // Try to find and update money text
+            UpdateMoneyUI();
+
+            // Wait a bit before trying again (not too often to avoid performance issues)
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    /**
+     * Called whenever a scene is loaded - updates money UI
+     */
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reset moneyText reference so it finds the new one in this scene
+        moneyText = null;
+        // Start a coroutine to find the text after a small delay (UI might not be ready yet)
+        StartCoroutine(FindMoneyTextAfterDelay());
+    }
+
+    /**
+     * Wait a moment for UI to initialize, then find and update money text
+     */
+    IEnumerator FindMoneyTextAfterDelay()
+    {
+        // Wait a frame for UI to initialize
+        yield return null;
+        // Try to find and update
+        UpdateMoneyUI();
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe from scene loaded event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /**
@@ -292,10 +350,57 @@ public class Player : MonoBehaviour
      */
     void UpdateMoneyUI()
     {
+        // Try to find money text if not assigned or if the reference is invalid
+        if (moneyText == null || moneyText.gameObject == null)
+        {
+            FindMoneyTextInScene();
+        }
+
         if (moneyText != null)
         {
             moneyText.text = $"Money: {money}";
         }
+    }
+
+    /**
+     * Find money text UI in current scene
+     */
+    void FindMoneyTextInScene()
+    {
+        // Try common names (exact matches first)
+        GameObject moneyObj = GameObject.Find("MoneyText");
+        if (moneyObj == null) moneyObj = GameObject.Find("Money_Text");
+        if (moneyObj == null) moneyObj = GameObject.Find("MoneyTextUI");
+        if (moneyObj == null) moneyObj = GameObject.Find("Money");
+        if (moneyObj == null) moneyObj = GameObject.Find("MoneyText (TMP)");
+
+        if (moneyObj != null)
+        {
+            moneyText = moneyObj.GetComponent<TMPro.TextMeshProUGUI>();
+            if (moneyText != null)
+            {
+                Debug.Log($"Player: Found money text by name: {moneyObj.name}");
+                return;
+            }
+        }
+
+        // Search all TextMeshProUGUI components for one with "money" in name
+        TMPro.TextMeshProUGUI[] allTexts = FindObjectsByType<TMPro.TextMeshProUGUI>(FindObjectsSortMode.None);
+        foreach (TMPro.TextMeshProUGUI text in allTexts)
+        {
+            if (text == null || text.gameObject == null) continue;
+
+            string name = text.name.ToLower();
+            string goName = text.gameObject.name.ToLower();
+            if (name.Contains("money") || goName.Contains("money"))
+            {
+                moneyText = text;
+                Debug.Log($"Player: Found money text by search: {text.gameObject.name}");
+                return;
+            }
+        }
+
+        Debug.LogWarning("Player: Could not find money text UI in current scene. Make sure there's a TextMeshProUGUI with 'money' in its name.");
     }
 
     /**
