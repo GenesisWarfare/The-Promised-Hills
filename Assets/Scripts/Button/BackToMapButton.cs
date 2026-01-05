@@ -100,6 +100,13 @@ public class BackToMapButton : MonoBehaviour
 
     void LoadMapScene()
     {
+        // Save money before going back to map
+        Player player = Player.Instance;
+        if (player != null)
+        {
+            player.SaveMoneyNow();
+        }
+
         if (!string.IsNullOrEmpty(mapSceneName))
         {
             SceneManager.LoadScene(mapSceneName);

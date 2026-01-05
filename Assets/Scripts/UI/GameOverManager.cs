@@ -206,6 +206,13 @@ public class GameOverManager : MonoBehaviour
 
     public void GoToMap()
     {
+        // Save money before going back to map
+        Player player = Player.Instance;
+        if (player != null)
+        {
+            player.SaveMoneyNow();
+        }
+
         // Resume time before loading scene
         Time.timeScale = 1f;
         SceneManager.LoadScene(mapSceneName);

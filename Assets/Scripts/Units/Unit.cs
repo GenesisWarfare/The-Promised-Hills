@@ -43,9 +43,11 @@ public class Unit : MonoBehaviour
 
     protected virtual void Update()
     {
-        // Lock Y position (stay on lane)
+        // Lock Y position (stay on lane) but preserve Z position
         Vector3 pos = transform.position;
+        float originalZ = pos.z; // Preserve original z position
         pos.y = lockedYPosition;
+        pos.z = originalZ; // Restore z position
         transform.position = pos;
 
         // If fighting, stop
@@ -66,6 +68,7 @@ public class Unit : MonoBehaviour
         // Move forward (simple Transform movement - no physics)
         transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
     }
+
 
     private void CheckCollisions()
     {

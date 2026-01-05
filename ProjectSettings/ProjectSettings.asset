@@ -44,8 +44,8 @@ PlayerSettings:
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
   defaultScreenHeight: 1080
-  defaultScreenWidthWeb: 1100
-  defaultScreenHeightWeb: 500
+  defaultScreenWidthWeb: 1010
+  defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   unsupportedMSAAFallback: 0
@@ -684,12 +684,12 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 79338cd3-884a-43fd-a4dc-39d92eaddaf1
+  cloudProjectId: 8c71f425-02aa-4564-ab90-ffd60d02a63b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: My project 2025-11-25_15-40-01
   organizationId: vitaminchiken
-  cloudEnabled: 0
+  cloudEnabled: 1
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0

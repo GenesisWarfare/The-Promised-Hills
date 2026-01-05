@@ -166,6 +166,9 @@ public class LoginUIManager : MonoBehaviour
                 if (player != null)
                 {
                     player.SetCredentials(username, password);
+                    // New player registration - set money to 100
+                    player.SetMoney(100);
+                    player.SaveMoneyNow();
                 }
                 // OnSignedIn will be called automatically via event
             }

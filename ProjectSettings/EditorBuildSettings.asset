@@ -5,9 +5,51 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoginRegister.unity
+    guid: e5f628f47c4351e47b7fda228e152070
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 32e9d6b870a2c5746b5629cebe202c83
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 598ea7c5143433d489c6b7aecbc58ee4
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: efd6cc78a5fe93745a2b295caf693737
+  - enabled: 1
+    path: Assets/Scenes/Level_1/Battlefield_Ella_Valley.unity
+    guid: 12f569235a241e64faa3fd8572316b64
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Level_1/Battlefield_Mount_Megiddo.unity
+    guid: 89088c0ee9853954aa1fa37d38ff5f23
+  - enabled: 0
+    path: Assets/Scenes/Level_1/Battlefield_Samaria.unity
+    guid: e564e008f5fd93a4e9a81b8ea2906c47
+  - enabled: 0
+    path: Assets/Scenes/Level_3/Battlefield_3_1.unity
+    guid: 40cb9d399ad57b74db4c25ac1f25ae72
+  - enabled: 0
+    path: Assets/Scenes/Level_3/Battlefield_3_2.unity
+    guid: 8f637476649bf7449ba554a104e1f2a8
+  - enabled: 0
+    path: Assets/Scenes/Level_3/Battlefield_3_3.unity
+    guid: 4d9bc8677ac5b004894aa0c69d1d41b2
+  - enabled: 1
+    path: Assets/Scenes/Level_4/Battlefield_4_2.unity
+    guid: ffe24ff8d046ea44686955929a101867
+  - enabled: 1
+    path: Assets/Scenes/Level_4/Battlefield_4_3.unity
+    guid: c67f2a344d62030448a9a7f19925d157
+  - enabled: 1
+    path: Assets/Scenes/Level_2/Battlefield_Amman.unity
+    guid: d18dd4445b46bf04b8fabf661ac47b3b
+  - enabled: 1
+    path: Assets/Scenes/Level_2/Battlefield_Ekron.unity
+    guid: a296ef8aa7e64844aa7177f690118fb5
+  - enabled: 1
+    path: Assets/Scenes/Level_2/Battlefield_Moab.unity
+    guid: 12dc15124a6e9644483466e321a06638
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

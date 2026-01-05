@@ -171,21 +171,26 @@ public class Player : MonoBehaviour
     /**
      * Set player name and password (called after login/register)
      */
-    public void SetCredentials(string name, string password)
+    public async void SetCredentials(string name, string password)
     {
         this.playerName = name;
         this.password = password;
-        SavePlayerData();
+        SavePlayerData(); // Save locally to PlayerPrefs
+        _ = SavePlayerDataToCloud(); // Save to Cloud Save (fire-and-forget)
         Debug.Log($"Player: Set credentials for {name}");
     }
 
     /**
-     * Load player name and password from PlayerPrefs
+     * Load player name and password from PlayerPrefs and Cloud Save
      */
-    void LoadPlayerData()
+    async void LoadPlayerData()
     {
+        // Load from PlayerPrefs first (for quick access)
         playerName = PlayerPrefs.GetString(NAME_KEY, "");
         password = PlayerPrefs.GetString(PASSWORD_KEY, "");
+
+        // Also try to load from Cloud Save (will override if available)
+        await LoadPlayerDataFromCloud();
 
         if (!string.IsNullOrEmpty(playerName))
         {
@@ -194,7 +199,7 @@ public class Player : MonoBehaviour
     }
 
     /**
-     * Save player name and password to PlayerPrefs
+     * Save player name and password to PlayerPrefs (local)
      */
     void SavePlayerData()
     {
@@ -203,7 +208,97 @@ public class Player : MonoBehaviour
             PlayerPrefs.SetString(NAME_KEY, playerName);
             PlayerPrefs.SetString(PASSWORD_KEY, password);
             PlayerPrefs.Save();
-            Debug.Log($"Player: Saved player data for {playerName}");
+            Debug.Log($"Player: Saved player data locally for {playerName}");
+        }
+    }
+
+    /**
+     * Save player name and password to Cloud Save
+     */
+    async Task SavePlayerDataToCloud()
+    {
+        // Check if Unity Services is initialized
+        if (UnityServices.State != ServicesInitializationState.Initialized)
+        {
+            Debug.LogWarning("Player: Unity Services not initialized, cannot save player data to cloud");
+            return;
+        }
+
+        try
+        {
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                Debug.LogWarning("Player: Not signed in, cannot save player data to cloud");
+                return;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Player: AuthenticationService not available: {ex.Message}");
+            return;
+        }
+
+        try
+        {
+            await DatabaseManager.SaveData((NAME_KEY, playerName), (PASSWORD_KEY, password));
+            Debug.Log($"Player: Saved player data (name, password) to cloud for {playerName}");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Player: Error saving player data to cloud: {ex.Message}");
+        }
+    }
+
+    /**
+     * Load player name and password from Cloud Save
+     */
+    async Task LoadPlayerDataFromCloud()
+    {
+        // Check if Unity Services is initialized
+        if (UnityServices.State != ServicesInitializationState.Initialized)
+        {
+            return;
+        }
+
+        try
+        {
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                return;
+            }
+        }
+        catch (System.Exception)
+        {
+            return;
+        }
+
+        try
+        {
+            var data = await DatabaseManager.LoadData(NAME_KEY, PASSWORD_KEY);
+            
+            if (data.ContainsKey(NAME_KEY) && data[NAME_KEY] != null)
+            {
+                string savedName = data[NAME_KEY].Value.GetAsString();
+                if (!string.IsNullOrEmpty(savedName))
+                {
+                    playerName = savedName;
+                    Debug.Log($"Player: Loaded name from cloud: {playerName}");
+                }
+            }
+
+            if (data.ContainsKey(PASSWORD_KEY) && data[PASSWORD_KEY] != null)
+            {
+                string savedPassword = data[PASSWORD_KEY].Value.GetAsString();
+                if (!string.IsNullOrEmpty(savedPassword))
+                {
+                    password = savedPassword;
+                    Debug.Log($"Player: Loaded password from cloud");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Player: Error loading player data from cloud: {ex.Message}");
         }
     }
 
@@ -267,6 +362,14 @@ public class Player : MonoBehaviour
     }
 
     /**
+     * Save money to Cloud Save immediately (called when needed)
+     */
+    public async void SaveMoneyNow()
+    {
+        await SaveMoneyToCloud();
+    }
+
+    /**
      * Save money to Cloud Save
      */
     async Task SaveMoneyToCloud()
@@ -301,6 +404,16 @@ public class Player : MonoBehaviour
         {
             Debug.LogError($"Player: Error saving money to cloud: {ex.Message}");
         }
+    }
+
+    /**
+     * Set money directly (used for initialization)
+     */
+    public void SetMoney(int amount)
+    {
+        money = amount;
+        UpdateMoneyUI();
+        Debug.Log($"Player: Set money to {money}");
     }
 
     /**

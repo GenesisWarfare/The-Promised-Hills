@@ -78,9 +78,16 @@ public class PlayerLaneManager : MonoBehaviour
             player.SpendMoney(unitCost);
         }
 
-        // Spawn the unit
-        Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
-        Debug.Log($"Spawned player unit in lane {laneNumber} (cost: {unitCost})");
+        // Spawn the unit at spawn point position (including z position)
+        Vector3 spawnPosition = spawnPoint.position;
+        GameObject spawnedUnit = Instantiate(playerUnitPrefab, spawnPosition, Quaternion.identity);
+        
+        // Ensure z position matches spawn point
+        Vector3 unitPos = spawnedUnit.transform.position;
+        unitPos.z = spawnPosition.z;
+        spawnedUnit.transform.position = unitPos;
+        
+        Debug.Log($"Spawned player unit in lane {laneNumber} at z={spawnPosition.z} (cost: {unitCost})");
     }
 
     private Transform GetSpawnPointForLane(int laneNumber)

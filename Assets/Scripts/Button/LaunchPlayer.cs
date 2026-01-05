@@ -71,7 +71,13 @@ public class LaunchPlayer : MonoBehaviour
             player.SpendMoney(unitCost);
         }
 
-        // Spawn the unit
-        Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
+        // Spawn the unit at spawn point position (including z position)
+        Vector3 spawnPosition = spawnPoint.position;
+        GameObject spawnedUnit = Instantiate(playerUnitPrefab, spawnPosition, Quaternion.identity);
+        
+        // Ensure z position matches spawn point
+        Vector3 unitPos = spawnedUnit.transform.position;
+        unitPos.z = spawnPosition.z;
+        spawnedUnit.transform.position = unitPos;
     }
 }
