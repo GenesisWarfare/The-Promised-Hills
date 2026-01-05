@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e1750b7f3a5f4b643872d2d2ecc71d98
+guid: 0f6b40ab8c6190748bd6fc5b4b1b055b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7734824345066745893
-    second: GrimReaper_0_0
+      213: -1318660756045344181
+    second: Moav_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GrimReaper_0_0
+      name: Moav_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 400
-        height: 397
+        y: 0
+        width: 1536
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5203fbfc2cd975b60800000000000000
-      internalID: 7734824345066745893
+      spriteID: b425ba8670d23bde0800000000000000
+      internalID: -1318660756045344181
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      GrimReaper_0_0: 7734824345066745893
+      Moav_0: -1318660756045344181
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

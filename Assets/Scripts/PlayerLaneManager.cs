@@ -54,15 +54,33 @@ public class PlayerLaneManager : MonoBehaviour
     public void SpawnInLane(int laneNumber)
     {
         Transform spawnPoint = GetSpawnPointForLane(laneNumber);
-        if (spawnPoint != null && playerUnitPrefab != null)
-        {
-            Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
-            Debug.Log($"Spawned player unit in lane {laneNumber}");
-        }
-        else
+        if (spawnPoint == null || playerUnitPrefab == null)
         {
             Debug.LogWarning($"Cannot spawn in lane {laneNumber}: spawnPoint or prefab is null");
+            return;
         }
+
+        // Get unit cost from prefab's Unit component
+        Unit unitComponent = playerUnitPrefab.GetComponent<Unit>();
+        int unitCost = unitComponent != null ? unitComponent.Cost : 0;
+        
+        // Check if player has enough money
+        Player player = Player.Instance;
+        if (player != null && !player.HasEnoughMoney(unitCost))
+        {
+            Debug.LogWarning($"PlayerLaneManager: Not enough money! Need {unitCost}, have {player.Money}");
+            return;
+        }
+
+        // Spend money
+        if (player != null && unitCost > 0)
+        {
+            player.SpendMoney(unitCost);
+        }
+
+        // Spawn the unit
+        Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
+        Debug.Log($"Spawned player unit in lane {laneNumber} (cost: {unitCost})");
     }
 
     private Transform GetSpawnPointForLane(int laneNumber)

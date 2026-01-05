@@ -13,15 +13,24 @@ public class AuthenticationManagerWithPassword : MonoBehaviour
     async void Awake()
     {
         Debug.Log("AuthenticationManagerWithPassword Awake");
-        await UnityServices.InitializeAsync();
+        try
+        {
+            await UnityServices.InitializeAsync();
+            Debug.Log($"Unity Services initialized! State: {UnityServices.State}");
 
-        if (AuthenticationService.Instance.IsSignedIn)
-        {
-            Debug.Log($"Player is already signed in as: {AuthenticationService.Instance.PlayerId}");
+            if (AuthenticationService.Instance.IsSignedIn)
+            {
+                Debug.Log($"Player is already signed in as: {AuthenticationService.Instance.PlayerId}");
+            }
+            else
+            {
+                Debug.Log("Player is not signed in yet - waiting for sign-in");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.Log("Player is not signed in yet - waiting for sign-in");
+            Debug.LogError($"Failed to initialize Unity Services: {ex.Message}");
+            Debug.LogError($"Stack trace: {ex.StackTrace}");
         }
     }
 
@@ -33,7 +42,9 @@ public class AuthenticationManagerWithPassword : MonoBehaviour
     {
         try
         {
+            Debug.Log($"Attempting to register user: {username}");
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
+            Debug.Log($"Registration successful! Player ID: {AuthenticationService.Instance.PlayerId}");
             return "Registration successful!";
         }
         catch (AuthenticationException ex)
@@ -59,7 +70,9 @@ public class AuthenticationManagerWithPassword : MonoBehaviour
     {
         try
         {
+            Debug.Log($"Attempting to login user: {username}");
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            Debug.Log($"Login successful! Player ID: {AuthenticationService.Instance.PlayerId}");
             return "Login successful!";
         }
         catch (AuthenticationException ex)

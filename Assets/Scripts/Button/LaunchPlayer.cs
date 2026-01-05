@@ -47,9 +47,31 @@ public class LaunchPlayer : MonoBehaviour
 
     public void SpawnUnit()
     {
-        if (playerUnitPrefab != null && spawnPoint != null)
+        if (playerUnitPrefab == null || spawnPoint == null)
         {
-            Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
+            Debug.LogWarning("LaunchPlayer: Missing prefab or spawn point!");
+            return;
         }
+
+        // Get unit cost from prefab's Unit component
+        Unit unitComponent = playerUnitPrefab.GetComponent<Unit>();
+        int unitCost = unitComponent != null ? unitComponent.Cost : 0;
+
+        // Check if player has enough money
+        Player player = Player.Instance;
+        if (player != null && !player.HasEnoughMoney(unitCost))
+        {
+            Debug.LogWarning($"LaunchPlayer: Not enough money! Need {unitCost}, have {player.Money}");
+            return;
+        }
+
+        // Spend money
+        if (player != null && unitCost > 0)
+        {
+            player.SpendMoney(unitCost);
+        }
+
+        // Spawn the unit
+        Instantiate(playerUnitPrefab, spawnPoint.position, Quaternion.identity);
     }
 }

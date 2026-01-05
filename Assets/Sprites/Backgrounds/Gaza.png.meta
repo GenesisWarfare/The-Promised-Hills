@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6bce9807b991c3f4a9bbbfdb4bc45b72
+guid: ebad1825e629d564eade9dc2145cd26f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -632094993731248425
-    second: kingdomOfIsrael_0
+      213: -2593143872080557079
+    second: Gaza_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kingdomOfIsrael_0
+      name: Gaza_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2206
-        height: 2206
+        width: 1536
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7de9852c3f85a37f0800000000000000
-      internalID: -632094993731248425
+      spriteID: 9eb482d236d430cd0800000000000000
+      internalID: -2593143872080557079
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kingdomOfIsrael_0: -632094993731248425
+      Gaza_0: -2593143872080557079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -22,6 +22,13 @@ public class LoginUIManager : MonoBehaviour
 
     void Start()
     {
+        // Set password field to hide password (show *****)
+        if (passwordInputField != null)
+        {
+            passwordInputField.contentType = TMP_InputField.ContentType.Password;
+            passwordInputField.ForceLabelUpdate();
+        }
+
         // Check if already signed in
         if (AuthenticationService.Instance.IsSignedIn)
         {
@@ -87,6 +94,12 @@ public class LoginUIManager : MonoBehaviour
 
             if (isSuccess)
             {
+                // Save player credentials to Player object
+                Player player = Player.Instance;
+                if (player != null)
+                {
+                    player.SetCredentials(username, password);
+                }
                 // OnSignedIn will be called automatically via event
             }
         }
@@ -148,6 +161,12 @@ public class LoginUIManager : MonoBehaviour
 
             if (isSuccess)
             {
+                // Save player credentials to Player object
+                Player player = Player.Instance;
+                if (player != null)
+                {
+                    player.SetCredentials(username, password);
+                }
                 // OnSignedIn will be called automatically via event
             }
         }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dc4c1615e45ab814cbdc33292e4a75fb
+guid: f6876bcbc4a3a5a4dba54a74c6e96ce9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 130452656225014213
-    second: Desert_0
+      213: 8621154380645147915
+    second: Emek_Haelah_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Desert_0
+      name: Emek_Haelah_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1600
-        height: 860
+        width: 1536
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5c15c4aeff57fc100800000000000000
-      internalID: 130452656225014213
+      spriteID: b05282c7b3e74a770800000000000000
+      internalID: 8621154380645147915
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Desert_0: 130452656225014213
+      Emek_Haelah_0: 8621154380645147915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

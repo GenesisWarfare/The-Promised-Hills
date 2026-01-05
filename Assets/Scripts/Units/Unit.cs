@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour
     public int maxHealth = 20;
     public int attackDamage = 5;
     public float attackInterval = 0.5f;
+    [Header("Unit Cost (Player Units Only)")]
+    [SerializeField] private int unitCost = 20; // Cost to spawn this unit (only used for player units)
 
     [Header("Movement")]
     public Vector2 direction = Vector2.right;
@@ -31,6 +33,7 @@ public class Unit : MonoBehaviour
     // Public property to check health from other units
     public int Health => health;
     public bool IsAlive => health > 0;
+    public int Cost => unitCost; // Public property to get unit cost
 
     protected virtual void Awake()
     {
@@ -223,6 +226,16 @@ public class Unit : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
+            // Give money to player if this is an enemy unit
+            if (this.CompareTag("EnemyUnit"))
+            {
+                Player player = Player.Instance;
+                if (player != null)
+                {
+                    player.OnEnemyKilled(this);
+                }
+            }
+
             Destroy(gameObject);
         }
     }
