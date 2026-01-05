@@ -18,7 +18,7 @@ public class SetupBackgrounds : EditorWindow
         // Level 4 background
         SetupLevelBackground("Level_4", "Background_4.png", "Background_4");
 
-        EditorUtility.DisplayDialog("Background Setup", 
+        EditorUtility.DisplayDialog("Background Setup",
             "Background setup complete!\n\n" +
             "Level 3: Background_3.png\n" +
             "Level 4: Background_4.png\n\n" +
@@ -54,7 +54,7 @@ public class SetupBackgrounds : EditorWindow
 
             string spritePath = AssetDatabase.GUIDToAssetPath(spriteGuids[0]);
             Sprite backgroundSprite = AssetDatabase.LoadAssetAtPath<Sprite>(spritePath);
-            
+
             if (backgroundSprite == null)
             {
                 Debug.LogWarning($"[SetupBackgrounds] Could not load sprite at: {spritePath}");
@@ -90,7 +90,7 @@ public class SetupBackgrounds : EditorWindow
 
             EditorUtility.SetDirty(background);
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
-            
+
             Debug.Log($"[SetupBackgrounds] Created {backgroundName} in {scenePath}");
         }
     }
