@@ -275,7 +275,7 @@ public class Player : MonoBehaviour
         try
         {
             var data = await DatabaseManager.LoadData(NAME_KEY, PASSWORD_KEY);
-            
+
             if (data.ContainsKey(NAME_KEY) && data[NAME_KEY] != null)
             {
                 string savedName = data[NAME_KEY].Value.GetAsString();
