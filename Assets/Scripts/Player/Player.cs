@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
         // Load player data
         LoadPlayerData();
-        
+
         // Wait for Unity Services to initialize before loading money
         await WaitForUnityServices();
         await LoadMoneyFromCloud();
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
     {
         playerName = PlayerPrefs.GetString(NAME_KEY, "");
         password = PlayerPrefs.GetString(PASSWORD_KEY, "");
-        
+
         if (!string.IsNullOrEmpty(playerName))
         {
             Debug.Log($"Player: Loaded player data for {playerName}");
@@ -324,11 +324,11 @@ public class Player : MonoBehaviour
         playerName = "";
         password = "";
         money = startingMoney;
-        
+
         PlayerPrefs.DeleteKey(NAME_KEY);
         PlayerPrefs.DeleteKey(PASSWORD_KEY);
         PlayerPrefs.Save();
-        
+
         Debug.Log("Player: Cleared all player data");
     }
 }

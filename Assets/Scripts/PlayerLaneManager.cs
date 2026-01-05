@@ -63,7 +63,7 @@ public class PlayerLaneManager : MonoBehaviour
         // Get unit cost from prefab's Unit component
         Unit unitComponent = playerUnitPrefab.GetComponent<Unit>();
         int unitCost = unitComponent != null ? unitComponent.Cost : 0;
-        
+
         // Check if player has enough money
         Player player = Player.Instance;
         if (player != null && !player.HasEnoughMoney(unitCost))

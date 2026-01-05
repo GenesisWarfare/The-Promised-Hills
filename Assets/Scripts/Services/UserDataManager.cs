@@ -22,7 +22,7 @@ public static class UserDataManager
         }
 
         PlayerPrefs.SetString(USERNAME_KEY, username);
-        
+
         // Note: In a real app, you should NEVER save passwords in plain text
         // This is for convenience only - consider hashing or using secure storage
         if (!string.IsNullOrEmpty(password))

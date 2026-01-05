@@ -65,7 +65,7 @@ public class SpriteOrganizationHelper : EditorWindow
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
             TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
-            
+
             if (importer != null)
             {
                 if (importer.textureType == TextureImporterType.Sprite)
@@ -100,7 +100,7 @@ public class SpriteOrganizationHelper : EditorWindow
         foreach (string path in individualSprites)
         {
             string name = System.IO.Path.GetFileName(path);
-            if (name.ToLower().Contains("background") || name.ToLower().Contains("desert") || 
+            if (name.ToLower().Contains("background") || name.ToLower().Contains("desert") ||
                 name.ToLower().Contains("castle") || name.ToLower().Contains("building"))
             {
                 backgrounds.Add(name);
