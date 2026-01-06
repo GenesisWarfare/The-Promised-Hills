@@ -1,24 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 /**
  * Manages win/lose screens when bases are destroyed
  */
 public class GameOverManager : MonoBehaviour
 {
-    [Header("UI Panels")]
-    [SerializeField] private GameObject winPanel;
-    [SerializeField] private GameObject losePanel;
-
     [Header("Win Screen")]
+    [SerializeField] private GameObject winPanel; // Image GameObject
     [SerializeField] private UnityEngine.UI.Button winBackToMapButton;
-    [SerializeField] private TextMeshProUGUI winText;
 
     [Header("Lose Screen")]
+    [SerializeField] private GameObject losePanel; // Image GameObject
     [SerializeField] private UnityEngine.UI.Button loseBackToMapButton;
-    [SerializeField] private TextMeshProUGUI loseText;
 
     [Header("Settings")]
     [SerializeField] private string mapSceneName = "Map";
@@ -148,13 +143,15 @@ public class GameOverManager : MonoBehaviour
 
         if (winPanel != null)
         {
-            EnsurePanelSetup(winPanel);
+            EnsureImageSetup(winPanel);
             winPanel.SetActive(true);
         }
 
-        if (winText != null)
+        // Ensure button is active and visible
+        if (winBackToMapButton != null)
         {
-            winText.text = "You Win!";
+            winBackToMapButton.gameObject.SetActive(true);
+            winBackToMapButton.interactable = true;
         }
     }
 
@@ -167,36 +164,35 @@ public class GameOverManager : MonoBehaviour
 
         if (losePanel != null)
         {
-            EnsurePanelSetup(losePanel);
+            EnsureImageSetup(losePanel);
             losePanel.SetActive(true);
         }
 
-        if (loseText != null)
+        // Ensure button is active and visible
+        if (loseBackToMapButton != null)
         {
-            loseText.text = "You Lose!";
+            loseBackToMapButton.gameObject.SetActive(true);
+            loseBackToMapButton.interactable = true;
         }
     }
 
     /**
-     * Ensure panel is properly set up: has opaque background and renders on top
+     * Ensure Image is properly set up and renders on top
      */
-    void EnsurePanelSetup(GameObject panel)
+    void EnsureImageSetup(GameObject imageObject)
     {
-        if (panel == null) return;
+        if (imageObject == null) return;
 
-        // Find or add Image component for opaque background
-        Image panelImage = panel.GetComponent<Image>();
-        if (panelImage == null)
+        // Ensure Image component exists (should already be there)
+        Image image = imageObject.GetComponent<Image>();
+        if (image == null)
         {
-            panelImage = panel.AddComponent<Image>();
+            Debug.LogWarning($"GameOverManager: {imageObject.name} is missing an Image component!");
+            return;
         }
 
-        // Set to opaque black (or you can change this color)
-        panelImage.color = new Color(0f, 1f, 1f, 1f);
-
-
-        // Ensure the panel's Canvas has high sorting order to render on top
-        Canvas canvas = panel.GetComponentInParent<Canvas>();
+        // Ensure the Canvas has high sorting order to render on top
+        Canvas canvas = imageObject.GetComponentInParent<Canvas>();
         if (canvas != null)
         {
             // Set very high sorting order so it renders above everything

@@ -12,6 +12,17 @@ public class AnimatedUnit : Unit
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    public enum FlipBehavior
+    {
+        Auto,              // Flip when moving left (default)
+        Inverted,          // Flip when moving right
+        AlwaysFlipped,     // Always flip regardless of direction
+        NeverFlipped       // Never flip regardless of direction
+    }
+
+    [Header("Sprite Flipping")]
+    [SerializeField] private FlipBehavior flipBehavior = FlipBehavior.Auto;
+
     private const string ANIM_IDLE = "Idle";
     private const string ANIM_RUN = "Run";
     private const string ANIM_ATTACK = "Attack";
@@ -29,9 +40,11 @@ public class AnimatedUnit : Unit
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Flip sprite based on direction
-        if (spriteRenderer != null && direction.x < 0)
-            spriteRenderer.flipX = true;
+        // Set initial flip based on behavior
+        if (spriteRenderer != null)
+        {
+            UpdateFlipDirection();
+        }
     }
 
     protected override void Update()
@@ -67,10 +80,10 @@ public class AnimatedUnit : Unit
             animator.SetBool(ANIM_IDLE, true);
         }
 
-        // Flip sprite based on direction
+        // Update flip direction
         if (spriteRenderer != null)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            UpdateFlipDirection();
         }
     }
 
@@ -165,5 +178,36 @@ public class AnimatedUnit : Unit
     {
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Updates the sprite flip direction based on the selected flip behavior
+    /// </summary>
+    private void UpdateFlipDirection()
+    {
+        if (spriteRenderer == null) return;
+
+        switch (flipBehavior)
+        {
+            case FlipBehavior.Auto:
+                // Flip when moving left (default behavior)
+                spriteRenderer.flipX = direction.x < 0;
+                break;
+
+            case FlipBehavior.Inverted:
+                // Flip when moving right (opposite of default)
+                spriteRenderer.flipX = direction.x > 0;
+                break;
+
+            case FlipBehavior.AlwaysFlipped:
+                // Always flip regardless of direction
+                spriteRenderer.flipX = true;
+                break;
+
+            case FlipBehavior.NeverFlipped:
+                // Never flip regardless of direction
+                spriteRenderer.flipX = false;
+                break;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 Lead your settlement through the ages of Israel — one battle at a time.
 
-**The Promised Hills** is a historical strategy and defense game where you guide a settlement through Israel’s history, from ancient kingdoms to the modern state. Build defenses, recruit units, research technologies, and fight battles inspired by real events.
+**The Promised Hills** is a historical strategy and defense game where you guide a settlement through Israel’s history, from ancient kingdoms to the modern state. Build defenses, recruit units, and fight battles inspired by real events.
 
 -[Itch.io](https://genesiswarfare.itch.io/the-promised-hills)
 

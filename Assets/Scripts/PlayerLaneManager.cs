@@ -9,13 +9,24 @@ using UnityEngine.InputSystem;
  */
 public class PlayerLaneManager : MonoBehaviour
 {
-    [Header("Lane Spawn Points")]
-    [SerializeField] private Transform lane1SpawnPoint;
-    [SerializeField] private Transform lane2SpawnPoint;
-    [SerializeField] private Transform lane3SpawnPoint;
+    [Header("Footman Spawn Points")]
+    [SerializeField] private Transform footmanLane1SpawnPoint;
+    [SerializeField] private Transform footmanLane2SpawnPoint;
+    [SerializeField] private Transform footmanLane3SpawnPoint;
+
+    [Header("Archer Spawn Points")]
+    [SerializeField] private Transform archerLane1SpawnPoint;
+    [SerializeField] private Transform archerLane2SpawnPoint;
+    [SerializeField] private Transform archerLane3SpawnPoint;
+
+    [Header("Hero Spawn Points")]
+    [SerializeField] private Transform heroLane1SpawnPoint;
+    [SerializeField] private Transform heroLane2SpawnPoint;
+    [SerializeField] private Transform heroLane3SpawnPoint;
 
     [Header("Unit Prefab")]
-    [SerializeField] private GameObject playerUnitPrefab;
+    [SerializeField] private GameObject playerUnitPrefab; // Default/fallback prefab
+    private GameObject selectedUnitPrefab; // Currently selected unit prefab (set by UnitSelectionButton)
 
     void Update()
     {
@@ -51,17 +62,41 @@ public class PlayerLaneManager : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Sets the selected unit prefab (called by UnitSelectionButton)
+    /// </summary>
+    public void SetSelectedUnitPrefab(GameObject prefab)
+    {
+        selectedUnitPrefab = prefab;
+        Debug.Log($"PlayerLaneManager: Selected unit prefab set to {prefab.name}");
+    }
+
+    /// <summary>
+    /// Gets the currently selected unit prefab, or falls back to default
+    /// </summary>
+    private GameObject GetSelectedUnitPrefab()
+    {
+        return selectedUnitPrefab != null ? selectedUnitPrefab : playerUnitPrefab;
+    }
+
     public void SpawnInLane(int laneNumber)
     {
-        Transform spawnPoint = GetSpawnPointForLane(laneNumber);
-        if (spawnPoint == null || playerUnitPrefab == null)
+        GameObject unitPrefabToSpawn = GetSelectedUnitPrefab();
+        if (unitPrefabToSpawn == null)
         {
-            Debug.LogWarning($"Cannot spawn in lane {laneNumber}: spawnPoint or prefab is null");
+            Debug.LogWarning($"Cannot spawn in lane {laneNumber}: unit prefab is null");
+            return;
+        }
+
+        Transform spawnPoint = GetSpawnPointForUnit(unitPrefabToSpawn, laneNumber);
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning($"Cannot spawn in lane {laneNumber}: spawnPoint is null for unit {unitPrefabToSpawn.name}");
             return;
         }
 
         // Get unit cost from prefab's Unit component
-        Unit unitComponent = playerUnitPrefab.GetComponent<Unit>();
+        Unit unitComponent = unitPrefabToSpawn.GetComponent<Unit>();
         int unitCost = unitComponent != null ? unitComponent.Cost : 0;
 
         // Check if player has enough money
@@ -80,7 +115,7 @@ public class PlayerLaneManager : MonoBehaviour
 
         // Spawn the unit at spawn point position (including z position)
         Vector3 spawnPosition = spawnPoint.position;
-        GameObject spawnedUnit = Instantiate(playerUnitPrefab, spawnPosition, Quaternion.identity);
+        GameObject spawnedUnit = Instantiate(unitPrefabToSpawn, spawnPosition, Quaternion.identity);
 
         // Ensure z position matches spawn point
         Vector3 unitPos = spawnedUnit.transform.position;
@@ -90,19 +125,85 @@ public class PlayerLaneManager : MonoBehaviour
         Debug.Log($"Spawned player unit in lane {laneNumber} at z={spawnPosition.z} (cost: {unitCost})");
     }
 
-    private Transform GetSpawnPointForLane(int laneNumber)
+    /// <summary>
+    /// Gets the spawn point for a specific unit type and lane
+    /// </summary>
+    private Transform GetSpawnPointForUnit(GameObject unitPrefab, int laneNumber)
     {
-        switch (laneNumber)
+        if (unitPrefab == null) return null;
+
+        string unitName = unitPrefab.name.ToLower();
+        Transform spawnPoint = null;
+
+        // Determine which spawn points to use based on unit type
+        if (unitName.Contains("hero"))
         {
-            case 1:
-                return lane1SpawnPoint;
-            case 2:
-                return lane2SpawnPoint;
-            case 3:
-                return lane3SpawnPoint;
-            default:
-                Debug.LogWarning($"Invalid lane number: {laneNumber}");
-                return null;
+            switch (laneNumber)
+            {
+                case 1:
+                    spawnPoint = heroLane1SpawnPoint;
+                    break;
+                case 2:
+                    spawnPoint = heroLane2SpawnPoint;
+                    break;
+                case 3:
+                    spawnPoint = heroLane3SpawnPoint;
+                    break;
+            }
         }
+        else if (unitName.Contains("archer"))
+        {
+            switch (laneNumber)
+            {
+                case 1:
+                    spawnPoint = archerLane1SpawnPoint;
+                    break;
+                case 2:
+                    spawnPoint = archerLane2SpawnPoint;
+                    break;
+                case 3:
+                    spawnPoint = archerLane3SpawnPoint;
+                    break;
+            }
+        }
+        else if (unitName.Contains("footman"))
+        {
+            switch (laneNumber)
+            {
+                case 1:
+                    spawnPoint = footmanLane1SpawnPoint;
+                    break;
+                case 2:
+                    spawnPoint = footmanLane2SpawnPoint;
+                    break;
+                case 3:
+                    spawnPoint = footmanLane3SpawnPoint;
+                    break;
+            }
+        }
+        else
+        {
+            // Fallback: try to use hero spawn points if unit type not recognized
+            Debug.LogWarning($"PlayerLaneManager: Unit type not recognized ({unitPrefab.name}), using hero spawn points as fallback");
+            switch (laneNumber)
+            {
+                case 1:
+                    spawnPoint = heroLane1SpawnPoint;
+                    break;
+                case 2:
+                    spawnPoint = heroLane2SpawnPoint;
+                    break;
+                case 3:
+                    spawnPoint = heroLane3SpawnPoint;
+                    break;
+            }
+        }
+
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning($"PlayerLaneManager: No spawn point found for {unitPrefab.name} in lane {laneNumber}");
+        }
+
+        return spawnPoint;
     }
 }

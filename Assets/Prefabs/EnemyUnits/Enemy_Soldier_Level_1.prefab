@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -155,12 +155,13 @@ MonoBehaviour:
   maxHealth: 20
   attackDamage: 5
   attackInterval: 0.5
-  unitCost: 10
+  unitCost: 20
   direction: {x: -1, y: 0}
   collisionCheckDistance: 0.5
   collisionCheckRadius: 0.3
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  flipBehavior: 0
 --- !u!95 &5247184674532645444
 Animator:
   serializedVersion: 7
@@ -171,7 +172,7 @@ Animator:
   m_GameObject: {fileID: 4493542165394543976}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 94cca9aa68418044ba16a76a593bd758, type: 2}
+  m_Controller: {fileID: 9100000, guid: dd80103c5d6509449af7a9c2cc375b7a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
