@@ -95,7 +95,7 @@ public class BattlefieldButton : MonoBehaviour
             // Use battlefield name from scene name if not set
             string displayName = string.IsNullOrEmpty(battlefieldName) ? sceneName : battlefieldName;
             string displayKingdom = string.IsNullOrEmpty(kingdomState) ? "Unknown" : kingdomState;
-            
+
             infoManager.SelectBattlefield(this, displayName, displayKingdom, detailedInfo, sceneName);
         }
         else

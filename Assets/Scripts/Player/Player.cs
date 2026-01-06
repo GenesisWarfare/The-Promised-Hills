@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
         // Start coroutine to continuously update money UI
         StartCoroutine(ContinuousMoneyUIUpdate());
-        
+
         // Start coroutine to continuously update player info UI
         StartCoroutine(ContinuousPlayerInfoUIUpdate());
     }
@@ -592,7 +592,7 @@ public class Player : MonoBehaviour
 
             string name = text.name.ToLower();
             string goName = text.gameObject.name.ToLower();
-            if ((name.Contains("playername") || goName.Contains("playername")) && 
+            if ((name.Contains("playername") || goName.Contains("playername")) &&
                 !name.Contains("money") && !goName.Contains("money"))
             {
                 playerNameText = text;

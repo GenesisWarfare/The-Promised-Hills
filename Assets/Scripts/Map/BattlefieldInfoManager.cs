@@ -62,7 +62,7 @@ public class BattlefieldInfoManager : MonoBehaviour
         {
             originalFontSize = infoText.fontSize;
             originalAlignment = infoText.alignment;
-            
+
             // Use default values if not set
             if (defaultFontSize > 0)
             {
@@ -125,13 +125,13 @@ public class BattlefieldInfoManager : MonoBehaviour
 
             // Build the info text
             string info = $"Location: \n{battlefieldName}\n{kingdomState}";
-            
+
             // Add detailed info if provided
             if (!string.IsNullOrEmpty(detailedInfo))
             {
                 info += $"\n\n{detailedInfo}";
             }
-            
+
             infoText.text = info;
         }
 
@@ -178,7 +178,7 @@ public class BattlefieldInfoManager : MonoBehaviour
             // Restore original font size and alignment
             infoText.fontSize = originalFontSize;
             infoText.alignment = originalAlignment;
-            
+
             if (!string.IsNullOrEmpty(defaultText))
             {
                 infoText.text = defaultText;

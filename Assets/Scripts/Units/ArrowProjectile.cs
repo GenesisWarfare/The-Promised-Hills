@@ -15,7 +15,7 @@ public class ArrowProjectile : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         // Set a default color if no sprite assigned
         if (spriteRenderer != null && spriteRenderer.sprite == null)
         {
@@ -90,7 +90,7 @@ public class ArrowProjectile : MonoBehaviour
     {
         // Arrow reached target position - try to find and damage target
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-        
+
         foreach (Collider2D hit in hits)
         {
             Unit unit = hit.GetComponent<Unit>();

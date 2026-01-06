@@ -37,7 +37,7 @@ public class ArcherUnit : AnimatedUnit
             pos.y = lockedYPosition;
             pos.z = originalZ;
             transform.position = pos;
-            
+
             // Update animations
             if (!isDead)
                 UpdateAnimations();
@@ -267,7 +267,7 @@ public class ArcherUnit : AnimatedUnit
         // Create arrow (simple approach - instant damage, or create projectile)
         // For now, we'll create a simple arrow projectile
         GameObject arrow = CreateArrow(spawnPos, directionToTarget, targetPosition);
-        
+
         if (arrow != null)
         {
             ArrowProjectile arrowScript = arrow.GetComponent<ArrowProjectile>();
