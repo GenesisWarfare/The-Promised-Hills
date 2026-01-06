@@ -72,10 +72,15 @@ This is the early combat prototype of the game. Units walk toward each other, en
 - **Base.cs** – Handles base health and defeat logic.
 
 ## How to Play
-1. Click the image button near your base to spawn a soldier.
-2. Soldiers walk forward automatically.
-3. When they meet an enemy, they stop and fight.
-4. Destroy the enemy base before yours falls.
+1. Click the image button near your base to choose the type of unit that you want to spwan.
+
+2. Press 1, 2 or 3 to choose the lane for the spawn of the unit.
+
+3. Units walk forward automatically.
+
+4. They stop and fight when encountering an enemy.
+
+5. Destroy the enemy base before your own falls.
 
 ---
 
