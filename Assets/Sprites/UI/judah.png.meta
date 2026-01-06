@@ -116,10 +116,10 @@ TextureImporter:
       name: judah_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 1518
-        height: 1024
+        x: 143
+        y: 80
+        width: 328
+        height: 268
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

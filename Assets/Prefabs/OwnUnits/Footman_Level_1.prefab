@@ -155,7 +155,7 @@ MonoBehaviour:
   maxHealth: 20
   attackDamage: 5
   attackInterval: 0.5
-  unitCost: 15
+  unitCost: 20
   direction: {x: 1, y: 0}
   collisionCheckDistance: 0.5
   collisionCheckRadius: 0.3

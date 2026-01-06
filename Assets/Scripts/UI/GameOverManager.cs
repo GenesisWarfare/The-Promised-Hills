@@ -138,6 +138,14 @@ public class GameOverManager : MonoBehaviour
     {
         Debug.Log("You Win!");
 
+        // Stop background music and play win sound
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager != null)
+        {
+            audioManager.StopMusic();
+            audioManager.PlayWin();
+        }
+
         // Stop time or pause game
         Time.timeScale = 0f;
 
@@ -158,6 +166,14 @@ public class GameOverManager : MonoBehaviour
     void ShowLoseScreen()
     {
         Debug.Log("You Lose!");
+
+        // Stop background music and play lose sound
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager != null)
+        {
+            audioManager.StopMusic();
+            audioManager.PlayLose();
+        }
 
         // Stop time or pause game
         Time.timeScale = 0f;

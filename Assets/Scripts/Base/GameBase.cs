@@ -31,6 +31,13 @@ public class GameBase : MonoBehaviour
         health -= dmg;
         if (health < 0) health = 0;
 
+        // Play base hit sound
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager != null)
+        {
+            audioManager.PlayBaseHit();
+        }
+
         // Notify health bar of health change
         OnHealthChanged?.Invoke(health, maxHealth);
 

@@ -73,7 +73,7 @@ public class UnitSelectionButton : MonoBehaviour
         }
 
         // Find PlayerLaneManager in the scene
-        PlayerLaneManager laneManager = FindObjectOfType<PlayerLaneManager>();
+        PlayerLaneManager laneManager = FindFirstObjectByType<PlayerLaneManager>();
         if (laneManager == null)
         {
             Debug.LogWarning("UnitSelectionButton: Could not find PlayerLaneManager in scene!");

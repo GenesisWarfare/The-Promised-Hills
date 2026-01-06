@@ -70,7 +70,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    private void CheckCollisions()
+    protected virtual void CheckCollisions()
     {
         // Check for enemy units or bases in front
         Vector2 checkPos = (Vector2)transform.position + direction.normalized * collisionCheckDistance;

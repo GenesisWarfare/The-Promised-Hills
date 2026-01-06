@@ -5,6 +5,18 @@ TextureImporter:
   - first:
       213: -4121561635931321457
     second: modern_israel_0
+  - first:
+      213: 7909800535378373024
+    second: modern_israel_1
+  - first:
+      213: 1941085147253132063
+    second: modern_israel_2
+  - first:
+      213: 5417591020854596044
+    second: modern_israel_3
+  - first:
+      213: 4423452068985880088
+    second: modern_israel_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -118,7 +130,7 @@ TextureImporter:
         serializedVersion: 2
         x: 11
         y: 0
-        width: 1515
+        width: 218
         height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -130,6 +142,94 @@ TextureImporter:
       bones: []
       spriteID: f8b8f6277854dc6c0800000000000000
       internalID: -4121561635931321457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern_israel_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 323
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a92c63dda145cd60800000000000000
+      internalID: 7909800535378373024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern_israel_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 622
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b4fc838ae10fa10800000000000000
+      internalID: 1941085147253132063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern_israel_3
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 350
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1526074562f2b40800000000000000
+      internalID: 5417591020854596044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: modern_israel_4
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 0
+        width: 1259
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81ebed46832436d30800000000000000
+      internalID: 4423452068985880088
       vertices: []
       indices: 
       edges: []
@@ -149,6 +249,10 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       modern_israel_0: -4121561635931321457
+      modern_israel_1: 7909800535378373024
+      modern_israel_2: 1941085147253132063
+      modern_israel_3: 5417591020854596044
+      modern_israel_4: 4423452068985880088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

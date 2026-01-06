@@ -9,8 +9,8 @@ using System.Collections;
 public class AnimatedUnit : Unit
 {
     [Header("Animation")]
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
 
     public enum FlipBehavior
     {
@@ -55,7 +55,7 @@ public class AnimatedUnit : Unit
             UpdateAnimations();
     }
 
-    private void UpdateAnimations()
+    protected virtual void UpdateAnimations()
     {
         if (animator == null || !animator.isInitialized)
             return;

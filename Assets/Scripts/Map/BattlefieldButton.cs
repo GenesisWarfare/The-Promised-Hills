@@ -4,13 +4,21 @@ using UnityEngine.SceneManagement;
 
 public class BattlefieldButton : MonoBehaviour
 {
+    [Header("Battlefield Info")]
     [SerializeField] private int levelNumber = 1;
     [SerializeField] private string sceneName = "";
+    [SerializeField] private string battlefieldName = ""; // e.g., "Ella Valley"
+    [SerializeField] private string kingdomState = ""; // e.g., "Kingdom of Judah"
+    [TextArea(5, 10)]
+    [SerializeField] private string detailedInfo = ""; // Detailed information about the battlefield and kingdom
+
+    [Header("Visual")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
 
     private SpriteRenderer spriteRenderer;
     private LevelManager levelManager;
+    private BattlefieldInfoManager infoManager;
 
     void Start()
     {
@@ -40,6 +48,13 @@ public class BattlefieldButton : MonoBehaviour
             Debug.LogError($"[BattlefieldButton] '{gameObject.name}' - LevelManager NOT FOUND!");
         }
 
+        // Find BattlefieldInfoManager
+        infoManager = FindFirstObjectByType<BattlefieldInfoManager>();
+        if (infoManager == null)
+        {
+            Debug.LogWarning($"[BattlefieldButton] '{gameObject.name}' - BattlefieldInfoManager not found! Battlefield selection won't work.");
+        }
+
         Debug.Log($"[BattlefieldButton] '{gameObject.name}' - Current active state: {gameObject.activeSelf}");
         // Don't hide here - LevelManager will handle visibility in Awake/Start
     }
@@ -52,7 +67,7 @@ public class BattlefieldButton : MonoBehaviour
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {
-                LoadBattlefield();
+                SelectBattlefield();
             }
         }
 
@@ -69,6 +84,25 @@ public class BattlefieldButton : MonoBehaviour
             {
                 spriteRenderer.color = normalColor;
             }
+        }
+    }
+
+    void SelectBattlefield()
+    {
+        // Instead of loading immediately, show info and enable March To War button
+        if (infoManager != null)
+        {
+            // Use battlefield name from scene name if not set
+            string displayName = string.IsNullOrEmpty(battlefieldName) ? sceneName : battlefieldName;
+            string displayKingdom = string.IsNullOrEmpty(kingdomState) ? "Unknown" : kingdomState;
+            
+            infoManager.SelectBattlefield(this, displayName, displayKingdom, detailedInfo, sceneName);
+        }
+        else
+        {
+            Debug.LogWarning($"[BattlefieldButton] '{gameObject.name}' - BattlefieldInfoManager not found! Falling back to direct load.");
+            // Fallback: load directly if info manager not found
+            LoadBattlefield();
         }
     }
 

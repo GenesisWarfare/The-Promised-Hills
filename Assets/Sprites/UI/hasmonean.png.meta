@@ -116,10 +116,10 @@ TextureImporter:
       name: hasmonean_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 1525
-        height: 1024
+        x: 139
+        y: 81
+        width: 336
+        height: 273
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

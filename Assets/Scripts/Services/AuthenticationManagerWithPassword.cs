@@ -225,6 +225,36 @@ public class AuthenticationManagerWithPassword : MonoBehaviour
     }
 
     /**
+     * Sign in as an anonymous guest user.
+     * Return the success/error message.
+     */
+    public async Task<string> SignInAnonymously()
+    {
+        try
+        {
+            Debug.Log("Attempting to sign in anonymously as guest");
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Debug.Log($"Anonymous sign-in successful! Player ID: {AuthenticationService.Instance.PlayerId}");
+            return "Guest login successful!";
+        }
+        catch (AuthenticationException ex)
+        {
+            Debug.LogError($"Anonymous authentication error: {ex.ErrorCode} - {ex.Message}");
+            return "Guest login failed: " + GetReadableErrorMessage(ex.Message);
+        }
+        catch (RequestFailedException ex)
+        {
+            Debug.LogError($"Request failed: {ex.ErrorCode} - {ex.Message}");
+            return GetUserFriendlyRequestError(ex, "Guest login");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Unexpected error during anonymous sign-in: {ex}");
+            return "Guest login failed: An unexpected error occurred. Please try again.";
+        }
+    }
+
+    /**
      * Sign out the current user
      */
     public void SignOut()

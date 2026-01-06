@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PlayerUnit
   - EnemyUnit
+  - PlayerArrow
+  - EnemyArrow
   layers:
   - Default
   - TransparentFX

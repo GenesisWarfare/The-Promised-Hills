@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6213476068413240314}
   - component: {fileID: 760853119527660621}
   - component: {fileID: 582134887650110659}
-  - component: {fileID: 7457135844036971244}
   - component: {fileID: 5247184674532645444}
+  - component: {fileID: -4539779298687979496}
   m_Layer: 0
   m_Name: Archer_Level_1
   m_TagString: PlayerUnit
@@ -139,29 +139,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7457135844036971244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493542165394543976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51421130add532e458ede54888b547c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimatedUnit
-  speed: 1.5
-  maxHealth: 20
-  attackDamage: 4
-  attackInterval: 0.4
-  unitCost: 30
-  direction: {x: 1, y: 0}
-  collisionCheckDistance: 0.5
-  collisionCheckRadius: 0.3
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  flipBehavior: 0
 --- !u!95 &5247184674532645444
 Animator:
   serializedVersion: 7
@@ -184,3 +161,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4539779298687979496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493542165394543976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0825023f5fc89ac47ba7156dde8908d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArcherUnit
+  speed: 1
+  maxHealth: 5
+  attackDamage: 2
+  attackInterval: 0.5
+  unitCost: 35
+  direction: {x: 1, y: 0}
+  collisionCheckDistance: 0.5
+  collisionCheckRadius: 0.3
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  flipBehavior: 0
+  attackRange: 4
+  arrowPrefab: {fileID: 2169089076974734875, guid: a3b568b21ceb14040b0310e3cf6031c4, type: 3}
+  arrowSpawnPoint: {fileID: 0}
+  arrowSpeed: 10

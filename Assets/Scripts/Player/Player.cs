@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMPro.TextMeshProUGUI moneyText; // Optional UI text to display money
+    [SerializeField] private TMPro.TextMeshProUGUI playerNameText; // Optional UI text to display player name
+    [SerializeField] private TMPro.TextMeshProUGUI playerInfoText; // Optional UI text to display both name and money (format: "Name - Money")
 
     // Player data
     private string playerName = "";
@@ -82,6 +84,9 @@ public class Player : MonoBehaviour
 
         // Start coroutine to continuously update money UI
         StartCoroutine(ContinuousMoneyUIUpdate());
+        
+        // Start coroutine to continuously update player info UI
+        StartCoroutine(ContinuousPlayerInfoUIUpdate());
     }
 
     /**
@@ -171,12 +176,14 @@ public class Player : MonoBehaviour
     /**
      * Set player name and password (called after login/register)
      */
-    public async void SetCredentials(string name, string password)
+    public void SetCredentials(string name, string password)
     {
         this.playerName = name;
         this.password = password;
         SavePlayerData(); // Save locally to PlayerPrefs
         _ = SavePlayerDataToCloud(); // Save to Cloud Save (fire-and-forget)
+        UpdatePlayerNameUI(); // Update name display
+        UpdatePlayerInfoUI(); // Update combined info display
         Debug.Log($"Player: Set credentials for {name}");
     }
 
@@ -413,6 +420,7 @@ public class Player : MonoBehaviour
     {
         money = amount;
         UpdateMoneyUI();
+        UpdatePlayerInfoUI(); // Update combined info display
         Debug.Log($"Player: Set money to {money}");
     }
 
@@ -425,6 +433,7 @@ public class Player : MonoBehaviour
 
         money += amount;
         UpdateMoneyUI();
+        UpdatePlayerInfoUI(); // Update combined info display
         _ = SaveMoneyToCloud(); // Save async but don't wait (fire-and-forget)
         Debug.Log($"Player: Added {amount} money. Total: {money}");
     }
@@ -441,6 +450,7 @@ public class Player : MonoBehaviour
         {
             money -= amount;
             UpdateMoneyUI();
+            UpdatePlayerInfoUI(); // Update combined info display
             _ = SaveMoneyToCloud(); // Save async but don't wait (fire-and-forget)
             Debug.Log($"Player: Spent {amount} money. Remaining: {money}");
             return true;
@@ -472,6 +482,42 @@ public class Player : MonoBehaviour
         if (moneyText != null)
         {
             moneyText.text = money.ToString();
+        }
+    }
+
+    /**
+     * Update player name display in UI
+     */
+    void UpdatePlayerNameUI()
+    {
+        // Try to find player name text if not assigned or if the reference is invalid
+        if (playerNameText == null || playerNameText.gameObject == null)
+        {
+            FindPlayerNameTextInScene();
+        }
+
+        if (playerNameText != null)
+        {
+            string displayName = string.IsNullOrEmpty(playerName) ? "Guest" : playerName;
+            playerNameText.text = displayName;
+        }
+    }
+
+    /**
+     * Update combined player info (name and money) display in UI
+     */
+    void UpdatePlayerInfoUI()
+    {
+        // Try to find player info text if not assigned or if the reference is invalid
+        if (playerInfoText == null || playerInfoText.gameObject == null)
+        {
+            FindPlayerInfoTextInScene();
+        }
+
+        if (playerInfoText != null)
+        {
+            string displayName = string.IsNullOrEmpty(playerName) ? "Guest" : playerName;
+            playerInfoText.text = $"{displayName} - {money}";
         }
     }
 
@@ -514,6 +560,110 @@ public class Player : MonoBehaviour
         }
 
         Debug.LogWarning("Player: Could not find money text UI in current scene. Make sure there's a TextMeshProUGUI with 'money' in its name.");
+    }
+
+    /**
+     * Find player name text UI in current scene
+     */
+    void FindPlayerNameTextInScene()
+    {
+        // Try common names (exact matches first)
+        GameObject nameObj = GameObject.Find("PlayerNameText");
+        if (nameObj == null) nameObj = GameObject.Find("PlayerName_Text");
+        if (nameObj == null) nameObj = GameObject.Find("PlayerNameTextUI");
+        if (nameObj == null) nameObj = GameObject.Find("PlayerName");
+        if (nameObj == null) nameObj = GameObject.Find("NameText");
+
+        if (nameObj != null)
+        {
+            playerNameText = nameObj.GetComponent<TMPro.TextMeshProUGUI>();
+            if (playerNameText != null)
+            {
+                Debug.Log($"Player: Found player name text by name: {nameObj.name}");
+                return;
+            }
+        }
+
+        // Search all TextMeshProUGUI components for one with "name" or "player" in name
+        TMPro.TextMeshProUGUI[] allTexts = FindObjectsByType<TMPro.TextMeshProUGUI>(FindObjectsSortMode.None);
+        foreach (TMPro.TextMeshProUGUI text in allTexts)
+        {
+            if (text == null || text.gameObject == null) continue;
+
+            string name = text.name.ToLower();
+            string goName = text.gameObject.name.ToLower();
+            if ((name.Contains("playername") || goName.Contains("playername")) && 
+                !name.Contains("money") && !goName.Contains("money"))
+            {
+                playerNameText = text;
+                Debug.Log($"Player: Found player name text by search: {text.gameObject.name}");
+                return;
+            }
+        }
+    }
+
+    /**
+     * Find player info text (name and money combined) UI in current scene
+     */
+    void FindPlayerInfoTextInScene()
+    {
+        // Try common names (exact matches first)
+        GameObject infoObj = GameObject.Find("PlayerInfoText");
+        if (infoObj == null) infoObj = GameObject.Find("PlayerInfo_Text");
+        if (infoObj == null) infoObj = GameObject.Find("PlayerInfoTextUI");
+        if (infoObj == null) infoObj = GameObject.Find("PlayerInfo");
+
+        if (infoObj != null)
+        {
+            playerInfoText = infoObj.GetComponent<TMPro.TextMeshProUGUI>();
+            if (playerInfoText != null)
+            {
+                Debug.Log($"Player: Found player info text by name: {infoObj.name}");
+                return;
+            }
+        }
+
+        // Search all TextMeshProUGUI components for one with "playerinfo" in name
+        TMPro.TextMeshProUGUI[] allTexts = FindObjectsByType<TMPro.TextMeshProUGUI>(FindObjectsSortMode.None);
+        foreach (TMPro.TextMeshProUGUI text in allTexts)
+        {
+            if (text == null || text.gameObject == null) continue;
+
+            string name = text.name.ToLower();
+            string goName = text.gameObject.name.ToLower();
+            if ((name.Contains("playerinfo") || goName.Contains("playerinfo")))
+            {
+                playerInfoText = text;
+                Debug.Log($"Player: Found player info text by search: {text.gameObject.name}");
+                return;
+            }
+        }
+    }
+
+    /**
+     * Coroutine that continuously tries to find and update player info UI
+     */
+    IEnumerator ContinuousPlayerInfoUIUpdate()
+    {
+        while (true)
+        {
+            // Reset references if invalid
+            if (playerNameText == null || playerNameText.gameObject == null)
+            {
+                playerNameText = null;
+            }
+            if (playerInfoText == null || playerInfoText.gameObject == null)
+            {
+                playerInfoText = null;
+            }
+
+            // Try to find and update player info text
+            UpdatePlayerNameUI();
+            UpdatePlayerInfoUI();
+
+            // Wait a bit before trying again
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     /**

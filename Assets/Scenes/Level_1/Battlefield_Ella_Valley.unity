@@ -1906,6 +1906,8 @@ MonoBehaviour:
   startingMoney: 100
   moneyPerKill: 10
   moneyText: {fileID: 1510108108}
+  playerNameText: {fileID: 0}
+  playerInfoText: {fileID: 0}
 --- !u!4 &1037120964
 Transform:
   m_ObjectHideFlags: 0

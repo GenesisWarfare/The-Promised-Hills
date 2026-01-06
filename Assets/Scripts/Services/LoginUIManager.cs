@@ -180,6 +180,53 @@ public class LoginUIManager : MonoBehaviour
         }
     }
 
+    /**
+     * Handle guest login - sign in anonymously and set player name to "Guest"
+     * Matches the exact signature of OnLoginButtonClicked for Unity Button compatibility
+     */
+    public async void OnGuestButtonClicked()
+    {
+        SetStatus("Joining as guest...", Color.yellow);
+
+        if (authManager == null)
+        {
+            authManager = FindFirstObjectByType<AuthenticationManagerWithPassword>();
+            if (authManager == null)
+            {
+                Debug.LogError("Authentication Manager not found!");
+                SetStatus("Authentication Manager not found!", Color.red);
+                return;
+            }
+        }
+
+        try
+        {
+            // Sign in anonymously
+            string message = await authManager.SignInAnonymously();
+            bool isSuccess = message.ToLower().Contains("success");
+            SetStatus(message, isSuccess ? Color.green : Color.red);
+
+            if (isSuccess)
+            {
+                // Set player name to "Guest" (no password for guest)
+                Player player = Player.Instance;
+                if (player != null)
+                {
+                    player.SetCredentials("Guest", "");
+                    // Guest starts with 100 money
+                    player.SetMoney(100);
+                    player.SaveMoneyNow();
+                }
+                // OnSignedIn will be called automatically via event
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error during guest login: {ex}");
+            SetStatus("Guest login failed: An unexpected error occurred. Please try again.", Color.red);
+        }
+    }
+
     void SetStatus(string message, Color color)
     {
         if (statusText != null)
