@@ -87,6 +87,9 @@ public class Player : MonoBehaviour
 
         // Start coroutine to continuously update player info UI
         StartCoroutine(ContinuousPlayerInfoUIUpdate());
+
+        // Start money regeneration coroutine for battlefield scenes
+        StartCoroutine(MoneyRegenerationCoroutine());
     }
 
     /**
@@ -175,25 +178,61 @@ public class Player : MonoBehaviour
 
     /**
      * Set player name and password (called after login/register)
+     * NOTE: Guest players are NOT saved to database - session only
      */
     public void SetCredentials(string name, string password)
     {
+        // Only clear previous data if switching between guest and non-guest
+        bool isGuest = name.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        bool wasGuest = this.playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        
+        // Clear data only when switching between guest and non-guest
+        if (isGuest != wasGuest && !string.IsNullOrEmpty(this.playerName))
+        {
+            // Switching between guest and player - clear money to prevent transfer
+            money = startingMoney;
+        }
+        
         this.playerName = name;
         this.password = password;
-        SavePlayerData(); // Save locally to PlayerPrefs
-        _ = SavePlayerDataToCloud(); // Save to Cloud Save (fire-and-forget)
+        
+        // Only save if NOT a guest
+        if (!isGuest)
+        {
+            SavePlayerData(); // Save locally to PlayerPrefs
+            _ = SavePlayerDataToCloud(); // Save to Cloud Save (fire-and-forget)
+            Debug.Log($"Player: Set credentials for {name} (saved to database)");
+        }
+        else
+        {
+            Debug.Log($"Player: Set credentials for Guest (session-only, NOT saved)");
+        }
+        
         UpdatePlayerNameUI(); // Update name display
         UpdatePlayerInfoUI(); // Update combined info display
-        Debug.Log($"Player: Set credentials for {name}");
     }
 
     /**
      * Load player name and password from PlayerPrefs and Cloud Save
+     * NOTE: Guest players are NOT loaded - they start fresh each session
      */
     async void LoadPlayerData()
     {
+        // DO NOT load guest data - guests start fresh each session
+        // Only load if there's saved data and it's not a guest
+        string savedName = PlayerPrefs.GetString(NAME_KEY, "");
+        
+        // If saved name is "Guest", don't load it (guests should start fresh)
+        if (savedName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase))
+        {
+            playerName = "";
+            password = "";
+            Debug.Log("Player: Previous session was Guest - starting fresh (no data loaded)");
+            return;
+        }
+
         // Load from PlayerPrefs first (for quick access)
-        playerName = PlayerPrefs.GetString(NAME_KEY, "");
+        playerName = savedName;
         password = PlayerPrefs.GetString(PASSWORD_KEY, "");
 
         // Also try to load from Cloud Save (will override if available)
@@ -207,9 +246,17 @@ public class Player : MonoBehaviour
 
     /**
      * Save player name and password to PlayerPrefs (local)
+     * NOTE: Guest players are NOT saved
      */
     void SavePlayerData()
     {
+        // Don't save guest data
+        bool isGuest = playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        if (isGuest)
+        {
+            return;
+        }
+
         if (!string.IsNullOrEmpty(playerName))
         {
             PlayerPrefs.SetString(NAME_KEY, playerName);
@@ -221,9 +268,17 @@ public class Player : MonoBehaviour
 
     /**
      * Save player name and password to Cloud Save
+     * NOTE: Guest players are NOT saved
      */
     async Task SavePlayerDataToCloud()
     {
+        // Don't save guest data
+        bool isGuest = playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        if (isGuest)
+        {
+            return;
+        }
+
         // Check if Unity Services is initialized
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
@@ -311,9 +366,19 @@ public class Player : MonoBehaviour
 
     /**
      * Load money from Cloud Save
+     * NOTE: Guest players do NOT load money - they start with default money each session
      */
     async Task LoadMoneyFromCloud()
     {
+        // If player is a guest, don't load money - start fresh
+        bool isGuest = playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        if (isGuest)
+        {
+            money = startingMoney;
+            Debug.Log("Player: Guest player - using starting money (not loaded from database)");
+            return;
+        }
+
         // Check if Unity Services is initialized and user is signed in
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
@@ -378,9 +443,18 @@ public class Player : MonoBehaviour
 
     /**
      * Save money to Cloud Save
+     * NOTE: Guest players do NOT save money - session only
      */
     async Task SaveMoneyToCloud()
     {
+        // If player is a guest, don't save money
+        bool isGuest = playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
+        if (isGuest)
+        {
+            // Guests don't save - session only
+            return;
+        }
+
         // Check if Unity Services is initialized
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
@@ -641,6 +715,31 @@ public class Player : MonoBehaviour
     }
 
     /**
+     * Money regeneration in battlefield scenes
+     * When money is below 40, regenerate 2 money every 2 seconds
+     */
+    IEnumerator MoneyRegenerationCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2f); // Wait 2 seconds between checks
+
+            // Check if we're in a battlefield scene
+            string currentScene = SceneManager.GetActiveScene().name.ToLower();
+            bool isBattlefield = currentScene.Contains("battlefield") || currentScene.Contains("battle");
+
+            if (isBattlefield && money < 40)
+            {
+                // Add 2 money
+                money += 2;
+                UpdateMoneyUI();
+                UpdatePlayerInfoUI();
+                Debug.Log($"Player: Money regenerated in battlefield. New total: {money}");
+            }
+        }
+    }
+
+    /**
      * Coroutine that continuously tries to find and update player info UI
      */
     IEnumerator ContinuousPlayerInfoUIUpdate()
@@ -686,6 +785,7 @@ public class Player : MonoBehaviour
 
     /**
      * Clear all player data (for logout)
+     * Also signs out from Unity Authentication
      */
     public void ClearPlayerData()
     {
@@ -693,10 +793,46 @@ public class Player : MonoBehaviour
         password = "";
         money = startingMoney;
 
+        // Clear PlayerPrefs
         PlayerPrefs.DeleteKey(NAME_KEY);
         PlayerPrefs.DeleteKey(PASSWORD_KEY);
         PlayerPrefs.Save();
 
-        Debug.Log("Player: Cleared all player data");
+        // Sign out from Unity Authentication
+        try
+        {
+            if (AuthenticationService.Instance != null && AuthenticationService.Instance.IsSignedIn)
+            {
+                AuthenticationService.Instance.SignOut();
+                Debug.Log("Player: Signed out from Unity Authentication");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Player: Could not sign out: {ex.Message}");
+        }
+
+        UpdateMoneyUI();
+        UpdatePlayerNameUI();
+        UpdatePlayerInfoUI();
+
+        Debug.Log("Player: Cleared all player data and signed out");
+    }
+
+    /**
+     * Clear player data and logout when game quits
+     */
+    void OnApplicationQuit()
+    {
+        ClearPlayerData();
+    }
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        // When game is paused (e.g., minimized), clear data and logout
+        if (pauseStatus)
+        {
+            ClearPlayerData();
+        }
     }
 }

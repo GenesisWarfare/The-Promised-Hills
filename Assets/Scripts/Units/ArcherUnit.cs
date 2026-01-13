@@ -14,7 +14,7 @@ public class ArcherUnit : AnimatedUnit
     [SerializeField] private float arrowSpeed = 10f; // Speed of arrow projectile
 
     private bool isRangedAttacking = false;
-    private bool isDead = false;
+    // Note: isDead is inherited from AnimatedUnit (protected field)
 
     // Animation constants (same as AnimatedUnit)
     private const string ANIM_IDLE = "Idle";

@@ -4,37 +4,31 @@ using TMPro;
 
 /**
  * Health bar UI for bases
- * Displays health bar and text for player and enemy bases
+ * Displays health bar using sprites (8 sprites for different health percentages) and text for player and enemy bases
  */
 public class BaseHealthBar : MonoBehaviour
 {
+
     [Header("Base Reference")]
-    [SerializeField] private GameBase targetBase;
+    [SerializeField] private GameBase targetBase; // Assign manually, or leave empty and set Is Player Base below
+    [SerializeField] private bool isPlayerBase = true; // If targetBase is not assigned, this determines which base to get from BaseManager
 
     [Header("UI Elements")]
-    [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private Image fillImage;
 
-    [Header("Colors")]
-    [SerializeField] private Color healthyColor = Color.green;
-    [SerializeField] private Color damagedColor = Color.yellow;
-    [SerializeField] private Color criticalColor = Color.red;
+    [Header("Health Bar Sprites")]
+    [Tooltip("Array of 8 sprites representing health from 0% to 100%. Index 0 = empty, Index 7 = full")]
+    [SerializeField] private Sprite[] healthBarSprites = new Sprite[8];
 
     [Header("Settings")]
     [SerializeField] private bool showHealthText = true;
-    [SerializeField] private float colorChangeThreshold = 0.3f; // Change to yellow at 30%
-    [SerializeField] private float criticalThreshold = 0.15f; // Change to red at 15%
 
     void Start()
     {
-        // Setup health bar first
-        if (healthSlider != null)
+        // Validate sprite array
+        if (healthBarSprites == null || healthBarSprites.Length != 8)
         {
-            healthSlider.minValue = 0f;
-            healthSlider.maxValue = 1f;
-            healthSlider.value = 1f;
-            healthSlider.interactable = false; // Make slider non-interactive (display only)
+            Debug.LogWarning($"BaseHealthBar on {gameObject.name}: Health bar sprites array should have exactly 8 sprites! Current count: {(healthBarSprites?.Length ?? 0)}");
         }
 
         // Try to find base - may need to wait a frame for BaseManager to create bases
@@ -46,18 +40,17 @@ public class BaseHealthBar : MonoBehaviour
         // Wait a frame to ensure BaseManager has created bases
         yield return null;
 
-        // Find base if not assigned
+        // If base not manually assigned, get it from BaseManager
         if (targetBase == null)
         {
             BaseManager baseManager = FindFirstObjectByType<BaseManager>();
             if (baseManager != null)
             {
-                // Try to find the appropriate base based on this object's name or tag
-                if (gameObject.name.Contains("Player") || gameObject.CompareTag("Player"))
+                if (isPlayerBase)
                 {
                     targetBase = baseManager.GetPlayerBase();
                 }
-                else if (gameObject.name.Contains("Enemy") || gameObject.CompareTag("Enemy"))
+                else
                 {
                     targetBase = baseManager.GetEnemyBase();
                 }
@@ -69,11 +62,11 @@ public class BaseHealthBar : MonoBehaviour
         {
             targetBase.OnHealthChanged += UpdateHealthBar;
             UpdateHealthBar(targetBase.Health, targetBase.maxHealth);
-            Debug.Log($"{gameObject.name}: Connected to base with health {targetBase.Health}/{targetBase.maxHealth}");
+            Debug.Log($"[BaseHealthBar] {gameObject.name}: Connected to base with health {targetBase.Health}/{targetBase.maxHealth}. Sprites count: {healthBarSprites?.Length ?? 0}");
         }
         else
         {
-            Debug.LogWarning($"BaseHealthBar on {gameObject.name}: No target base found! Make sure BaseManager is in the scene.");
+            Debug.LogWarning($"[BaseHealthBar] {gameObject.name}: No target base found! Make sure BaseManager is in the scene or assign targetBase manually.");
         }
     }
 
@@ -88,14 +81,53 @@ public class BaseHealthBar : MonoBehaviour
 
     void UpdateHealthBar(int currentHealth, int maxHealth)
     {
-        if (maxHealth <= 0) return;
+        if (maxHealth <= 0)
+        {
+            Debug.LogWarning($"[BaseHealthBar] {gameObject.name}: maxHealth is 0 or less!");
+            return;
+        }
 
         float healthPercent = (float)currentHealth / maxHealth;
 
-        // Update slider
-        if (healthSlider != null)
+        // Get Image component from this GameObject
+        Image healthBarImage = GetComponent<Image>();
+        if (healthBarImage == null)
         {
-            healthSlider.value = healthPercent;
+            return; // No Image component, skip update
+        }
+
+        // Update health bar sprite based on health percentage
+        if (healthBarSprites == null || healthBarSprites.Length != 8)
+        {
+            Debug.LogWarning($"[BaseHealthBar] {gameObject.name}: Health bar sprites array is null or doesn't have 8 sprites! Current: {(healthBarSprites?.Length ?? 0)}");
+        }
+        else
+        {
+            // Map health percentage to sprite index (0-7)
+            // 0% = index 0, 12.5% = index 1, 25% = index 2, ..., 87.5% = index 7, 100% = index 7
+            int spriteIndex = Mathf.Clamp(Mathf.FloorToInt(healthPercent * 8f), 0, 7);
+            
+            // If health is exactly 0, use the first sprite (empty)
+            if (currentHealth <= 0)
+            {
+                spriteIndex = 0;
+            }
+            // If health is full (100%), use the last sprite
+            else if (healthPercent >= 1f)
+            {
+                spriteIndex = 7;
+            }
+
+            // Set the sprite if it exists
+            if (spriteIndex < healthBarSprites.Length && healthBarSprites[spriteIndex] != null)
+            {
+                healthBarImage.sprite = healthBarSprites[spriteIndex];
+                Debug.Log($"[BaseHealthBar] {gameObject.name}: Updated sprite to index {spriteIndex} (health: {currentHealth}/{maxHealth}, percent: {healthPercent:F2})");
+            }
+            else
+            {
+                Debug.LogWarning($"[BaseHealthBar] {gameObject.name}: Health bar sprite at index {spriteIndex} is null!");
+            }
         }
 
         // Update text
@@ -103,22 +135,9 @@ public class BaseHealthBar : MonoBehaviour
         {
             healthText.text = $"{currentHealth} / {maxHealth}";
         }
-
-        // Update color based on health percentage
-        if (fillImage != null)
+        else if (healthText == null && showHealthText)
         {
-            if (healthPercent <= criticalThreshold)
-            {
-                fillImage.color = criticalColor;
-            }
-            else if (healthPercent <= colorChangeThreshold)
-            {
-                fillImage.color = damagedColor;
-            }
-            else
-            {
-                fillImage.color = healthyColor;
-            }
+            Debug.LogWarning($"[BaseHealthBar] {gameObject.name}: Health text is null but showHealthText is true!");
         }
     }
 }

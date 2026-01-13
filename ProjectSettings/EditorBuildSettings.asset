@@ -6,53 +6,56 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/OpeningVideo.unity
+    guid: edbd1c5715ccb62438cbda83f7334058
+  - enabled: 1
     path: Assets/Scenes/LoginRegister.unity
     guid: e5f628f47c4351e47b7fda228e152070
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 598ea7c5143433d489c6b7aecbc58ee4
+    path: Assets/Scenes/MainMenu.unity
+    guid: 31af429df4f8e184abb14cb5e8859d57
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: efd6cc78a5fe93745a2b295caf693737
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 598ea7c5143433d489c6b7aecbc58ee4
   - enabled: 1
     path: Assets/Scenes/Level_1/Battlefield_Ella_Valley.unity
     guid: 12f569235a241e64faa3fd8572316b64
   - enabled: 1
     path: Assets/Scenes/Level_1/Battlefield_Mount_Megiddo.unity
-    guid: 2db844043c718f446be5a7763f68d3a1
+    guid: da538e3a08f004f4980404f8cfb79e36
   - enabled: 1
     path: Assets/Scenes/Level_1/Battlefield_Samaria.unity
-    guid: eda7f31e2e406644c8c6a812708c9935
+    guid: 655a99879d339984baee8c724b859f47
   - enabled: 1
     path: Assets/Scenes/Level_2/Battlefield_Amman.unity
-    guid: 5600cc57426a990468470e5aa211e00e
+    guid: 5b4c5b0bf93a02a4fb59b145686a03e9
   - enabled: 1
     path: Assets/Scenes/Level_2/Battlefield_Ekron.unity
-    guid: d95adee98412a46439a75cf3a51d1544
+    guid: 57d7ac99c551d10438d4aa2180d7ee16
   - enabled: 1
     path: Assets/Scenes/Level_2/Battlefield_Moab.unity
-    guid: 5906c37f43b46bb4a8c00238c2e526b2
+    guid: 3d7f6e1e412365b45b424cb33a2cc31d
   - enabled: 1
     path: Assets/Scenes/Level_3/Battlefield_Ceasarea.unity
-    guid: 0e3b926939dbb7e4e9da2dd84421d9ac
+    guid: 5433a8bc39d1a2f40a560ba5d9e0badc
   - enabled: 1
     path: Assets/Scenes/Level_3/Battlefield_Egypt.unity
-    guid: fd13201521e63cd4cbc6b5ed7d0a03d8
+    guid: 63019add068baed41bc6fdfdfa1cf4b5
   - enabled: 1
     path: Assets/Scenes/Level_3/Battlefield_Idumea.unity
-    guid: b341b55425bb4cc4bbd4b57b9b9d480c
-  - enabled: 1
-    path: Assets/Scenes/Level_4/Battlefield_4_2.unity
-    guid: ffe24ff8d046ea44686955929a101867
-  - enabled: 1
-    path: Assets/Scenes/Level_4/Battlefield_4_3.unity
-    guid: c67f2a344d62030448a9a7f19925d157
+    guid: c8c4ae9e42f14284d885342d8550520d
   - enabled: 1
     path: Assets/Scenes/Level_4/Battlefield_Gaza.unity
-    guid: 84026b11eda6c7849a428bdc4ec3307d
+    guid: bdb064ddcb632494b838f2a295751384
   - enabled: 1
-    path: Assets/Scenes/Level_4/Battlefield_Gaza_Fixed.unity
-    guid: 9cf4760609ce3644eb795ba3924b6af8
+    path: Assets/Scenes/Level_4/Battlefield_Golan.unity
+    guid: 3abd758d7f07480449237a54bd3a922d
+  - enabled: 1
+    path: Assets/Scenes/Level_4/Battlefield_Dimona.unity
+    guid: 85cf2553b7532714dad19f8c0e7e5e5f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

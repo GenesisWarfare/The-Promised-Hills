@@ -15,7 +15,7 @@ public class LoginUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText; // Optional - can be null
 
     [Header("Scene Settings")]
-    [SerializeField] private string menuSceneName = "Menu";
+    [SerializeField] private string menuSceneName = "MainMenu";
 
     [Header("Authentication")]
     [SerializeField] private AuthenticationManagerWithPassword authManager;
@@ -100,7 +100,8 @@ public class LoginUIManager : MonoBehaviour
                 {
                     player.SetCredentials(username, password);
                 }
-                // OnSignedIn will be called automatically via event
+                // Transition to menu - use coroutine to ensure sign-in state is updated
+                StartCoroutine(TransitionToMenuAfterDelay());
             }
         }
         catch (System.Exception ex)
@@ -170,7 +171,8 @@ public class LoginUIManager : MonoBehaviour
                     player.SetMoney(100);
                     player.SaveMoneyNow();
                 }
-                // OnSignedIn will be called automatically via event
+                // Transition to menu - use coroutine to ensure sign-in state is updated
+                StartCoroutine(TransitionToMenuAfterDelay());
             }
         }
         catch (System.Exception ex)
@@ -217,7 +219,8 @@ public class LoginUIManager : MonoBehaviour
                     player.SetMoney(100);
                     player.SaveMoneyNow();
                 }
-                // OnSignedIn will be called automatically via event
+                // Transition to menu - use coroutine to ensure sign-in state is updated
+                StartCoroutine(TransitionToMenuAfterDelay());
             }
         }
         catch (System.Exception ex)
@@ -241,11 +244,41 @@ public class LoginUIManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(menuSceneName))
         {
+            Debug.Log($"LoginUIManager: Loading scene '{menuSceneName}'");
             SceneManager.LoadScene(menuSceneName);
         }
         else
         {
             Debug.LogError("Menu scene name not set!");
+        }
+    }
+
+    /// <summary>
+    /// Transition to menu after a short delay to ensure authentication state is updated
+    /// This is more reliable than relying solely on the SignedIn event, especially in WebGL
+    /// </summary>
+    private System.Collections.IEnumerator TransitionToMenuAfterDelay()
+    {
+        // Wait a frame to ensure authentication state is updated
+        yield return null;
+        
+        // Verify we're actually signed in before transitioning
+        int attempts = 0;
+        while (!AuthenticationService.Instance.IsSignedIn && attempts < 10)
+        {
+            yield return new WaitForSeconds(0.1f);
+            attempts++;
+        }
+
+        if (AuthenticationService.Instance.IsSignedIn)
+        {
+            Debug.Log("LoginUIManager: Authentication confirmed, transitioning to menu");
+            GoToMenu();
+        }
+        else
+        {
+            Debug.LogWarning("LoginUIManager: Authentication state not confirmed, but attempting transition anyway");
+            GoToMenu();
         }
     }
 

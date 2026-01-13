@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
     private int currentSelectedLevel = 1;
     private List<BattlefieldButton> allBattlefieldButtons = new List<BattlefieldButton>();
     private List<LevelSelectionButton> levelSelectionButtons = new List<LevelSelectionButton>();
+    
+    private const string SAVED_LEVEL_KEY = "LastSelectedLevel";
 
     void Awake()
     {
@@ -68,9 +70,10 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Initialize with level 1 selected (this will show the correct buttons)
-        Debug.Log("[LevelManager] Initializing with level 1 selected...");
-        SelectLevel(1);
+        // Load last selected level, or default to level 1
+        int savedLevel = PlayerPrefs.GetInt(SAVED_LEVEL_KEY, 1);
+        Debug.Log($"[LevelManager] Loading saved level: {savedLevel}");
+        SelectLevel(savedLevel);
 
         Debug.Log("=== LevelManager.Start() END ===");
     }
@@ -79,6 +82,11 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log($"=== LevelManager.SelectLevel({levelNumber}) START ===");
         currentSelectedLevel = levelNumber;
+        
+        // Save the selected level so it persists after returning from battle
+        PlayerPrefs.SetInt(SAVED_LEVEL_KEY, levelNumber);
+        PlayerPrefs.Save();
+        Debug.Log($"[LevelManager] Saved selected level {levelNumber} to PlayerPrefs");
 
         Debug.Log($"[LevelManager] SelectLevel called with levelNumber: {levelNumber}");
         Debug.Log($"[LevelManager] Previous level was: {currentSelectedLevel}");

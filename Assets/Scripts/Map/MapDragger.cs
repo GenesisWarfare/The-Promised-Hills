@@ -15,20 +15,42 @@ public class MapDragger : MonoBehaviour
     private Vector3 lastMousePosition;
     private bool isDragging = false;
     private SpriteRenderer mapSpriteRenderer;
+    private SettingsManager settingsManager;
 
     void Start()
     {
         mapSpriteRenderer = GetComponent<SpriteRenderer>();
+        // Find SettingsManager to check if settings are open
+        settingsManager = FindFirstObjectByType<SettingsManager>();
     }
 
     void Update()
     {
+        // Find SettingsManager if not found yet
+        if (settingsManager == null)
+        {
+            settingsManager = FindFirstObjectByType<SettingsManager>();
+        }
+
+        // Don't allow dragging if settings are open
+        if (settingsManager != null && settingsManager.IsSettingsOpen())
+        {
+            isDragging = false; // Stop any ongoing drag
+            return;
+        }
+
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         worldMousePosition.z = transform.position.z;
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            // Don't start dragging if settings are open
+            if (settingsManager != null && settingsManager.IsSettingsOpen())
+            {
+                return;
+            }
+
             // Check if click is on the map (not on level selection square)
             if (IsClickOnMap(worldMousePosition))
             {

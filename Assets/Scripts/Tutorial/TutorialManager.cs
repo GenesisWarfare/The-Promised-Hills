@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private string nextSceneName = "Level_1/Map_1";
-    [SerializeField] private GameObject initialExplanation;
-    [SerializeField] private GameObject LaunchSoldierExplanation;
-    [SerializeField] private GameObject goalExplanation;
+    [SerializeField] private GameObject Explanation1;
+    [SerializeField] private GameObject Explanation2;
+    [SerializeField] private GameObject Explanation3;
+    [SerializeField] private GameObject Explanation4;
 
     private int currentStep = 0;
-    private const int TOTAL_STEPS = 3;
+    private const int TOTAL_STEPS = 4;
 
     void Start()
     {
@@ -44,27 +45,32 @@ public class TutorialManager : MonoBehaviour
     void ShowCurrentStep()
     {
         // Hide all explanations
-        if (initialExplanation != null)
-            initialExplanation.SetActive(false);
-        if (LaunchSoldierExplanation != null)
-            LaunchSoldierExplanation.SetActive(false);
-        if (goalExplanation != null)
-            goalExplanation.SetActive(false);
+        if (Explanation1 != null)
+            Explanation1.SetActive(false);
+        if (Explanation2 != null)
+            Explanation2.SetActive(false);
+        if (Explanation3 != null)
+            Explanation3.SetActive(false);
+        if (Explanation4 != null)
+            Explanation4.SetActive(false);
 
-        // Show current step
         switch (currentStep)
         {
-            case 0: // Launching soldiers
-                if (initialExplanation != null)
-                    initialExplanation.SetActive(true);
+            case 0:
+                if (Explanation1 != null)
+                    Explanation1.SetActive(true);
                 break;
-            case 1: // When soldiers fight
-                if (LaunchSoldierExplanation != null)
-                    LaunchSoldierExplanation.SetActive(true);
+            case 1:
+                if (Explanation2 != null)
+                    Explanation2.SetActive(true);
                 break;
-            case 2: // The goal
-                if (goalExplanation != null)
-                    goalExplanation.SetActive(true);
+            case 2:
+                if (Explanation3 != null)
+                    Explanation3.SetActive(true);
+                break;
+            case 3:
+                if (Explanation4 != null)
+                    Explanation4.SetActive(true);
                 break;
         }
     }

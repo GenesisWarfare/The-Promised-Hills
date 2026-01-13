@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     [Header("Collision Detection")]
     public float collisionCheckDistance = 0.5f;
     public float collisionCheckRadius = 0.3f;
+    public Vector2 collisionCheckOffset = Vector2.zero; // Offset for collision check position (Y for height)
 
     protected int health;
     protected Unit currentEnemyUnit;
@@ -50,14 +51,14 @@ public class Unit : MonoBehaviour
         pos.z = originalZ; // Restore z position
         transform.position = pos;
 
-        // If fighting, stop
+        // Check for collisions manually (no physics) - do this first so we can detect enemies
+        CheckCollisions();
+
+        // If fighting, stop moving
         if (currentEnemyUnit != null || targetBase != null)
         {
             return;
         }
-
-        // Check for collisions manually (no physics)
-        CheckCollisions();
 
         // If blocked by friendly, stop
         if (isBlockedByFriendly)
@@ -65,15 +66,19 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        // Move forward (simple Transform movement - no physics)
-        transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
+        // Move forward only if not attacking and not blocked (explicit check before movement)
+        if (currentEnemyUnit == null && targetBase == null && !isBlockedByFriendly)
+        {
+            transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
+        }
     }
 
 
     protected virtual void CheckCollisions()
     {
         // Check for enemy units or bases in front
-        Vector2 checkPos = (Vector2)transform.position + direction.normalized * collisionCheckDistance;
+        // Apply offset to the check position (useful for adjusting vertical position)
+        Vector2 checkPos = (Vector2)transform.position + collisionCheckOffset + direction.normalized * collisionCheckDistance;
         Collider2D[] hits = Physics2D.OverlapCircleAll(checkPos, collisionCheckRadius);
 
         isBlockedByFriendly = false;
@@ -124,6 +129,16 @@ public class Unit : MonoBehaviour
         {
             currentEnemyUnit = foundEnemy;
             StartCoroutine(AttackUnitRoutine(foundEnemy));
+        }
+        // If we're already attacking, verify the enemy is still valid
+        else if (currentEnemyUnit != null)
+        {
+            // If the current enemy is dead, clear it (attack routine will also clear it, but this ensures immediate stop)
+            if (!currentEnemyUnit.IsAlive)
+            {
+                currentEnemyUnit = null;
+            }
+            // Otherwise, keep currentEnemyUnit set so we continue attacking and don't move
         }
 
         // Handle base collision

@@ -104,7 +104,9 @@ public class AudioManager : MonoBehaviour
         }
         if (buttonClickSound == null)
         {
-            buttonClickSound = Resources.Load<AudioClip>("sound_impact");
+            // Try to load a proper button sound, but don't use hit sound as fallback
+            buttonClickSound = Resources.Load<AudioClip>("sound_button");
+            // If no button sound exists, leave it null (no sound will play)
         }
         if (baseHitSound == null)
         {
@@ -133,7 +135,7 @@ public class AudioManager : MonoBehaviour
 
         // Determine which music to play based on scene name
         string sceneLower = sceneName.ToLower();
-        if (sceneLower.Contains("register") || sceneLower.Contains("login") || sceneLower.Contains("map"))
+        if (sceneLower.Contains("register") || sceneLower.Contains("login") || sceneLower.Contains("map") || sceneLower.Contains("mainmenu"))
         {
             musicToPlay = calmMusic;
         }
@@ -142,13 +144,16 @@ public class AudioManager : MonoBehaviour
             musicToPlay = combatMusic;
         }
 
-        // Play the music if it's different from what's currently playing
-        if (musicToPlay != null && musicSource.clip != musicToPlay)
+        // Play the music if it's different from what's currently playing, OR if music isn't playing
+        if (musicToPlay != null)
         {
-            musicSource.clip = musicToPlay;
-            musicSource.Play();
+            if (musicSource.clip != musicToPlay || !musicSource.isPlaying)
+            {
+                musicSource.clip = musicToPlay;
+                musicSource.Play();
+            }
         }
-        else if (musicToPlay == null && musicSource.isPlaying)
+        else if (musicSource.isPlaying)
         {
             musicSource.Stop();
         }
@@ -200,13 +205,27 @@ public class AudioManager : MonoBehaviour
     {
         musicVolume = Mathf.Clamp01(volume);
         if (musicSource != null)
+        {
             musicSource.volume = musicVolume;
+        }
     }
 
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
         if (sfxSource != null)
+        {
             sfxSource.volume = sfxVolume;
+        }
+    }
+
+    public float GetMusicVolume()
+    {
+        return musicVolume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxVolume;
     }
 }

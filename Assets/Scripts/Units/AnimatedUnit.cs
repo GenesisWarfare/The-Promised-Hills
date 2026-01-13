@@ -28,7 +28,8 @@ public class AnimatedUnit : Unit
     private const string ANIM_ATTACK = "Attack";
     private const string ANIM_DEATH = "Death";
 
-    private bool isDead = false;
+    [System.NonSerialized]
+    protected bool isDead = false; // Protected so derived classes can access it, non-serialized to avoid conflicts
     private bool isAttacking = false;
 
     protected override void Awake()

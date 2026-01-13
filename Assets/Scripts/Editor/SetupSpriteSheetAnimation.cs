@@ -153,7 +153,12 @@ public class SetupSpriteSheetAnimation : EditorWindow
             }
         }
 
+        // Set sprite sheet data (using deprecated API with warning suppression)
+        // Note: The new ISpriteEditorDataProvider API is complex and may require additional setup
+        // The old API still works, so we suppress the warning
+#pragma warning disable CS0618
         importer.spritesheet = sprites.ToArray();
+#pragma warning restore CS0618
         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
         AssetDatabase.Refresh();
 
