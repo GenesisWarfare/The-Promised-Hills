@@ -5,23 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /**
- * VideoPlayerController - Plays video files in the tutorial scene
+ * VideoPlayerController - Plays video files using URL only
  * 
  * SETUP INSTRUCTIONS:
  * 
- * FOR WEBGL (Required):
  * 1. Create a folder called "StreamingAssets" in your Assets folder (if it doesn't exist)
  * 2. Copy your MP4 file into the StreamingAssets folder
  * 3. In the Inspector, set "Video Url" to just the filename (e.g., "trailer.mp4")
  *    OR set it to a full URL (e.g., "https://example.com/video.mp4")
  * 
- * FOR OTHER PLATFORMS:
- * 1. Import your MP4 file into Unity (drag it into Assets folder)
- * 2. Select the video file in Project window
- * 3. In Inspector, set:
- *    - Import Type: Video Clip
- *    - Click Apply
- * 4. In VideoPlayerController Inspector, assign the Video Clip
+ * NOTE: This script uses URL-based video loading only (no VideoClip support)
  * 
  * DISPLAY SETUP FOR 2D GAMES (Recommended):
  * 
@@ -49,8 +42,7 @@ public class VideoPlayerController : MonoBehaviour
 {
     [Header("Video Settings")]
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private VideoClip videoClip; // Your MP4 file (not used in WebGL)
-    [SerializeField] private string videoUrl = ""; // URL or path to video file (required for WebGL)
+    [SerializeField] private string videoUrl = ""; // URL or path to video file (required)
     [SerializeField] private bool playOnStart = true;
     [SerializeField] private bool loop = false;
 
@@ -98,16 +90,14 @@ public class VideoPlayerController : MonoBehaviour
     {
         if (videoPlayer == null) return;
 
-        // WebGL requires URL-based video, not VideoClip
-        #if UNITY_WEBGL && !UNITY_EDITOR
-        // For WebGL, use URL
+        // Always use URL-based video (works on all platforms)
         if (!string.IsNullOrEmpty(videoUrl))
         {
             // Check if it's a YouTube URL (won't work)
             if (videoUrl.Contains("youtube.com") || videoUrl.Contains("youtu.be"))
             {
                 Debug.LogError("VideoPlayerController: YouTube URLs don't work with Unity VideoPlayer! You need a direct video file URL (ending in .mp4, .webm, etc.) or a file in StreamingAssets folder.");
-                Debug.LogError("For WebGL, you must either:");
+                Debug.LogError("You must either:");
                 Debug.LogError("1. Put your video file in Assets/StreamingAssets/ folder and set Video Url to just the filename (e.g., 'trailer.mp4')");
                 Debug.LogError("2. Use a direct video file URL from a web server (e.g., 'https://yourserver.com/video.mp4')");
                 return;
@@ -116,7 +106,6 @@ public class VideoPlayerController : MonoBehaviour
             // If videoUrl doesn't start with http, assume it's in StreamingAssets
             if (!videoUrl.StartsWith("http://") && !videoUrl.StartsWith("https://"))
             {
-                // For WebGL, StreamingAssets path needs special handling
                 string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, videoUrl);
                 videoPlayer.url = fullPath;
                 Debug.Log($"VideoPlayerController: Using StreamingAssets path: {fullPath}");
@@ -127,36 +116,10 @@ public class VideoPlayerController : MonoBehaviour
                 Debug.Log($"VideoPlayerController: Using URL: {videoUrl}");
             }
         }
-        else if (videoClip != null)
-        {
-            // Fallback: try to construct path from clip name
-            string clipName = videoClip.name;
-            videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, clipName + ".mp4");
-            Debug.LogWarning($"VideoPlayerController: Using fallback URL path. Make sure '{clipName}.mp4' is in StreamingAssets folder for WebGL.");
-        }
         else
         {
-            Debug.LogError("VideoPlayerController: No video URL or clip specified! WebGL requires a URL.");
-            Debug.LogError("Set 'Video Url' to a filename in StreamingAssets (e.g., 'trailer.mp4') or a direct video file URL.");
+            Debug.LogError("VideoPlayerController: No video URL specified! Set 'Video Url' to a filename in StreamingAssets (e.g., 'trailer.mp4') or a direct video file URL.");
         }
-        #else
-        // For other platforms, use VideoClip if available, otherwise URL
-        if (videoClip != null)
-        {
-            videoPlayer.clip = videoClip;
-        }
-        else if (!string.IsNullOrEmpty(videoUrl))
-        {
-            if (!videoUrl.StartsWith("http://") && !videoUrl.StartsWith("https://"))
-            {
-                videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoUrl);
-            }
-            else
-            {
-                videoPlayer.url = videoUrl;
-            }
-        }
-        #endif
 
         // Set render mode
         videoPlayer.renderMode = renderMode;
@@ -239,19 +202,11 @@ public class VideoPlayerController : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            #if UNITY_WEBGL && !UNITY_EDITOR
             if (string.IsNullOrEmpty(videoPlayer.url))
             {
-                Debug.LogWarning("VideoPlayerController: Video URL is not set! WebGL requires a URL.");
+                Debug.LogWarning("VideoPlayerController: Video URL is not set!");
                 return;
             }
-            #else
-            if (videoPlayer.clip == null && string.IsNullOrEmpty(videoPlayer.url))
-            {
-                Debug.LogWarning("VideoPlayerController: VideoPlayer clip or URL is not assigned!");
-                return;
-            }
-            #endif
             videoPlayer.Play();
         }
         else

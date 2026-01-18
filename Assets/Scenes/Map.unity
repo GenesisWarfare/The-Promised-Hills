@@ -1652,11 +1652,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db251d6a2fe0378428746ecd2542def5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.02
+      value: -5.22
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db251d6a2fe0378428746ecd2542def5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.45
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db251d6a2fe0378428746ecd2542def5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   defaultText: Click and drag the map around
   defaultFontSize: 35
   defaultAlignment: 514
-  battlefieldFontSize: 23.5
+  battlefieldFontSize: 22
   battlefieldAlignment: 257
 --- !u!4 &845817044
 Transform:
@@ -3777,8 +3777,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -363, y: 0}
-  m_SizeDelta: {x: 224.91, y: 395.53}
+  m_AnchoredPosition: {x: -357.49, y: 14.76}
+  m_SizeDelta: {x: 213.44, y: 365.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1965168228
 MonoBehaviour:
@@ -3827,8 +3827,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4101,8 +4101,8 @@ Transform:
   m_GameObject: {fileID: 2054658566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.31, y: -0, z: -5}
-  m_LocalScale: {x: 0.842207, y: 0.9042813, z: 1}
+  m_LocalPosition: {x: -7.1973, y: 0.295, z: -5}
+  m_LocalScale: {x: 0.7992116, y: 0.8350359, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4381,7 +4381,7 @@ Transform:
   m_GameObject: {fileID: 2122101128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.87, y: -5.39, z: -6}
+  m_LocalPosition: {x: -7.08, y: -5.25, z: -6}
   m_LocalScale: {x: 0.60058975, y: 0.7070258, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4445,7 +4445,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 15.02, y: 10.24}
+  m_Size: {x: 8, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &2135487300
 GameObject:

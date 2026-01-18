@@ -166,7 +166,7 @@ public class PlayerLaneManager : MonoBehaviour
                     break;
             }
         }
-        else if (unitName.Contains("footman"))
+        else if (unitName.Contains("footman") || unitName.Contains("axeman") || unitName.Contains("swordman"))
         {
             switch (laneNumber)
             {
