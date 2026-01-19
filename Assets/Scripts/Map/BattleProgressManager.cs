@@ -78,19 +78,19 @@ public class BattleProgressManager : MonoBehaviour
     async void Start()
     {
         isProgressLoaded = false;
-        
+
         // Wait for Unity Services to initialize
         await WaitForUnityServices();
-        
+
         // Load battle progress from cloud save
         await LoadBattleProgress();
-        
+
         // Populate battles per kingdom from BattlefieldButtons
         PopulateBattlesPerKingdom();
-        
+
         // Check and unlock kingdoms based on won battles
         CheckAndUnlockKingdoms();
-        
+
         // Mark progress as loaded
         isProgressLoaded = true;
         Debug.Log("BattleProgressManager: Progress loading complete");
@@ -140,14 +140,14 @@ public class BattleProgressManager : MonoBehaviour
 
         // Find all BattlefieldButtons
         BattlefieldButton[] allButtons = FindObjectsByType<BattlefieldButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        
+
         foreach (BattlefieldButton button in allButtons)
         {
             if (button != null && !string.IsNullOrEmpty(button.GetSceneName()))
             {
                 int level = button.GetLevelNumber();
                 string sceneName = button.GetSceneName();
-                
+
                 if (battlesPerKingdom.ContainsKey(level))
                 {
                     if (!battlesPerKingdom[level].Contains(sceneName))
@@ -293,7 +293,7 @@ public class BattleProgressManager : MonoBehaviour
         {
             // Convert won battles to comma-separated string
             string wonBattlesString = string.Join(",", wonBattles);
-            
+
             // Convert unlocked kingdoms to comma-separated string
             string unlockedKingdomsString = string.Join(",", unlockedKingdoms.Select(k => k.ToString()));
 

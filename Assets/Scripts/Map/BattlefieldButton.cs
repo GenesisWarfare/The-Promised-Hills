@@ -43,7 +43,7 @@ public class BattlefieldButton : MonoBehaviour
             // If original sprite wasn't captured, capture it now
             originalSprite = spriteRenderer.sprite;
         }
-        
+
         // Refresh the win status visual when enabled
         StartCoroutine(CheckWinStatusAfterDelay());
     }
@@ -94,7 +94,7 @@ public class BattlefieldButton : MonoBehaviour
 
         // Find BattleProgressManager
         progressManager = BattleProgressManager.Instance;
-        
+
         // Wait a frame for BattleProgressManager to load data, then check win status
         StartCoroutine(CheckWinStatusAfterDelay());
 
@@ -123,13 +123,13 @@ public class BattlefieldButton : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 waited++;
             }
-            
+
             if (progressManager.IsProgressLoaded)
             {
                 Debug.Log($"[BattlefieldButton] '{gameObject.name}' - Progress loaded, updating visual state");
             }
         }
-        
+
         // Update win status and visual
         if (progressManager != null)
         {

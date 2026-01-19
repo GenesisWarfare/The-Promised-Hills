@@ -20,7 +20,7 @@ public class SceneLoaderButton : MonoBehaviour
 {
     [Header("Scene Settings")]
     [SerializeField] private string sceneName = ""; // Name of the scene to load (must match Build Settings)
-    
+
     [Header("Button Delay Settings")]
     [Tooltip("Delay in seconds before the button becomes clickable after scene loads")]
     [SerializeField] private float enableDelay = 2f; // Default 2 seconds
@@ -32,13 +32,13 @@ public class SceneLoaderButton : MonoBehaviour
     {
         // Get the Button component
         button = GetComponent<Button>();
-        
+
         // Disable button initially
         if (button != null)
         {
             button.interactable = false;
         }
-        
+
         // Start coroutine to enable button after delay
         StartCoroutine(EnableButtonAfterDelay());
     }
@@ -46,7 +46,7 @@ public class SceneLoaderButton : MonoBehaviour
     private System.Collections.IEnumerator EnableButtonAfterDelay()
     {
         yield return new WaitForSeconds(enableDelay);
-        
+
         // Enable button after delay
         if (button != null)
         {

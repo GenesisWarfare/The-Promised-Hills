@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     private int currentSelectedLevel = 1;
     private List<BattlefieldButton> allBattlefieldButtons = new List<BattlefieldButton>();
     private List<LevelSelectionButton> levelSelectionButtons = new List<LevelSelectionButton>();
-    
+
     private const string SAVED_LEVEL_KEY = "LastSelectedLevel";
 
     void Awake()
@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator WaitForProgressAndInitialize()
     {
         Debug.Log("[LevelManager] Waiting for BattleProgressManager to load progress...");
-        
+
         BattleProgressManager progressManager = BattleProgressManager.Instance;
         if (progressManager == null)
         {
@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.LogWarning("[LevelManager] BattleProgressManager did not finish loading in time, proceeding anyway...");
             }
-            
+
             // Refresh battle progress manager to update battles list and check unlocks
             if (progressManager != null)
             {
@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour
     void RefreshAllButtonVisuals()
     {
         Debug.Log("[LevelManager] Refreshing all button visuals...");
-        
+
         // Refresh all level selection buttons (kingdom buttons)
         foreach (LevelSelectionButton button in levelSelectionButtons)
         {
@@ -154,14 +154,14 @@ public class LevelManager : MonoBehaviour
                 button.RefreshVisualState();
             }
         }
-        
+
         Debug.Log($"[LevelManager] Refreshed {levelSelectionButtons.Count} level selection buttons and {allBattlefieldButtons.Count} battlefield buttons");
     }
 
     public void SelectLevel(int levelNumber)
     {
         Debug.Log($"=== LevelManager.SelectLevel({levelNumber}) START ===");
-        
+
         // Check if this kingdom is unlocked
         BattleProgressManager progressManager = BattleProgressManager.Instance;
         if (progressManager != null && !progressManager.IsKingdomUnlocked(levelNumber))
@@ -171,7 +171,7 @@ public class LevelManager : MonoBehaviour
         }
 
         currentSelectedLevel = levelNumber;
-        
+
         // Save the selected level so it persists after returning from battle
         PlayerPrefs.SetInt(SAVED_LEVEL_KEY, levelNumber);
         PlayerPrefs.Save();

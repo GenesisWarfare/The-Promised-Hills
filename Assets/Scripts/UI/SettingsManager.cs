@@ -22,7 +22,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private bool startHidden = true;
 
     private AudioManager audioManager;
-    
+
     // Static instance for easy access
     private static SettingsManager instance;
     public static SettingsManager Instance
@@ -49,7 +49,7 @@ public class SettingsManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         // Close settings panel immediately when component initializes (runs before Start)
         // Do this BEFORE anything else can see it
         if (settingsPanel != null)
@@ -61,7 +61,7 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-    
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Close settings panel when map scene loads (including when returning from battlefield)
@@ -257,13 +257,13 @@ public class SettingsManager : MonoBehaviour
     public void OpenSettings()
     {
         Debug.Log("OpenSettings() called");
-        
+
         if (settingsPanel == null)
         {
             Debug.LogError("SettingsManager: settingsPanel is null! Make sure it's assigned in the Inspector.");
             return;
         }
-        
+
         Debug.Log($"Settings panel active state before: {settingsPanel.activeSelf}");
         settingsPanel.SetActive(true);
         Debug.Log($"Settings panel active state after: {settingsPanel.activeSelf}");
@@ -278,7 +278,7 @@ public class SettingsManager : MonoBehaviour
             Debug.LogWarning("SettingsManager: audioManager is null");
         }
     }
-    
+
     // Static method that can be called from anywhere
     public static void OpenSettingsStatic()
     {

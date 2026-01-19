@@ -76,13 +76,13 @@ public class LevelSelectionButton : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 waited++;
             }
-            
+
             if (progressManager.IsProgressLoaded)
             {
                 Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - Progress loaded, updating visual state");
             }
         }
-        
+
         // Update unlock status and visual
         if (progressManager != null)
         {
@@ -93,7 +93,7 @@ public class LevelSelectionButton : MonoBehaviour
             // If no progress manager, assume level 1 is unlocked
             isUnlocked = (levelNumber == 1);
         }
-        
+
         UpdateVisualState();
     }
 

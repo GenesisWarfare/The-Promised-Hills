@@ -185,17 +185,17 @@ public class Player : MonoBehaviour
         // Only clear previous data if switching between guest and non-guest
         bool isGuest = name.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
         bool wasGuest = this.playerName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
-        
+
         // Clear data only when switching between guest and non-guest
         if (isGuest != wasGuest && !string.IsNullOrEmpty(this.playerName))
         {
             // Switching between guest and player - clear money to prevent transfer
             money = startingMoney;
         }
-        
+
         this.playerName = name;
         this.password = password;
-        
+
         // Only save if NOT a guest
         if (!isGuest)
         {
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log($"Player: Set credentials for Guest (session-only, NOT saved)");
         }
-        
+
         UpdatePlayerNameUI(); // Update name display
         UpdatePlayerInfoUI(); // Update combined info display
     }
@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
         // DO NOT load guest data - guests start fresh each session
         // Only load if there's saved data and it's not a guest
         string savedName = PlayerPrefs.GetString(NAME_KEY, "");
-        
+
         // If saved name is "Guest", don't load it (guests should start fresh)
         if (savedName.Equals("Guest", System.StringComparison.OrdinalIgnoreCase))
         {

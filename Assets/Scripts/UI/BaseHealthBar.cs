@@ -106,7 +106,7 @@ public class BaseHealthBar : MonoBehaviour
             // Map health percentage to sprite index (0-7)
             // 0% = index 0, 12.5% = index 1, 25% = index 2, ..., 87.5% = index 7, 100% = index 7
             int spriteIndex = Mathf.Clamp(Mathf.FloorToInt(healthPercent * 8f), 0, 7);
-            
+
             // If health is exactly 0, use the first sprite (empty)
             if (currentHealth <= 0)
             {

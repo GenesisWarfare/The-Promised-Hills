@@ -17,7 +17,7 @@ public class LoginUIManager : MonoBehaviour
     [Header("Scene Settings")]
     [SerializeField] private string menuSceneName = "OpeningVideo"; // Scene after login/register (plays video then goes to map)
     [SerializeField] private string guestSceneName = "Map"; // Scene after guest login (goes directly to map, no video)
-    
+
     [Header("Video Preload Settings")]
     [SerializeField] private string videoUrl = "https://genesiswarfare.github.io/intro/Thepromisedhillstrailer.mp4"; // Video URL to preload
     [SerializeField] private bool preloadVideo = true; // Enable video preloading
@@ -61,7 +61,7 @@ public class LoginUIManager : MonoBehaviour
     void OnSignedIn()
     {
         Debug.Log("User signed in successfully!");
-        
+
         // Check if this is a guest login - if so, don't transition here
         // (OnGuestButtonClicked already handles the transition)
         if (isGuestLogin)
@@ -70,7 +70,7 @@ public class LoginUIManager : MonoBehaviour
             isGuestLogin = false; // Reset flag
             return;
         }
-        
+
         // Regular login/register - go to opening video
         GoToMenu();
     }
@@ -314,7 +314,7 @@ public class LoginUIManager : MonoBehaviour
     {
         // Wait a frame to ensure authentication state is updated
         yield return null;
-        
+
         // Verify we're actually signed in before transitioning
         int attempts = 0;
         while (!AuthenticationService.Instance.IsSignedIn && attempts < 10)

@@ -151,7 +151,7 @@ public class PlayerLaneManager : MonoBehaviour
                     break;
             }
         }
-        else if (unitName.Contains("archer")  || unitName.Contains("soldier")  || unitName.Contains("sniper"))
+        else if (unitName.Contains("archer") || unitName.Contains("soldier") || unitName.Contains("sniper"))
         {
             switch (laneNumber)
             {
