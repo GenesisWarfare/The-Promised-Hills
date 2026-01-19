@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ebad1825e629d564eade9dc2145cd26f
+guid: bae7fccc7def3374693812a5494e5ff2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2593143872080557079
-    second: Gaza_0
+      213: -6681297708525394727
+    second: Gaza 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,6 +97,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -113,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gaza_0
+      name: Gaza 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9eb482d236d430cd0800000000000000
-      internalID: -2593143872080557079
+      spriteID: 9d466b412234743a0800000000000000
+      internalID: -6681297708525394727
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gaza_0: -2593143872080557079
+      Gaza 1_0: -6681297708525394727
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

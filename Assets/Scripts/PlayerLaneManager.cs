@@ -136,7 +136,7 @@ public class PlayerLaneManager : MonoBehaviour
         Transform spawnPoint = null;
 
         // Determine which spawn points to use based on unit type
-        if (unitName.Contains("hero"))
+        if (unitName.Contains("hero") || unitName.Contains("merkava"))
         {
             switch (laneNumber)
             {
@@ -151,7 +151,7 @@ public class PlayerLaneManager : MonoBehaviour
                     break;
             }
         }
-        else if (unitName.Contains("archer"))
+        else if (unitName.Contains("archer")  || unitName.Contains("soldier")  || unitName.Contains("sniper"))
         {
             switch (laneNumber)
             {

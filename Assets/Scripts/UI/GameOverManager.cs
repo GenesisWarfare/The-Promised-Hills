@@ -138,6 +138,15 @@ public class GameOverManager : MonoBehaviour
     {
         Debug.Log("You Win!");
 
+        // Mark this battle as won
+        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        BattleProgressManager progressManager = BattleProgressManager.Instance;
+        if (progressManager != null && !string.IsNullOrEmpty(currentSceneName))
+        {
+            progressManager.MarkBattleAsWon(currentSceneName);
+            Debug.Log($"GameOverManager: Marked battle '{currentSceneName}' as won");
+        }
+
         // Stop background music and play win sound
         AudioManager audioManager = AudioManager.Instance;
         if (audioManager != null)

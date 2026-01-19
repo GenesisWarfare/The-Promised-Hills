@@ -149,7 +149,7 @@ Animator:
   m_GameObject: {fileID: 4493542165394543976}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d24243ed085b4f74fba515e854a34f66, type: 2}
+  m_Controller: {fileID: 9100000, guid: d2f8e3925917a054c9ae33689d549dc1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherUnit
   speed: 1.5
-  maxHealth: 5
-  attackDamage: 2
+  maxHealth: 100
+  attackDamage: 9
   attackInterval: 0.5
   unitCost: 35
   direction: {x: 1, y: 0}
@@ -186,6 +186,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   flipBehavior: 0
   attackRange: 4
-  arrowPrefab: {fileID: 2169089076974734875, guid: a3b568b21ceb14040b0310e3cf6031c4, type: 3}
+  arrowPrefab: {fileID: 2104202777584684571, guid: 21f75575ae6ee684a9c4514f2cc6e0a8, type: 3}
   arrowSpawnPoint: {fileID: 0}
-  arrowSpeed: 10
+  arrowSpeed: 25

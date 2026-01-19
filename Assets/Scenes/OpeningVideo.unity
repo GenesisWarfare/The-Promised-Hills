@@ -1007,8 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VideoPlayerController
   videoPlayer: {fileID: 1754067723}
-  videoClip: {fileID: 32900000, guid: 76ff1b94cf293e9478ac6b76162eb08e, type: 3}
-  videoUrl: ThePromisedHIllsTrailer.mp4
+  videoUrl: https://genesiswarfare.github.io/intro/Thepromisedhillstrailer.mp4
   playOnStart: 1
   loop: 0
   renderMode: 3
@@ -1041,7 +1040,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 3
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -1049,7 +1048,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: https://genesiswarfare.github.io/intro/Thepromisedhillstrailer.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1

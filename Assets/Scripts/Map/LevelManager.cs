@@ -55,6 +55,13 @@ public class LevelManager : MonoBehaviour
         // Refresh button lists to ensure we have all buttons
         RefreshButtonLists();
 
+        // Refresh battle progress manager to update battles list and check unlocks
+        BattleProgressManager progressManager = BattleProgressManager.Instance;
+        if (progressManager != null)
+        {
+            progressManager.RefreshBattlesAndCheckUnlocks();
+        }
+
         Debug.Log($"[LevelManager] Hiding all {allBattlefieldButtons.Count} battlefield buttons...");
         // Hide all battlefield buttons first
         foreach (BattlefieldButton button in allBattlefieldButtons)
@@ -70,8 +77,14 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Load last selected level, or default to level 1
+        // Load last selected level, but only if it's unlocked
         int savedLevel = PlayerPrefs.GetInt(SAVED_LEVEL_KEY, 1);
+        if (progressManager != null && !progressManager.IsKingdomUnlocked(savedLevel))
+        {
+            // If saved level is not unlocked, default to level 1
+            savedLevel = 1;
+            Debug.Log($"[LevelManager] Saved level was not unlocked, defaulting to level 1");
+        }
         Debug.Log($"[LevelManager] Loading saved level: {savedLevel}");
         SelectLevel(savedLevel);
 
@@ -81,6 +94,15 @@ public class LevelManager : MonoBehaviour
     public void SelectLevel(int levelNumber)
     {
         Debug.Log($"=== LevelManager.SelectLevel({levelNumber}) START ===");
+        
+        // Check if this kingdom is unlocked
+        BattleProgressManager progressManager = BattleProgressManager.Instance;
+        if (progressManager != null && !progressManager.IsKingdomUnlocked(levelNumber))
+        {
+            Debug.LogWarning($"[LevelManager] Cannot select level {levelNumber} - kingdom is not unlocked!");
+            return;
+        }
+
         currentSelectedLevel = levelNumber;
         
         // Save the selected level so it persists after returning from battle
