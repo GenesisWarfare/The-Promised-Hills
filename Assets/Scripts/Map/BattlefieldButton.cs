@@ -112,7 +112,7 @@ public class BattlefieldButton : MonoBehaviour
         {
             progressManager = BattleProgressManager.Instance;
         }
-        
+
         if (progressManager != null)
         {
             // Wait for progress to be loaded (important for first-time map load)

@@ -65,7 +65,7 @@ public class LevelSelectionButton : MonoBehaviour
         {
             progressManager = BattleProgressManager.Instance;
         }
-        
+
         if (progressManager != null)
         {
             // Wait for progress to be loaded (important for first-time map load)
@@ -107,7 +107,7 @@ public class LevelSelectionButton : MonoBehaviour
         {
             progressManager = BattleProgressManager.Instance;
         }
-        
+
         if (progressManager != null)
         {
             isUnlocked = progressManager.IsKingdomUnlocked(levelNumber);
@@ -117,7 +117,7 @@ public class LevelSelectionButton : MonoBehaviour
             // If no progress manager, assume level 1 is unlocked
             isUnlocked = (levelNumber == 1);
         }
-        
+
         if (spriteRenderer != null)
         {
             if (isUnlocked)
