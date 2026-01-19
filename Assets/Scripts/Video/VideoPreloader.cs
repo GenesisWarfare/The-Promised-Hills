@@ -49,7 +49,7 @@ public class VideoPreloader : MonoBehaviour
         // Just store the URL - the VideoPlayerController will handle the actual loading
         preloadedVideoUrl = url;
         isVideoPreloaded = true;
-        
+
         Debug.Log("VideoPreloader: Video URL stored, ready for use");
     }
 

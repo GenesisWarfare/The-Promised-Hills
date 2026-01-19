@@ -100,10 +100,10 @@ public class VideoPlayerController : MonoBehaviour
         if (videoPlayer == null) yield break;
 
         Debug.Log("VideoPlayerController: Preparing video for playback...");
-        
+
         // Prepare video first (critical for WebGL)
         videoPlayer.Prepare();
-        
+
         // Wait until video is prepared
         while (!videoPlayer.isPrepared)
         {
@@ -111,7 +111,7 @@ public class VideoPlayerController : MonoBehaviour
         }
 
         Debug.Log("VideoPlayerController: Video prepared, starting playback");
-        
+
         // Ensure RenderTexture is assigned to RawImage (only if using RenderTexture mode)
         if (videoPlayer.renderMode == VideoRenderMode.RenderTexture)
         {
@@ -176,16 +176,16 @@ public class VideoPlayerController : MonoBehaviour
 
         // Set render mode
         videoPlayer.renderMode = renderMode;
-        
+
+#if UNITY_WEBGL
         // For WebGL, only switch to Camera Far Plane if RenderTexture is selected but no RawImage is assigned
-        #if UNITY_WEBGL
         if (renderMode == VideoRenderMode.RenderTexture && targetRawImage == null)
         {
             Debug.LogWarning("VideoPlayerController: RenderTexture mode selected but no RawImage assigned. Switching to Camera Far Plane for WebGL compatibility.");
             videoPlayer.renderMode = VideoRenderMode.CameraFarPlane;
             renderMode = VideoRenderMode.CameraFarPlane;
         }
-        #endif
+#endif
 
         // Configure based on render mode (use videoPlayer.renderMode in case it was changed for WebGL)
         switch (videoPlayer.renderMode)
@@ -215,7 +215,7 @@ public class VideoPlayerController : MonoBehaviour
                 // Create a RenderTexture for size control (best for 2D/UI)
                 RenderTexture renderTexture = new RenderTexture((int)videoSize.x, (int)videoSize.y, 0);
                 videoPlayer.targetTexture = renderTexture;
-                
+
                 // If UI RawImage is assigned, display the video on it (perfect for 2D)
                 if (targetRawImage != null)
                 {
@@ -232,13 +232,13 @@ public class VideoPlayerController : MonoBehaviour
 
         // Set loop
         videoPlayer.isLooping = loop;
-        
+
         // Set playOnAwake based on user preference
         videoPlayer.playOnAwake = playOnStart;
 
         // Set audio output mode (if video has audio)
         videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
-        
+
         // Add AudioSource if needed
         if (videoPlayer.audioOutputMode == VideoAudioOutputMode.AudioSource)
         {
@@ -253,7 +253,7 @@ public class VideoPlayerController : MonoBehaviour
         // Add error handling
         videoPlayer.errorReceived += OnVideoError;
         videoPlayer.prepareCompleted += OnVideoPrepared;
-        
+
         // Stop video initially (we'll prepare and play manually)
         videoPlayer.Stop();
     }
@@ -272,7 +272,7 @@ public class VideoPlayerController : MonoBehaviour
     {
         Debug.Log($"VideoPlayerController: Video prepared successfully. URL: {source.url}");
         Debug.Log($"VideoPlayerController: Video resolution: {source.width}x{source.height}");
-        
+
         // Ensure RenderTexture is assigned to RawImage when video is prepared (important for WebGL)
         if (source.renderMode == VideoRenderMode.RenderTexture)
         {
@@ -303,14 +303,14 @@ public class VideoPlayerController : MonoBehaviour
                 Debug.LogWarning("VideoPlayerController: Video URL is not set!");
                 return;
             }
-            
+
             // For RenderTexture mode, ensure RawImage is set up (critical for WebGL)
             if (videoPlayer.renderMode == VideoRenderMode.RenderTexture && targetRawImage != null && videoPlayer.targetTexture != null)
             {
                 targetRawImage.texture = videoPlayer.targetTexture;
                 targetRawImage.enabled = true;
             }
-            
+
             videoPlayer.Play();
         }
         else
@@ -352,10 +352,10 @@ public class VideoPlayerController : MonoBehaviour
     void Update()
     {
         // For WebGL RenderTexture mode, continuously ensure RawImage has the texture assigned
-        if (videoPlayer != null && 
-            videoPlayer.renderMode == VideoRenderMode.RenderTexture && 
-            targetRawImage != null && 
-            videoPlayer.targetTexture != null && 
+        if (videoPlayer != null &&
+            videoPlayer.renderMode == VideoRenderMode.RenderTexture &&
+            targetRawImage != null &&
+            videoPlayer.targetTexture != null &&
             videoPlayer.isPlaying)
         {
             if (targetRawImage.texture != videoPlayer.targetTexture)
@@ -415,7 +415,7 @@ public class VideoPlayerController : MonoBehaviour
         }
 
         Debug.Log("VideoPlayerController: Video skipped by user - loading next scene immediately");
-        
+
         // Load next scene immediately (don't stop the video)
         if (loadSceneOnVideoEnd)
         {
@@ -449,7 +449,7 @@ public class VideoPlayerController : MonoBehaviour
     void OnVideoFinished(VideoPlayer vp)
     {
         Debug.Log("Video finished playing");
-        
+
         // Load next scene if enabled
         if (loadSceneOnVideoEnd)
         {
@@ -493,7 +493,7 @@ public class VideoPlayerController : MonoBehaviour
     string NormalizeUrl(string url)
     {
         if (string.IsNullOrEmpty(url)) return "";
-        
+
         // If it's a StreamingAssets path, convert to the actual URL format
         if (url.StartsWith(Application.streamingAssetsPath))
         {
@@ -501,7 +501,7 @@ public class VideoPlayerController : MonoBehaviour
             string filename = System.IO.Path.GetFileName(url);
             return filename.ToLower().Trim();
         }
-        
+
         // For HTTP URLs, normalize
         return url.ToLower().Trim().TrimEnd('/');
     }
@@ -512,7 +512,7 @@ public class VideoPlayerController : MonoBehaviour
     string GetFullVideoUrl()
     {
         if (string.IsNullOrEmpty(videoUrl)) return "";
-        
+
         // If videoUrl doesn't start with http, assume it's in StreamingAssets
         if (!videoUrl.StartsWith("http://") && !videoUrl.StartsWith("https://"))
         {
