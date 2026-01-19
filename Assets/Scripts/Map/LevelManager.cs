@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
@@ -55,11 +56,46 @@ public class LevelManager : MonoBehaviour
         // Refresh button lists to ensure we have all buttons
         RefreshButtonLists();
 
-        // Refresh battle progress manager to update battles list and check unlocks
+        // Wait for BattleProgressManager to load progress before selecting level
+        StartCoroutine(WaitForProgressAndInitialize());
+    }
+
+    IEnumerator WaitForProgressAndInitialize()
+    {
+        Debug.Log("[LevelManager] Waiting for BattleProgressManager to load progress...");
+        
         BattleProgressManager progressManager = BattleProgressManager.Instance;
-        if (progressManager != null)
+        if (progressManager == null)
         {
-            progressManager.RefreshBattlesAndCheckUnlocks();
+            Debug.LogWarning("[LevelManager] BattleProgressManager not found, proceeding anyway...");
+        }
+        else
+        {
+            // Wait for BattleProgressManager to finish loading progress
+            int maxWaitTime = 50; // 5 seconds max wait
+            int waited = 0;
+            while (!progressManager.IsProgressLoaded && waited < maxWaitTime)
+            {
+                yield return new WaitForSeconds(0.1f);
+                waited++;
+            }
+
+            if (progressManager.IsProgressLoaded)
+            {
+                Debug.Log("[LevelManager] BattleProgressManager finished loading progress, refreshing battles and unlocks...");
+            }
+            else
+            {
+                Debug.LogWarning("[LevelManager] BattleProgressManager did not finish loading in time, proceeding anyway...");
+            }
+            
+            // Refresh battle progress manager to update battles list and check unlocks
+            if (progressManager != null)
+            {
+                progressManager.RefreshBattlesAndCheckUnlocks();
+                // Give it one more frame to process
+                yield return null;
+            }
         }
 
         Debug.Log($"[LevelManager] Hiding all {allBattlefieldButtons.Count} battlefield buttons...");
@@ -83,12 +119,43 @@ public class LevelManager : MonoBehaviour
         {
             // If saved level is not unlocked, default to level 1
             savedLevel = 1;
-            Debug.Log($"[LevelManager] Saved level was not unlocked, defaulting to level 1");
+            Debug.Log($"[LevelManager] Saved level {savedLevel} was not unlocked, defaulting to level 1");
         }
         Debug.Log($"[LevelManager] Loading saved level: {savedLevel}");
         SelectLevel(savedLevel);
 
+        // Refresh all button visuals now that progress is loaded
+        RefreshAllButtonVisuals();
+
         Debug.Log("=== LevelManager.Start() END ===");
+    }
+
+    /**
+     * Refresh all button visuals (kingdom buttons and battlefield buttons) based on current progress
+     */
+    void RefreshAllButtonVisuals()
+    {
+        Debug.Log("[LevelManager] Refreshing all button visuals...");
+        
+        // Refresh all level selection buttons (kingdom buttons)
+        foreach (LevelSelectionButton button in levelSelectionButtons)
+        {
+            if (button != null)
+            {
+                button.RefreshVisualState();
+            }
+        }
+
+        // Refresh all battlefield buttons (to show flags for won battles)
+        foreach (BattlefieldButton button in allBattlefieldButtons)
+        {
+            if (button != null)
+            {
+                button.RefreshVisualState();
+            }
+        }
+        
+        Debug.Log($"[LevelManager] Refreshed {levelSelectionButtons.Count} level selection buttons and {allBattlefieldButtons.Count} battlefield buttons");
     }
 
     public void SelectLevel(int levelNumber)

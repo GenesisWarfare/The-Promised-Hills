@@ -15,10 +15,17 @@ public class LoginUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText; // Optional - can be null
 
     [Header("Scene Settings")]
-    [SerializeField] private string menuSceneName = "MainMenu";
+    [SerializeField] private string menuSceneName = "OpeningVideo"; // Scene after login/register (plays video then goes to map)
+    [SerializeField] private string guestSceneName = "Map"; // Scene after guest login (goes directly to map, no video)
+    
+    [Header("Video Preload Settings")]
+    [SerializeField] private string videoUrl = "https://genesiswarfare.github.io/intro/Thepromisedhillstrailer.mp4"; // Video URL to preload
+    [SerializeField] private bool preloadVideo = true; // Enable video preloading
 
     [Header("Authentication")]
     [SerializeField] private AuthenticationManagerWithPassword authManager;
+
+    private bool isGuestLogin = false; // Flag to track if we're doing a guest login
 
     void Start()
     {
@@ -54,6 +61,17 @@ public class LoginUIManager : MonoBehaviour
     void OnSignedIn()
     {
         Debug.Log("User signed in successfully!");
+        
+        // Check if this is a guest login - if so, don't transition here
+        // (OnGuestButtonClicked already handles the transition)
+        if (isGuestLogin)
+        {
+            Debug.Log("LoginUIManager: Guest login detected in OnSignedIn - transition already handled by OnGuestButtonClicked");
+            isGuestLogin = false; // Reset flag
+            return;
+        }
+        
+        // Regular login/register - go to opening video
         GoToMenu();
     }
 
@@ -100,6 +118,8 @@ public class LoginUIManager : MonoBehaviour
                 {
                     player.SetCredentials(username, password);
                 }
+                // Start preloading video in background before transitioning
+                StartPreloadingVideo();
                 // Transition to menu - use coroutine to ensure sign-in state is updated
                 StartCoroutine(TransitionToMenuAfterDelay());
             }
@@ -171,6 +191,8 @@ public class LoginUIManager : MonoBehaviour
                     player.SetMoney(100);
                     player.SaveMoneyNow();
                 }
+                // Start preloading video in background before transitioning
+                StartPreloadingVideo();
                 // Transition to menu - use coroutine to ensure sign-in state is updated
                 StartCoroutine(TransitionToMenuAfterDelay());
             }
@@ -190,6 +212,9 @@ public class LoginUIManager : MonoBehaviour
     {
         SetStatus("Joining as guest...", Color.yellow);
 
+        // Set flag to indicate this is a guest login (prevents OnSignedIn from transitioning)
+        isGuestLogin = true;
+
         if (authManager == null)
         {
             authManager = FindFirstObjectByType<AuthenticationManagerWithPassword>();
@@ -197,6 +222,7 @@ public class LoginUIManager : MonoBehaviour
             {
                 Debug.LogError("Authentication Manager not found!");
                 SetStatus("Authentication Manager not found!", Color.red);
+                isGuestLogin = false; // Reset flag on error
                 return;
             }
         }
@@ -219,14 +245,19 @@ public class LoginUIManager : MonoBehaviour
                     player.SetMoney(100);
                     player.SaveMoneyNow();
                 }
-                // Transition to menu - use coroutine to ensure sign-in state is updated
-                StartCoroutine(TransitionToMenuAfterDelay());
+                // Guest login goes directly to map (no video) - use coroutine to ensure sign-in state is updated
+                StartCoroutine(TransitionToSceneAfterDelay(guestSceneName));
+            }
+            else
+            {
+                isGuestLogin = false; // Reset flag on failure
             }
         }
         catch (System.Exception ex)
         {
             Debug.LogError($"Error during guest login: {ex}");
             SetStatus("Guest login failed: An unexpected error occurred. Please try again.", Color.red);
+            isGuestLogin = false; // Reset flag on error
         }
     }
 
@@ -253,11 +284,33 @@ public class LoginUIManager : MonoBehaviour
         }
     }
 
+    void GoToScene(string sceneName)
+    {
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            Debug.Log($"LoginUIManager: Loading scene '{sceneName}'");
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogError($"Scene name '{sceneName}' is empty!");
+        }
+    }
+
     /// <summary>
     /// Transition to menu after a short delay to ensure authentication state is updated
     /// This is more reliable than relying solely on the SignedIn event, especially in WebGL
     /// </summary>
     private System.Collections.IEnumerator TransitionToMenuAfterDelay()
+    {
+        yield return TransitionToSceneAfterDelay(menuSceneName);
+    }
+
+    /// <summary>
+    /// Transition to a specific scene after a short delay to ensure authentication state is updated
+    /// This is more reliable than relying solely on the SignedIn event, especially in WebGL
+    /// </summary>
+    private System.Collections.IEnumerator TransitionToSceneAfterDelay(string sceneName)
     {
         // Wait a frame to ensure authentication state is updated
         yield return null;
@@ -272,13 +325,13 @@ public class LoginUIManager : MonoBehaviour
 
         if (AuthenticationService.Instance.IsSignedIn)
         {
-            Debug.Log("LoginUIManager: Authentication confirmed, transitioning to menu");
-            GoToMenu();
+            Debug.Log($"LoginUIManager: Authentication confirmed, transitioning to scene '{sceneName}'");
+            GoToScene(sceneName);
         }
         else
         {
-            Debug.LogWarning("LoginUIManager: Authentication state not confirmed, but attempting transition anyway");
-            GoToMenu();
+            Debug.LogWarning($"LoginUIManager: Authentication state not confirmed, but attempting transition to '{sceneName}' anyway");
+            GoToScene(sceneName);
         }
     }
 
@@ -319,5 +372,18 @@ public class LoginUIManager : MonoBehaviour
         }
 
         return hasLower && hasUpper && hasNumber && hasSymbol;
+    }
+
+    /**
+     * Start preloading the video in the background
+     * This allows the video to be ready when we transition to the video scene
+     */
+    void StartPreloadingVideo()
+    {
+        if (preloadVideo && !string.IsNullOrEmpty(videoUrl))
+        {
+            Debug.Log($"LoginUIManager: Starting to preload video: {videoUrl}");
+            VideoPreloader.PreloadVideo(videoUrl);
+        }
     }
 }

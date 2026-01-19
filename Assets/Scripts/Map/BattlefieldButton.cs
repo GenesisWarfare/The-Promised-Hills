@@ -103,18 +103,34 @@ public class BattlefieldButton : MonoBehaviour
     }
 
     /**
-     * Wait a moment for BattleProgressManager to load, then check win status
+     * Wait for BattleProgressManager to load progress, then check win status
      */
     System.Collections.IEnumerator CheckWinStatusAfterDelay()
     {
-        yield return null; // Wait one frame
-        yield return null; // Wait another frame for cloud save to load
-        
+        // Wait for BattleProgressManager to be available
         if (progressManager == null)
         {
             progressManager = BattleProgressManager.Instance;
         }
         
+        if (progressManager != null)
+        {
+            // Wait for progress to be loaded (important for first-time map load)
+            int maxWaitTime = 50; // 5 seconds max wait
+            int waited = 0;
+            while (!progressManager.IsProgressLoaded && waited < maxWaitTime)
+            {
+                yield return new WaitForSeconds(0.1f);
+                waited++;
+            }
+            
+            if (progressManager.IsProgressLoaded)
+            {
+                Debug.Log($"[BattlefieldButton] '{gameObject.name}' - Progress loaded, updating visual state");
+            }
+        }
+        
+        // Update win status and visual
         if (progressManager != null)
         {
             CheckAndUpdateWinStatus();

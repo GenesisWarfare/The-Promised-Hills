@@ -54,6 +54,10 @@ public class BattleProgressManager : MonoBehaviour
         }
     }
 
+    // Flag to indicate if progress has been loaded
+    private bool isProgressLoaded = false;
+    public bool IsProgressLoaded => isProgressLoaded;
+
     void Awake()
     {
         if (instance == null)
@@ -73,6 +77,8 @@ public class BattleProgressManager : MonoBehaviour
 
     async void Start()
     {
+        isProgressLoaded = false;
+        
         // Wait for Unity Services to initialize
         await WaitForUnityServices();
         
@@ -84,6 +90,10 @@ public class BattleProgressManager : MonoBehaviour
         
         // Check and unlock kingdoms based on won battles
         CheckAndUnlockKingdoms();
+        
+        // Mark progress as loaded
+        isProgressLoaded = true;
+        Debug.Log("BattleProgressManager: Progress loading complete");
     }
 
     /**

@@ -500,7 +500,7 @@ MonoBehaviour:
   usernameInputField: {fileID: 445884670}
   passwordInputField: {fileID: 1981864019}
   statusText: {fileID: 119417935}
-  menuSceneName: MainMenu
+  menuSceneName: OpeningVideo
   authManager: {fileID: 109267362}
 --- !u!114 &109267362
 MonoBehaviour:
@@ -1609,7 +1609,7 @@ Transform:
   m_GameObject: {fileID: 800246627}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.09, y: 1.89, z: -3}
+  m_LocalPosition: {x: 8.49, y: 1.75, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2576,8 +2576,8 @@ Transform:
   m_GameObject: {fileID: 1606116985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.69, y: -4.38, z: -4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.4, y: -4.82, z: -4}
+  m_LocalScale: {x: 0.98, y: 0.8782, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

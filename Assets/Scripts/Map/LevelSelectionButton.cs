@@ -13,6 +13,16 @@ public class LevelSelectionButton : MonoBehaviour
     private BattleProgressManager progressManager;
     private bool isUnlocked = false;
 
+    void OnEnable()
+    {
+        // Refresh visual state when object becomes active (e.g., returning to map scene)
+        if (spriteRenderer != null)
+        {
+            // Start coroutine to check unlock status
+            StartCoroutine(CheckUnlockStatusAfterDelay());
+        }
+    }
+
     void Start()
     {
         Debug.Log($"[LevelSelectionButton] Start() - GameObject: '{gameObject.name}', levelNumber: {levelNumber}");
@@ -38,23 +48,42 @@ public class LevelSelectionButton : MonoBehaviour
             Debug.LogError($"[LevelSelectionButton] '{gameObject.name}' - LevelManager NOT FOUND!");
         }
 
-        // Wait a frame for BattleProgressManager to load data, then check unlock status
+        // Initialize progress manager
+        progressManager = BattleProgressManager.Instance;
+
+        // Wait for BattleProgressManager to load data, then check unlock status
         StartCoroutine(CheckUnlockStatusAfterDelay());
     }
 
     /**
-     * Wait a moment for BattleProgressManager to load, then check unlock status
+     * Wait for BattleProgressManager to load progress, then check unlock status
      */
     System.Collections.IEnumerator CheckUnlockStatusAfterDelay()
     {
-        yield return null; // Wait one frame
-        yield return null; // Wait another frame for cloud save to load
-        
+        // Wait for BattleProgressManager to be available
         if (progressManager == null)
         {
             progressManager = BattleProgressManager.Instance;
         }
         
+        if (progressManager != null)
+        {
+            // Wait for progress to be loaded (important for first-time map load)
+            int maxWaitTime = 50; // 5 seconds max wait
+            int waited = 0;
+            while (!progressManager.IsProgressLoaded && waited < maxWaitTime)
+            {
+                yield return new WaitForSeconds(0.1f);
+                waited++;
+            }
+            
+            if (progressManager.IsProgressLoaded)
+            {
+                Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - Progress loaded, updating visual state");
+            }
+        }
+        
+        // Update unlock status and visual
         if (progressManager != null)
         {
             isUnlocked = progressManager.IsKingdomUnlocked(levelNumber);
@@ -73,17 +102,43 @@ public class LevelSelectionButton : MonoBehaviour
      */
     void UpdateVisualState()
     {
+        // Refresh unlock status from progress manager
+        if (progressManager == null)
+        {
+            progressManager = BattleProgressManager.Instance;
+        }
+        
+        if (progressManager != null)
+        {
+            isUnlocked = progressManager.IsKingdomUnlocked(levelNumber);
+        }
+        else
+        {
+            // If no progress manager, assume level 1 is unlocked
+            isUnlocked = (levelNumber == 1);
+        }
+        
         if (spriteRenderer != null)
         {
             if (isUnlocked)
             {
                 spriteRenderer.color = normalColor;
+                Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - Kingdom {levelNumber} is UNLOCKED (normal color)");
             }
             else
             {
                 spriteRenderer.color = lockedColor;
+                Debug.Log($"[LevelSelectionButton] '{gameObject.name}' - Kingdom {levelNumber} is LOCKED (gray color)");
             }
         }
+    }
+
+    /**
+     * Public method to refresh visual state (called by LevelManager)
+     */
+    public void RefreshVisualState()
+    {
+        UpdateVisualState();
     }
 
     void Update()
