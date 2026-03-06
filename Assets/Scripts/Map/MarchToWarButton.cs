@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /**
  * MarchToWarButton - Image button that appears when a battlefield is selected
@@ -40,9 +39,9 @@ public class MarchToWarButton : MonoBehaviour
     void Update()
     {
         // Handle click
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (MobileInputHelper.WasPressedThisFrame())
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(MobileInputHelper.GetPosition());
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {
@@ -53,7 +52,7 @@ public class MarchToWarButton : MonoBehaviour
         // Visual feedback on hover
         if (spriteRenderer != null)
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(MobileInputHelper.GetPosition());
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {

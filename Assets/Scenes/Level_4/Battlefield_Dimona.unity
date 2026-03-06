@@ -346,7 +346,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0169, y: -0, z: 0}
-  m_LocalScale: {x: 1.3428956, y: 1.1687664, z: 1}
+  m_LocalScale: {x: 1.501339, y: 1.1687664, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -587,6 +587,7 @@ MonoBehaviour:
   heroLane2SpawnPoint: {fileID: 515886580}
   heroLane3SpawnPoint: {fileID: 1757303789}
   playerUnitPrefab: {fileID: 4493542165394543976, guid: 4eb5adf765a0666408762b5c04cd3474, type: 3}
+  laneDetectionTolerance: 1.5
 --- !u!4 &234555197
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,7 +1329,7 @@ Transform:
   m_GameObject: {fileID: 950746395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.73, y: 0.04, z: -10}
+  m_LocalPosition: {x: 11.95, y: 0.04, z: -10}
   m_LocalScale: {x: 0.8836, y: 12.152631, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1723,7 +1724,7 @@ Transform:
   m_GameObject: {fileID: 1299424109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7318, y: 0.0236, z: -10}
+  m_LocalPosition: {x: -11.98, y: 0.0236, z: -10}
   m_LocalScale: {x: 0.8836, y: 12.152631, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2650,7 +2651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5225925389991786790, guid: 33dee0c9585b8864683146a6be3bf8ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.61
+      value: -4.01
       objectReference: {fileID: 0}
     - target: {fileID: 5225925389991786790, guid: 33dee0c9585b8864683146a6be3bf8ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3509,7 +3510,7 @@ PrefabInstance:
     - target: {fileID: 5948906465657816673, guid: 35d720647fa2c6f498c47f10fed483dd, type: 3}
       propertyPath: unitPrefab
       value: 
-      objectReference: {fileID: 4493542165394543976, guid: b977216746b9e1a4fa891f4342f25790, type: 3}
+      objectReference: {fileID: 4493542165394543976, guid: 71307e4027a761f48938ed75c080f11f, type: 3}
     - target: {fileID: 6418627395227443760, guid: 35d720647fa2c6f498c47f10fed483dd, type: 3}
       propertyPath: m_Name
       value: Sniper_Button
@@ -3527,6 +3528,10 @@ PrefabInstance:
     - target: {fileID: 7597616998683737146, guid: 35d720647fa2c6f498c47f10fed483dd, type: 3}
       propertyPath: m_Size.y
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041542025791406986, guid: 35d720647fa2c6f498c47f10fed483dd, type: 3}
+      propertyPath: m_Name
+      value: Sniper_Price
       objectReference: {fileID: 0}
     - target: {fileID: 8541161404022536480, guid: 35d720647fa2c6f498c47f10fed483dd, type: 3}
       propertyPath: m_LocalScale.x

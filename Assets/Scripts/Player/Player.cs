@@ -179,8 +179,9 @@ public class Player : MonoBehaviour
     /**
      * Set player name and password (called after login/register)
      * NOTE: Guest players are NOT saved to database - session only
+     * @param reloadMoneyFromCloud If true, reload money from cloud after setting credentials (for existing users logging in)
      */
-    public void SetCredentials(string name, string password)
+    public void SetCredentials(string name, string password, bool reloadMoneyFromCloud = true)
     {
         // Only clear previous data if switching between guest and non-guest
         bool isGuest = name.Equals("Guest", System.StringComparison.OrdinalIgnoreCase);
@@ -201,6 +202,12 @@ public class Player : MonoBehaviour
         {
             SavePlayerData(); // Save locally to PlayerPrefs
             _ = SavePlayerDataToCloud(); // Save to Cloud Save (fire-and-forget)
+            // Reload money from cloud after setting credentials (for existing users logging in)
+            // Don't reload for new registrations (they should start with 100)
+            if (reloadMoneyFromCloud)
+            {
+                _ = LoadMoneyFromCloudAfterLogin(); // Fire-and-forget async call
+            }
             Debug.Log($"Player: Set credentials for {name} (saved to database)");
         }
         else
@@ -210,6 +217,21 @@ public class Player : MonoBehaviour
 
         UpdatePlayerNameUI(); // Update name display
         UpdatePlayerInfoUI(); // Update combined info display
+    }
+
+    /**
+     * Reload money from cloud after login (called after SetCredentials for non-guest users)
+     */
+    async Task LoadMoneyFromCloudAfterLogin()
+    {
+        // Wait a moment for authentication to be fully established
+        await System.Threading.Tasks.Task.Delay(500);
+
+        // Now reload money from cloud
+        await LoadMoneyFromCloud();
+        UpdateMoneyUI();
+        UpdatePlayerInfoUI();
+        Debug.Log($"Player: Reloaded money from cloud after login: {money}");
     }
 
     /**

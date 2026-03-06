@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 #endif
 
 /**
- * Manages player unit spawning via keyboard shortcuts
- * Press 1, 2, or 3 to spawn units in lanes 1, 2, or 3
+ * Manages player unit spawning
+ * Supports both keyboard shortcuts (1, 2, 3) and drag-and-drop from UnitSelectionButton
+ * Drag-and-drop works on mobile and WebGL, keyboard shortcuts work on desktop
  */
 public class PlayerLaneManager : MonoBehaviour
 {
@@ -28,23 +29,28 @@ public class PlayerLaneManager : MonoBehaviour
     [SerializeField] private GameObject playerUnitPrefab; // Default/fallback prefab
     private GameObject selectedUnitPrefab; // Currently selected unit prefab (set by UnitSelectionButton)
 
+    [Header("Drag and Drop Settings")]
+    [SerializeField] private float laneDetectionTolerance = 1.5f; // How close (in world units) to spawn point Y to detect lane
+
     void Update()
     {
+        // Keyboard shortcuts still work for desktop users (optional)
 #if ENABLE_INPUT_SYSTEM
         Keyboard keyboard = Keyboard.current;
-        if (keyboard == null) return;
-
-        if (keyboard.digit1Key.wasPressedThisFrame)
+        if (keyboard != null)
         {
-            SpawnInLane(1);
-        }
-        else if (keyboard.digit2Key.wasPressedThisFrame)
-        {
-            SpawnInLane(2);
-        }
-        else if (keyboard.digit3Key.wasPressedThisFrame)
-        {
-            SpawnInLane(3);
+            if (keyboard.digit1Key.wasPressedThisFrame)
+            {
+                SpawnInLane(1);
+            }
+            else if (keyboard.digit2Key.wasPressedThisFrame)
+            {
+                SpawnInLane(2);
+            }
+            else if (keyboard.digit3Key.wasPressedThisFrame)
+            {
+                SpawnInLane(3);
+            }
         }
 #else
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -205,5 +211,54 @@ public class PlayerLaneManager : MonoBehaviour
         }
 
         return spawnPoint;
+    }
+
+    /// <summary>
+    /// Finds which lane (1, 2, or 3) a world position is closest to based on Y position of spawn points
+    /// Returns 0 if no lane is close enough
+    /// </summary>
+    public int GetLaneAtPosition(Vector2 worldPosition, GameObject unitPrefab)
+    {
+        if (unitPrefab == null) return 0;
+
+        Transform spawnPoint1 = GetSpawnPointForUnit(unitPrefab, 1);
+        Transform spawnPoint2 = GetSpawnPointForUnit(unitPrefab, 2);
+        Transform spawnPoint3 = GetSpawnPointForUnit(unitPrefab, 3);
+
+        if (spawnPoint1 == null || spawnPoint2 == null || spawnPoint3 == null)
+        {
+            return 0;
+        }
+
+        float y1 = spawnPoint1.position.y;
+        float y2 = spawnPoint2.position.y;
+        float y3 = spawnPoint3.position.y;
+
+        float distanceToLane1 = Mathf.Abs(worldPosition.y - y1);
+        float distanceToLane2 = Mathf.Abs(worldPosition.y - y2);
+        float distanceToLane3 = Mathf.Abs(worldPosition.y - y3);
+
+        // Find the closest lane
+        float minDistance = Mathf.Min(distanceToLane1, distanceToLane2, distanceToLane3);
+
+        // Check if within tolerance
+        if (minDistance > laneDetectionTolerance)
+        {
+            return 0; // Not close enough to any lane
+        }
+
+        // Return the lane number of the closest spawn point
+        if (minDistance == distanceToLane1)
+        {
+            return 1;
+        }
+        else if (minDistance == distanceToLane2)
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
     }
 }

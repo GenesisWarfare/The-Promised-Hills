@@ -802,8 +802,8 @@ Transform:
   m_GameObject: {fileID: 1155890430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0318, y: -0.0361, z: 0}
-  m_LocalScale: {x: 1.1612, y: 1.0207, z: 1}
+  m_LocalPosition: {x: -0.0629, y: -0.0361, z: 0}
+  m_LocalScale: {x: 1.3561511, y: 1.0207, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   targetRawImage: {fileID: 1640007660}
   videoSize: {x: 1920, y: 1080}
   loadSceneOnVideoEnd: 1
-  nextSceneName: Map
+  nextSceneName: MainMenu
   allowSkip: 1
   skipOnAnyKey: 0
   skipOnMouseClick: 0

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LevelSelectionButton : MonoBehaviour
 {
@@ -143,9 +142,9 @@ public class LevelSelectionButton : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (MobileInputHelper.WasPressedThisFrame())
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(MobileInputHelper.GetPosition());
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {
@@ -157,7 +156,7 @@ public class LevelSelectionButton : MonoBehaviour
         // Visual feedback on hover (only if unlocked)
         if (spriteRenderer != null)
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(MobileInputHelper.GetPosition());
             Collider2D hit = Physics2D.OverlapPoint(worldPoint);
             if (hit != null && hit.gameObject == gameObject)
             {

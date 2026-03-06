@@ -158,6 +158,7 @@ MonoBehaviour:
   levelNumber: 4
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!61 &43277825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -344,6 +345,7 @@ MonoBehaviour:
     on the Egyptian border.
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  flagSprite: {fileID: 2453536360624921081, guid: d7ad2e1e050362e4ab4b5f680a7d6677, type: 3}
 --- !u!58 &84327578
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -488,12 +490,14 @@ MonoBehaviour:
   sceneName: Battlefield_Ceasarea
   battlefieldName: Roman Ceasarea
   kingdomState: Hasmonean Kingdom
-  detailedInfo: "Straton\u2019s Tower, the earlier settlement at Caesarea, lies on
-    the Mediterranean coast outside direct Hasmonean control.\r\nDuring the Hasmonean
-    period, the city remains largely Hellenistic until it is later transformed into
-    Caesarea Maritima."
+  detailedInfo: 'Caesarea lies on the Mediterranean coast outside direct Hasmonean
+    control.
+
+    During the Hasmonean period, the city remains largely Hellenistic
+    until it is later transformed into Caesarea Maritima.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  flagSprite: {fileID: 2453536360624921081, guid: d7ad2e1e050362e4ab4b5f680a7d6677, type: 3}
 --- !u!58 &102241543
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -645,6 +649,7 @@ MonoBehaviour:
     Sennacherib suppress the rebellion and punish Ekron for its alliance with Judah.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  flagSprite: {fileID: -1042371230148870439, guid: ce374dbbcedc2ca4ab5e328d1d1e5f01, type: 3}
 --- !u!58 &128952831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -822,6 +827,7 @@ MonoBehaviour:
   levelNumber: 1
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!61 &223960921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1079,6 +1085,289 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &342995939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342995940}
+  - component: {fileID: 342995944}
+  - component: {fileID: 342995943}
+  - component: {fileID: 342995942}
+  - component: {fileID: 342995941}
+  m_Layer: 5
+  m_Name: Start_Game_Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &342995940
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342995939}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 360031947}
+  m_Father: {fileID: 646410684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 381.27, y: 158.31}
+  m_SizeDelta: {x: 191.31, y: 78.15}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &342995941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342995939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b9129299b92214f9a6e52d8202fe38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AdButton
+  adType: 0
+--- !u!114 &342995942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342995939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 342995943}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SceneLoaderButton, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &342995943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342995939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 5873922061639052055, guid: 170c720afa2442544bf5fdf136c3b2cc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &342995944
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342995939}
+  m_CullTransparentMesh: 1
+--- !u!1 &360031946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360031947}
+  - component: {fileID: 360031949}
+  - component: {fileID: 360031948}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &360031947
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360031946}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342995940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &360031948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360031946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Watch ad for 50 Shekels
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 3697c32c3899d9644a0daccb58640483, type: 2}
+  m_sharedMaterial: {fileID: 4052329397311122472, guid: 3697c32c3899d9644a0daccb58640483, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 25
+  m_fontSizeBase: 25
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &360031949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360031946}
+  m_CullTransparentMesh: 1
 --- !u!1 &448774686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,6 +1425,7 @@ MonoBehaviour:
     that enable underground movement and surprise attacks.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &448774689
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1287,6 +1577,7 @@ MonoBehaviour:
     is forcibly integrated into the Jewish state.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  flagSprite: {fileID: 2453536360624921081, guid: d7ad2e1e050362e4ab4b5f680a7d6677, type: 3}
 --- !u!58 &475666034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1436,6 +1727,7 @@ MonoBehaviour:
     critical infrastructure in modern warfare."
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &526156657
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1630,6 +1922,7 @@ RectTransform:
   - {fileID: 1529680378}
   - {fileID: 1570645771}
   - {fileID: 43277827}
+  - {fileID: 342995940}
   - {fileID: 1653130490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1726,10 +2019,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattlefieldInfoManager
   infoText: {fileID: 1965168228}
   marchToWarButton: {fileID: 2122101128}
-  defaultText: Click and drag the map around
+  defaultText: Select your battle on the map
   defaultFontSize: 35
   defaultAlignment: 514
-  battlefieldFontSize: 22
+  battlefieldFontSize: 21
   battlefieldAlignment: 257
 --- !u!4 &845817044
 Transform:
@@ -1803,6 +2096,7 @@ MonoBehaviour:
     defeats the Philistine champion Goliath and turns the tide of the conflict.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &867252702
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2110,6 +2404,7 @@ MonoBehaviour:
     northern defense."
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &1152612565
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2594,6 +2889,7 @@ MonoBehaviour:
     much of the population is deported, ending the Kingdom of Israel.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &1467658884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2733,6 +3029,7 @@ MonoBehaviour:
   levelNumber: 2
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!61 &1529680376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2907,6 +3204,7 @@ MonoBehaviour:
     Judah into the conflict.
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flagSprite: {fileID: -1042371230148870439, guid: ce374dbbcedc2ca4ab5e328d1d1e5f01, type: 3}
 --- !u!58 &1530862376
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3093,14 +3391,11 @@ MonoBehaviour:
   sceneName: Battlefield_Amman
   battlefieldName: Amman
   kingdomState: Kingdom of Judah
-  detailedInfo: 'Judah confronts the Kingdom of Amman east of the Jordan as regional
+  detailedInfo: Judah confronts the Kingdom of Amman east of the Jordan as regional
     rivalries flare in the Iron Age Levant.
-
-    According to biblical accounts,
-    conflicts center around Rabbath Amman, reflecting long-standing tensions between
-    Judah and Amman.'
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flagSprite: {fileID: -1042371230148870439, guid: ce374dbbcedc2ca4ab5e328d1d1e5f01, type: 3}
 --- !u!58 &1548309627
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3229,6 +3524,7 @@ MonoBehaviour:
   levelNumber: 3
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!61 &1570645769
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3463,6 +3759,7 @@ MonoBehaviour:
 '
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  flagSprite: {fileID: -4631071651849754486, guid: b737e03eae34f754db178a63b639a475, type: 3}
 --- !u!58 &1616685695
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3583,8 +3880,8 @@ Transform:
   m_GameObject: {fileID: 1627992934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.1122, y: -0.0252, z: -4}
-  m_LocalScale: {x: 0.48864982, y: 1.1978507, z: 1}
+  m_LocalPosition: {x: -8.0634, y: -0.0252, z: -4}
+  m_LocalScale: {x: 0.61252254, y: 1.1978507, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3802,8 +4099,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Click and drag the map around
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3697c32c3899d9644a0daccb58640483, type: 2}
-  m_sharedMaterial: {fileID: 4052329397311122472, guid: 3697c32c3899d9644a0daccb58640483, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a1bf7c3656f3e9646babcf86b3de9306, type: 2}
+  m_sharedMaterial: {fileID: 452853069339912629, guid: a1bf7c3656f3e9646babcf86b3de9306, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3833,7 +4130,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

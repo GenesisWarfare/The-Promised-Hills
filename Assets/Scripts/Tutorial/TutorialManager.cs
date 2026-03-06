@@ -1,5 +1,7 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+#endif
 using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
@@ -20,9 +22,23 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        // Advance to next step on any input
-        if (Keyboard.current.anyKey.wasPressedThisFrame
-            || Mouse.current.leftButton.wasPressedThisFrame)
+        // Advance to next step on any input (keyboard, mouse, or touch)
+        bool inputPressed = false;
+
+#if ENABLE_INPUT_SYSTEM
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.anyKey.wasPressedThisFrame)
+        {
+            inputPressed = true;
+        }
+#endif
+
+        if (!inputPressed && MobileInputHelper.WasPressedThisFrame())
+        {
+            inputPressed = true;
+        }
+
+        if (inputPressed)
         {
             AdvanceStep();
         }

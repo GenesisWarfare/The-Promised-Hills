@@ -345,8 +345,8 @@ Transform:
   m_GameObject: {fileID: 50977398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0169, y: -0, z: 0}
-  m_LocalScale: {x: 1.3428956, y: 1.1687664, z: 1}
+  m_LocalPosition: {x: 0.0481, y: -0, z: 0}
+  m_LocalScale: {x: 1.5094469, y: 1.1687664, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -587,6 +587,7 @@ MonoBehaviour:
   heroLane2SpawnPoint: {fileID: 515886580}
   heroLane3SpawnPoint: {fileID: 1757303789}
   playerUnitPrefab: {fileID: 4493542165394543976, guid: 4eb5adf765a0666408762b5c04cd3474, type: 3}
+  laneDetectionTolerance: 1.5
 --- !u!4 &234555197
 Transform:
   m_ObjectHideFlags: 0
@@ -1418,7 +1419,7 @@ Transform:
   m_GameObject: {fileID: 950746395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.73, y: 0.04, z: -10}
+  m_LocalPosition: {x: 11.88, y: 0.04, z: -10}
   m_LocalScale: {x: 0.8836, y: 12.152631, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1848,7 +1849,7 @@ Transform:
   m_GameObject: {fileID: 1299424109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7318, y: 0.0236, z: -10}
+  m_LocalPosition: {x: -11.95, y: 0.05, z: -10}
   m_LocalScale: {x: 0.8836, y: 12.152631, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

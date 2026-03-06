@@ -29,6 +29,9 @@ public class LoginUIManager : MonoBehaviour
 
     void Start()
     {
+        // ALWAYS logout any existing user when the login scene loads
+        LogoutExistingUser();
+
         // Set password field to hide password (show *****)
         if (passwordInputField != null)
         {
@@ -36,16 +39,37 @@ public class LoginUIManager : MonoBehaviour
             passwordInputField.ForceLabelUpdate();
         }
 
-        // Check if already signed in
-        if (AuthenticationService.Instance.IsSignedIn)
+        // Listen for sign in event
+        AuthenticationService.Instance.SignedIn += OnSignedIn;
+    }
+
+    /**
+     * Logout any existing user - called when login scene first loads
+     */
+    void LogoutExistingUser()
+    {
+        Debug.Log("LoginUIManager: Logging out any existing user on scene load");
+
+        // Sign out from Unity Authentication if signed in
+        try
         {
-            Debug.Log("Player already signed in, going to menu");
-            GoToMenu();
+            if (AuthenticationService.Instance != null && AuthenticationService.Instance.IsSignedIn)
+            {
+                AuthenticationService.Instance.SignOut();
+                Debug.Log("LoginUIManager: Signed out from Unity Authentication");
+            }
         }
-        else
+        catch (System.Exception ex)
         {
-            // Listen for sign in event
-            AuthenticationService.Instance.SignedIn += OnSignedIn;
+            Debug.LogWarning($"LoginUIManager: Could not sign out from AuthenticationService: {ex.Message}");
+        }
+
+        // Clear player data
+        Player player = Player.Instance;
+        if (player != null)
+        {
+            player.ClearPlayerData();
+            Debug.Log("LoginUIManager: Cleared player data");
         }
     }
 
@@ -116,7 +140,8 @@ public class LoginUIManager : MonoBehaviour
                 Player player = Player.Instance;
                 if (player != null)
                 {
-                    player.SetCredentials(username, password);
+                    // For login, reload money from cloud (existing user)
+                    player.SetCredentials(username, password, reloadMoneyFromCloud: true);
                 }
                 // Start preloading video in background before transitioning
                 StartPreloadingVideo();
@@ -186,7 +211,8 @@ public class LoginUIManager : MonoBehaviour
                 Player player = Player.Instance;
                 if (player != null)
                 {
-                    player.SetCredentials(username, password);
+                    // For registration, don't reload money from cloud (new user starts with 100)
+                    player.SetCredentials(username, password, reloadMoneyFromCloud: false);
                     // New player registration - set money to 100
                     player.SetMoney(100);
                     player.SaveMoneyNow();

@@ -1,0 +1,23 @@
+# ninja log v5
+1	1249	7944235215232753	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	c60a764cb5fb684b
+57	333	7944235206123160	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a03bb3a9b06ca3ad
+20	994	7944235212716842	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5349e21f151e4ab0
+334	461	7944235207313903	C:/Users/Yanai/UnityProjects/ThePromisedHills/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5e4i8314/obj/arm64-v8a/libswappywrapper.so	625e14991ab10ddc
+50	950	7944235212272049	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	d1e330ced9a16cfc
+26	917	7944235211932534	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	fa22c6d08323a574
+31	922	7944235211966848	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3cd515ad0f013c5
+1249	1331	7944235216108300	C:/Users/Yanai/UnityProjects/ThePromisedHills/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5e4i8314/obj/arm64-v8a/libgame.so	c05f9bf5c491f602
+43	1162	7944235214393671	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	39be55fb7cd0792d
+15	942	7944235212199089	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d7092380d3d2e815
+37	1175	7944235214535130	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	9964810bb854fdf
+50	180	7944297331183434	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a03bb3a9b06ca3ad
+181	359	7944297332978001	C:/Users/Yanai/UnityProjects/ThePromisedHills/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5e4i8314/obj/arm64-v8a/libswappywrapper.so	625e14991ab10ddc
+10	788	7944297337301634	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3cd515ad0f013c5
+5	789	7944297337316691	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d7092380d3d2e815
+33	794	7944297337389304	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	fa22c6d08323a574
+38	816	7944297337597176	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	d1e330ced9a16cfc
+23	832	7944297337747619	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5349e21f151e4ab0
+44	907	7944297338489413	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	39be55fb7cd0792d
+27	992	7944297339337358	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	9964810bb854fdf
+16	1035	7944297339733360	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	c60a764cb5fb684b
+1035	1110	7944297340541938	C:/Users/Yanai/UnityProjects/ThePromisedHills/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5e4i8314/obj/arm64-v8a/libgame.so	c05f9bf5c491f602

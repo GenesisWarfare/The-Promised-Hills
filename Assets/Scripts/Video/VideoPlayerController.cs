@@ -389,8 +389,8 @@ public class VideoPlayerController : MonoBehaviour
                 }
             }
 
-            // Check mouse click
-            if (!shouldSkip && skipOnMouseClick && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            // Check mouse/touch click
+            if (!shouldSkip && skipOnMouseClick && MobileInputHelper.WasPressedThisFrame())
             {
                 shouldSkip = true;
             }

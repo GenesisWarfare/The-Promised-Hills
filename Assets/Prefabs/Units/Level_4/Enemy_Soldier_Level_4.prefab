@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherUnit
   speed: 1.5
-  maxHealth: 100
+  maxHealth: 200
   attackDamage: 9
   attackInterval: 0.5
   unitCost: 35

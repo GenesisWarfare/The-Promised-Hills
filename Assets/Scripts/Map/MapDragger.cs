@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MapDragger : MonoBehaviour
 {
@@ -39,11 +38,11 @@ public class MapDragger : MonoBehaviour
             return;
         }
 
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
+        Vector2 inputPosition = MobileInputHelper.GetPosition();
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, Camera.main.nearClipPlane));
         worldMousePosition.z = transform.position.z;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (MobileInputHelper.WasPressedThisFrame())
         {
             // Don't start dragging if settings are open
             if (settingsManager != null && settingsManager.IsSettingsOpen())
@@ -61,7 +60,7 @@ public class MapDragger : MonoBehaviour
 
         if (isDragging)
         {
-            if (Mouse.current.leftButton.isPressed)
+            if (MobileInputHelper.IsPressed())
             {
                 Vector3 delta = worldMousePosition - lastMousePosition;
                 Vector3 newPosition = transform.position + delta;

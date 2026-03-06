@@ -176,7 +176,7 @@ MonoBehaviour:
   speed: 1.5
   maxHealth: 80
   attackDamage: 12
-  attackInterval: 100
+  attackInterval: 0.9
   unitCost: 40
   direction: {x: 1, y: 0}
   collisionCheckDistance: 0.5
